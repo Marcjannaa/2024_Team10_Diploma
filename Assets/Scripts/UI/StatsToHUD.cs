@@ -14,11 +14,17 @@ public class StatsToHUD : MonoBehaviour
     void Start()
     {
         Hp.text = Stats.Health.Value.ToString();
+        Coins.text = Stats.Health.Value.ToString();
+        Bombs.text = Stats.Health.Value.ToString();
+        Keys.text = Stats.Health.Value.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Hp.text = Stats.Health.Value.ToString();
+        Coins.text = Stats.Coins.Value.ToString();
+        Bombs.text = Stats.Bombs.Value.ToString();
+        Keys.text = Stats.Keys.Value.ToString();
     }
 }
