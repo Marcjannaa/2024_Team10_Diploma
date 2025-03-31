@@ -10,6 +10,9 @@ public class Player_Stats : MonoBehaviour
     public Stat Strength = new Stat { BaseValue = 10 };
     public Stat Agility = new Stat { BaseValue = 10 };
     public Stat Intelligence = new Stat { BaseValue = 10 };
+    public Stat Coins = new Stat { BaseValue = 0 };
+    public Stat Bombs = new Stat { BaseValue = 0 };
+    public Stat Keys = new Stat { BaseValue = 0 };
 }
 
 [System.Serializable]
