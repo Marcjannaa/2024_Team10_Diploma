@@ -49,5 +49,6 @@ public class CombatManager : MonoBehaviour
         print(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
 
         battleUI.SetActive(true);
+        
     }
 }
