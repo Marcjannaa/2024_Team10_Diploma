@@ -13,19 +13,18 @@ public class Player_Stats : MonoBehaviour
     public Stat Coins = new Stat { BaseValue = 0 };
     public Stat Bombs = new Stat { BaseValue = 0 };
     public Stat Keys = new Stat { BaseValue = 0 };
+    [SerializeField] private InventoryUI inventoryUI;
     
     
     
-    // void Update()
-    // {
-    //     if (Input.GetButtonDown("Jump"))
-    //     {
-    //         Health.Modify(1);
-    //         Coins.Modify(1);
-    //         Bombs.Modify(1);
-    //         Keys.Modify(1);
-    //     }
-    // }
+    void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+            if (inventoryUI != null)
+            {
+                inventoryUI.ToggleUI();
+            }
+    }
 }
 
 [System.Serializable]
