@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float _speed = 5.0f;
-    private bool canCombat = false;
+    private bool _canCombat = false;
+    private GameObject _enemyInRange = null;
     
     void Update ()
         {
@@ -18,9 +19,9 @@ public class PlayerMovement : MonoBehaviour
             
             transform.Translate(direction * _speed * Time.deltaTime);
             
-            if (canCombat && Input.GetKeyDown(KeyCode.Return))
+            if (_canCombat && Input.GetKeyDown(KeyCode.Return))
             {
-                CombatManager.InitiateCombat(false);
+                CombatManager.InitiateCombat(false,gameObject,_enemyInRange);
             }
         }
 
@@ -28,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            canCombat = true;
+            _canCombat = true;
+            _enemyInRange = other.gameObject;
         }
     }
 
@@ -36,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            canCombat = false;
+            _canCombat = false;
+            _enemyInRange = null;
         }
     }
 }
