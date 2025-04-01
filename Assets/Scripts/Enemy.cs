@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
             direction.y = 0;
 
             transform.Translate(direction * _speed * Time.deltaTime);
+            
         }
     }
 
@@ -22,7 +23,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.collider.CompareTag("Player"))
         {
-            CombatManager.InitiateCombat(true);
+            CombatManager.InitiateCombat(true, other.gameObject,gameObject);
         }
     }
 
