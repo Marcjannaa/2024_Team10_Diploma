@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class Player_Stats : MonoBehaviour
 {
-    public Stat MaxHealth = new Stat(110, StatType.MaxHealth);
+    public Stat MaxHealth = new Stat(100, StatType.MaxHealth);
     public Stat Health = new Stat(100, StatType.Health);
     public Stat Strength = new Stat(10, StatType.Strength);
     public Stat Agility = new Stat(10, StatType.Agility);
@@ -26,5 +26,8 @@ public class Player_Stats : MonoBehaviour
                 inventoryUI.ToggleUI();
             }
     }
+    
+    
+    
 }
 
