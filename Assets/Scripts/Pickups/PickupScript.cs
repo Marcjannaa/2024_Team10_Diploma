@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PickupScript : MonoBehaviour
 {
-    [SerializeField] private Player_Stats stats;
     [SerializeField] private int id;
+    private static Player_Stats _stats;
     
     void Start()
     {
-        
+        _stats = FindObjectOfType<Player_Stats>();
     }
 
     // Update is called once per frame
@@ -24,13 +26,13 @@ public class PickupScript : MonoBehaviour
         switch (id)
         {
             case 1:
-                stats.Coins.Modify(1);
+                _stats.Coins.Modify(1);
                 break;
             case 2:
-                stats.Bombs.Modify(1);
+                _stats.Bombs.Modify(1);
                 break;
             case 3:
-                stats.Keys.Modify(1);
+                _stats.Keys.Modify(1);
                 break;
         }
         
@@ -44,5 +46,10 @@ public class PickupScript : MonoBehaviour
             Collect();
             Destroy(gameObject);
         }
+    }
+
+    public static Player_Stats getStats()
+    {
+        return _stats;
     }
 }
