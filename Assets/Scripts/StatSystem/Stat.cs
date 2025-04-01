@@ -9,7 +9,7 @@ public class Stat
     public float StatValue;
     //private int _modifiedValue;
 
-    private static List<Stat> _stats = new List<Stat>();
+    //private static List<Stat> _stats = new List<Stat>();
 
     public Stat(float statValue)
     {
@@ -20,22 +20,21 @@ public class Stat
     {
         StatValue = statValue;
         Type = type;
-        _stats.Add(this);
-        Debug.Log(_stats);
+        // _stats.Add(this);
+        // Debug.Log(_stats);
     }
+
 
     public float Value
     {
 
         get
         {
-            Debug.Log(StatValue);
             return StatValue;
         }
         
     }
 
-    
     
     public void Modify(float amount)
     {
