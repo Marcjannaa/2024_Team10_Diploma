@@ -29,7 +29,7 @@ public class Stat
 
         get
         {
-            Debug.Log(StatValue);
+            //Debug.Log(StatValue);
             return StatValue;
         }
         
