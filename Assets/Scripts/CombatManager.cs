@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build;
@@ -20,13 +21,16 @@ public class CombatManager : MonoBehaviour
     private GameObject _enemy;
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
+    private Image _enemySprite;
     
     private Turn _turn;
 
-    public void OnAtkClicked()
+    public async void OnAtkClicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(- _player.GetComponent<Player_Stats>().Strength.Value * 4); 
-        print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+
+        await Task.Delay(1000);
+
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
     }
@@ -69,12 +73,18 @@ public class CombatManager : MonoBehaviour
     
         Instance._player = PlayerGO;
         Instance._enemy = EnemyGO;
+        
+        
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
     
         Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
     
         _battleUI.SetActive(true);
+        Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
+        Instance._enemySprite = battleSpriteTransform.GetComponent<Image>();
+        
+        
         Instance.SwitchBattleUIPanel();
     
         Instance.StartCoroutine(Instance.BattleLoop());
@@ -83,7 +93,7 @@ public class CombatManager : MonoBehaviour
     private void EnemyAction()
     {
         _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplayer); 
-        print(_player.GetComponent<Player_Stats>().Health.Value);
+
     }
 
     private void SwitchBattleUIPanel()
@@ -124,6 +134,9 @@ public class CombatManager : MonoBehaviour
         while (_battleOngoing)
         {
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
+            _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+            _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
+            
             
             if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
             {
