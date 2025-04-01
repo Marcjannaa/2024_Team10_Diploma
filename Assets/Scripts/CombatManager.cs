@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum Turn
 {
@@ -24,7 +25,10 @@ public class CombatManager : MonoBehaviour
 
     public void OnAtkClicked()
     {
-        print("guwno");
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(- _player.GetComponent<Player_Stats>().Strength.Value * 4); 
+        print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+        _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
     }
     
     public void OnSkillClicked()
@@ -41,6 +45,7 @@ public class CombatManager : MonoBehaviour
     {
         _guardMultiplayer = 0.3f;
         _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
     }
     
     private void Awake()
@@ -75,9 +80,10 @@ public class CombatManager : MonoBehaviour
         Instance.StartCoroutine(Instance.BattleLoop());
     }
 
-    private static void EnemyAction()
+    private void EnemyAction()
     {
-        
+        _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplayer); 
+        print(_player.GetComponent<Player_Stats>().Health.Value);
     }
 
     private void SwitchBattleUIPanel()
@@ -97,32 +103,55 @@ public class CombatManager : MonoBehaviour
 
     private void GameOver()
     {
+        _battleUI.SetActive(false); 
         Destroy(_player);
         _battleOngoing = false;
+        
+        Time.timeScale = 1;
+    }
+
+    private void EnemyDefeated()
+    {
+        Destroy(_enemy);
+        _battleOngoing = false;
         _battleUI.SetActive(false); 
+        
+        Time.timeScale = 1;
     }
     
     private IEnumerator BattleLoop()
     {
         while (_battleOngoing)
         {
+            _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
+            
+            if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
+            {
+                GameOver();
+                yield break;
+            }
+
+            if (_enemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
+            {
+                EnemyDefeated();
+                yield break;
+            }
+
             if (_turn == Turn.Enemy)
             {
                 EnemyAction();
                 yield return new WaitForSecondsRealtime(1.5f);
-            
+
                 _turn = Turn.Player;
+                _guardMultiplayer = 1;
                 SwitchBattleUIPanel();
-
             }
 
-            if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
-            {
-                GameOver();
-            }
-        
             yield return null;
         }
+
+        Time.timeScale = 1;
     }
+
 }
 

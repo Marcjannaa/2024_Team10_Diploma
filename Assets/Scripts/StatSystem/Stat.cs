@@ -6,17 +6,17 @@ using UnityEngine;
 public class Stat
 {
     public StatType Type { get; set; }
-    public int StatValue;
+    public float StatValue;
     //private int _modifiedValue;
 
     private static List<Stat> _stats = new List<Stat>();
 
-    public Stat(int statValue)
+    public Stat(float statValue)
     {
         StatValue = statValue;
     }
     
-    public Stat(int statValue, StatType type)
+    public Stat(float statValue, StatType type)
     {
         StatValue = statValue;
         Type = type;
@@ -24,7 +24,7 @@ public class Stat
         Debug.Log(_stats);
     }
 
-    public int Value
+    public float Value
     {
 
         get
@@ -37,13 +37,13 @@ public class Stat
 
     
     
-    public void Modify(int amount)
+    public void Modify(float amount)
     {
         var tmp = StatValue + amount;
         switch (Type)
         {
             case StatType.Health:
-                int maxHp = _stats.Find(x => x.Type == StatType.MaxHealth).Value;
+                float maxHp = _stats.Find(x => x.Type == StatType.MaxHealth).Value;
                 if ( tmp > maxHp)
                 {
                     tmp = StatValue;
