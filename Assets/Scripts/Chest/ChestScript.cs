@@ -10,6 +10,7 @@ public class ChestScript : MonoBehaviour
     [SerializeField] private GameObject Coin;
     [SerializeField] private GameObject Bomb;
     [SerializeField] private GameObject Key;
+    [SerializeField] private List<Item> items;
     private Vector3 position;
     void Start()
     {
@@ -28,6 +29,7 @@ public class ChestScript : MonoBehaviour
         {
             if (PickupScript.getStats().Keys.Value > 0)
             {
+                PickupScript.getStats().Keys.Modify(-1);
                 float times = Random.Range(0f, 1f);
                 int choose;
                 int loopCount;
@@ -35,7 +37,8 @@ public class ChestScript : MonoBehaviour
                 if (times > 0.9)
                 {
                     loopCount = 0;
-                    //Instantiate(RandomItem)
+                    int choice = Random.Range( 0, items.Count);
+                    Instantiate(items[choice]);
                 } else if (times > 0.8)
                 {
                     loopCount = 4;
@@ -48,7 +51,7 @@ public class ChestScript : MonoBehaviour
                 for (int i = 0; i < loopCount; i++)
                 {
                     times = Random.Range(0f, 1f);
-                    choose = Random.Range(1, 3);
+                    choose = Random.Range(1, 4);
                     switch (choose)
                     {
                         case 1:
@@ -84,7 +87,7 @@ public class ChestScript : MonoBehaviour
             for (int i = 0; i < loopCount; i++)
             {
                 times = Random.Range(0f, 1f);
-                choose = Random.Range(1, 3);
+                choose = Random.Range(1, 4);
                 switch (choose)
                 {
                     case 1:

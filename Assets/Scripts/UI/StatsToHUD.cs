@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StatsToHUD : MonoBehaviour
@@ -18,8 +15,7 @@ public class StatsToHUD : MonoBehaviour
         Bombs.text = Stats.Health.Value.ToString();
         Keys.text = Stats.Health.Value.ToString();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Hp.text = Stats.Health.Value.ToString();
