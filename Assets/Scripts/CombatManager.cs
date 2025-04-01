@@ -19,7 +19,10 @@ public class CombatManager : MonoBehaviour
 
     public void OnAtkClicked()
     {
-        print("guwno");
+        GameObject miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
+        miniGameUI.SetActive(true);
+        miniGameUI.GetComponent<Canvas>().enabled = true;
+        battleUI.SetActive(false);
     }
     
     public void OnSkillClicked()
