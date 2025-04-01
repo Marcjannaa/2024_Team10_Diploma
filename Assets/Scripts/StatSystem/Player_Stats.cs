@@ -28,15 +28,3 @@ public class Player_Stats : MonoBehaviour
     }
 }
 
-public enum StatType
-{
-    Health,
-    MaxHealth,
-    Strength,
-    Agility,
-    Intelligence,
-    Coin,
-    Bomb,
-    Key
-    
-}
