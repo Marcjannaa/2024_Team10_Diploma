@@ -16,13 +16,18 @@ public class CombatManager : MonoBehaviour
     private static CombatManager Instance { get; set; }
     private static GameObject battleUI;
     private Turn _turn;
-
+    private static GameObject _miniGameUI;
     public void OnAtkClicked()
     {
-        GameObject miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
-        miniGameUI.SetActive(true);
-        miniGameUI.GetComponent<Canvas>().enabled = true;
+        _miniGameUI.SetActive(true);
+        _miniGameUI.GetComponent<Canvas>().enabled = true;
         battleUI.SetActive(false);
+    }
+
+    public static void OnAttackEnded()
+    {
+        _miniGameUI.SetActive(false);
+        battleUI.SetActive(true);
     }
     
     public void OnSkillClicked()
@@ -35,7 +40,8 @@ public class CombatManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
+            battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
+            _miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
         }
         else
         {
