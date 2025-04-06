@@ -7,10 +7,11 @@ public class Inventory : MonoBehaviour
 {
     static Player_Stats stats;
 
-    private static List<Item> Items = new List<Item>();
+    public static List<Item> Items = new List<Item>();
     // Start is called before the first frame update
     void Start()
     {
+        Items.Clear();
         stats = FindObjectOfType<Player_Stats>();
     }
 
@@ -22,11 +23,18 @@ public class Inventory : MonoBehaviour
 
     public static void addItem(Item item)
     {
-        stats.MaxHealth.Modify(item.MaxHp);
-        stats.Strength.Modify(item.STR);
-        stats.Agility.Modify(item.AGL);
-        stats.Intelligence.Modify(item.INT);
-        Items.Add(item);
+        if (Items.Count < 9)
+        {
+            stats.MaxHealth.Modify(item.MaxHp);
+            stats.Health.Modify(item.MaxHp);
+            stats.Strength.Modify(item.STR);
+            stats.Agility.Modify(item.AGL);
+            stats.Intelligence.Modify(item.INT);
+            Items.Add(item);
+        }
+        
+        
+        
         Debug.Log(Items);
     }
     
