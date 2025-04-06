@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum Turn
 {
@@ -19,12 +21,18 @@ public class CombatManager : MonoBehaviour
     private GameObject _enemy;
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
+    private Image _enemySprite;
     
     private Turn _turn;
 
-    public void OnAtkClicked()
+    public async void OnAtkClicked()
     {
-        print("guwno");
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+
+        await Task.Delay(1000);
+
+        _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
     }
     
     public void OnSkillClicked()
@@ -41,6 +49,7 @@ public class CombatManager : MonoBehaviour
     {
         _guardMultiplayer = 0.3f;
         _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
     }
     
     private void Awake()
@@ -64,20 +73,27 @@ public class CombatManager : MonoBehaviour
     
         Instance._player = PlayerGO;
         Instance._enemy = EnemyGO;
+        
+        
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
     
         Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
     
         _battleUI.SetActive(true);
+        Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
+        Instance._enemySprite = battleSpriteTransform.GetComponent<Image>();
+        
+        
         Instance.SwitchBattleUIPanel();
     
         Instance.StartCoroutine(Instance.BattleLoop());
     }
 
-    private static void EnemyAction()
+    private void EnemyAction()
     {
-        
+        _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplayer); 
+
     }
 
     private void SwitchBattleUIPanel()
@@ -97,32 +113,58 @@ public class CombatManager : MonoBehaviour
 
     private void GameOver()
     {
+        _battleUI.SetActive(false); 
         Destroy(_player);
         _battleOngoing = false;
+        
+        Time.timeScale = 1;
+    }
+
+    private void EnemyDefeated()
+    {
+        Destroy(_enemy);
+        _battleOngoing = false;
         _battleUI.SetActive(false); 
+        
+        Time.timeScale = 1;
     }
     
     private IEnumerator BattleLoop()
     {
         while (_battleOngoing)
         {
+            _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
+            _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+            _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
+            
+            
+            if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
+            {
+                GameOver();
+                yield break;
+            }
+
+            if (_enemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
+            {
+                EnemyDefeated();
+                yield break;
+            }
+
             if (_turn == Turn.Enemy)
             {
                 EnemyAction();
                 yield return new WaitForSecondsRealtime(1.5f);
-            
+
                 _turn = Turn.Player;
+                _guardMultiplayer = 1;
                 SwitchBattleUIPanel();
-
             }
 
-            if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
-            {
-                GameOver();
-            }
-        
             yield return null;
         }
+
+        Time.timeScale = 1;
     }
+
 }
 
