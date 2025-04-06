@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
 
-enum Turn
+internal enum Turn
 {
     Player,
     Enemy
@@ -13,7 +13,7 @@ enum Turn
 
 public class CombatManager : MonoBehaviour
 {
-    public static CombatManager Instance { get; private set; }
+    private static CombatManager Instance { get; set; }
     private static GameObject battleUI;
     private Turn _turn;
 
@@ -45,7 +45,7 @@ public class CombatManager : MonoBehaviour
 
     public static void InitiateCombat(bool enemyAdvantage)
     {
-        Time.timeScale = 0;
+        GameStateManager.Instance.TogglePause();
         
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
 

@@ -11,7 +11,7 @@ public class TimingMiniGame : MonoBehaviour
     {
         if (gameEnded) return;
 
-        transform.Translate(Vector2.right * (speed * Time.deltaTime));
+        transform.Translate(Vector2.right * (speed * Time.unscaledDeltaTime));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -30,6 +30,7 @@ public class TimingMiniGame : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        print("wha");
         if (other.CompareTag("Target"))
         {
             isTouchingTarget = true;
