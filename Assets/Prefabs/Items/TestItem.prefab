@@ -125,3 +125,5 @@ MonoBehaviour:
   STR: 10
   AGL: 10
   INT: 10
+  image: {fileID: 21300000, guid: adeacd18afae3314f9403e710ef917fa, type: 3}
+  ui: {fileID: 0}

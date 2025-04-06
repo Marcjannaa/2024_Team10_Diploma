@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Item : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Item : MonoBehaviour
     [SerializeField] public int STR;
     [SerializeField] public int AGL;
     [SerializeField] public int INT;
+    [SerializeField] public Sprite image;
+    [SerializeField] public InventoryUI ui;
     
     
     // Start is called before the first frame update
@@ -31,8 +34,8 @@ public class Item : MonoBehaviour
         if (other.collider.tag.Equals("Player"))
         {
             Inventory.addItem(this);
+            ui.updateInv();
             Destroy(gameObject);
         }
-        
     }
 }
