@@ -2,46 +2,30 @@ using UnityEngine;
 
 public class TimingMiniGame : MonoBehaviour
 {
-    private bool isTouchingTarget = false;
-    private bool gameEnded = false;
+    private bool _isTouchingTarget = false;
+    private bool _gameEnded = false;
 
-    [SerializeField] float speed;
+    [SerializeField] private float speed;
+    [SerializeField] private Collider2D targetCollider; 
 
-    void Update()
+    private Collider2D _selfCollider;
+
+    private void Start()
     {
-        if (gameEnded) return;
+        _selfCollider = GetComponent<Collider2D>();
+    }
+
+    private void Update()
+    {
+        if (_gameEnded) return;
 
         transform.Translate(Vector2.right * (speed * Time.unscaledDeltaTime));
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            gameEnded = true; 
+        _isTouchingTarget = _selfCollider.bounds.Intersects(targetCollider.bounds);
 
-            if (isTouchingTarget)
-            {
-                Debug.Log("Trafione w punkt!");
-            }
-            else
-            {
-                Debug.Log("Pudło!");
-            }
-        }
-    }
+        if (!Input.GetKeyDown(KeyCode.Space)) return;
+        _gameEnded = true;
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        print("wha");
-        if (other.CompareTag("Target"))
-        {
-            isTouchingTarget = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Target"))
-        {
-            isTouchingTarget = false;
-        }
+        Debug.Log(_isTouchingTarget ? "Trafione w punkt!" : "Pudło!");
     }
 }
