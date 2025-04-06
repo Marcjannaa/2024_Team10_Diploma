@@ -3,7 +3,7 @@ using UnityEngine;
 public class MiniPlayer : MonoBehaviour
 {
     private RectTransform rectTransform;
-    public float moveSpeed = 10f;
+    public float moveSpeed = 50f;
 
     void Start()
     {
@@ -12,18 +12,9 @@ public class MiniPlayer : MonoBehaviour
 
     void Update()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-
-        Debug.Log("Current Position: " + rectTransform.anchoredPosition);
-
-        // Zastosowanie moveSpeed oraz Time.deltaTime
+        float moveX = -1.0f;
         Vector2 currentPos = rectTransform.anchoredPosition;
         currentPos.x += moveX * moveSpeed * Time.deltaTime;
-        currentPos.y += moveY * moveSpeed * Time.deltaTime;
-
-        Debug.Log("New Position: " + currentPos);
-
         rectTransform.anchoredPosition = currentPos;
     }
 
