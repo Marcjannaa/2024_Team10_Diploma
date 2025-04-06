@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7900960285561281515}
   - component: {fileID: 6781062011493022997}
-  - component: {fileID: 2186725552712391008}
   - component: {fileID: 5318335318968382389}
   - component: {fileID: 7245647039722332586}
   - component: {fileID: 4444638067036948943}
+  - component: {fileID: 9130292454392461868}
   m_Layer: 5
-  m_Name: miniplayer
+  m_Name: MiniPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,19 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767772036455185258}
   m_CullTransparentMesh: 1
---- !u!114 &2186725552712391008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767772036455185258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e77f1c4b8f20d46b9a008140501217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
 --- !u!114 &5318335318968382389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +150,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9130292454392461868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767772036455185258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8159d58db4f7e844798c631c64540935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  targetCollider: {fileID: 0}
+  panelBounds: {fileID: 0}
+  targetRadius: 0.5
