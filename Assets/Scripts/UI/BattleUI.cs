@@ -9,6 +9,8 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private TMP_Text _playerHealthText;
     [SerializeField] private Slider _enemyHealthSlider;
     [SerializeField] private Image _enemySprite;
+    [SerializeField] private GameObject _playerActionFirst;
+    
 
     public void SetPlayerHealthText(string text)
     {
@@ -31,5 +33,7 @@ public class BattleUI : MonoBehaviour
             Debug.LogError("Failed to set enemy sprite: _enemySprite or sprite is null!");
         }
     }
+    
+    public GameObject GetPlayerActionFirst() => _playerActionFirst;
 
 }

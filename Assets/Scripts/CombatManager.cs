@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 internal enum Turn
@@ -29,20 +30,22 @@ public class CombatManager : MonoBehaviour
 
     public async void OnAtkClicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
-
+        //_enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+        print("atk clicked");
         //await Task.Delay(1000);
 
-        _turn = Turn.Enemy;
+        
         _miniGameUI.SetActive(true);
-        battleUI.SetActive(false);
-        //SwitchBattleUIPanel();
+        print(_miniGameUI.IsUnityNull());
+        _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
+        
     }
     public static void OnAttackEnded()
     {
         _miniGameUI.SetActive(false);
         battleUI.SetActive(true);
-
+        
         Instance._turn = Turn.Player;
         Instance._guardMultiplayer = 1;
         Instance._enemyHasActed = false; 
@@ -120,15 +123,26 @@ public class CombatManager : MonoBehaviour
         switch (_turn)
         {
             case Turn.Player:
+                // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
-                _miniGameUI.SetActive(false); 
+                _miniGameUI.SetActive(false);
+
+                // Set the focus on the attack button only once
+                if (EventSystem.current.currentSelectedGameObject == null)
+                {
+                    GameObject firstButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+                    EventSystem.current.SetSelectedGameObject(firstButton);
+                    Debug.Log("Attack button focus set");
+                }
                 break;
             case Turn.Enemy:
+                // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
-                _miniGameUI.SetActive(true); 
+                _miniGameUI.SetActive(true);
                 break;
         }
     }
+
 
     private void GameOver()
     {
