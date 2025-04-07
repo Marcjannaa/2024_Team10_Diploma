@@ -23,8 +23,8 @@ public class CombatManager : MonoBehaviour
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
     private Image _enemySprite;
-    private static GameObject _miniGameUI;
     private Turn _turn;
+    private static GameObject _miniGameUI;
     private bool _enemyHasActed = false;
 
     public void OnAtkClicked()
@@ -119,6 +119,7 @@ public class CombatManager : MonoBehaviour
 
     private void SwitchBattleUIPanel()
     {
+        
         switch (_turn)
         {
             case Turn.Player:
@@ -127,6 +128,7 @@ public class CombatManager : MonoBehaviour
                 _miniGameUI.SetActive(false);
 
                 // Set the focus on the attack button only once
+                
                 if (EventSystem.current.currentSelectedGameObject == null)
                 {
                     GameObject firstButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
