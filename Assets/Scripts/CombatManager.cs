@@ -18,30 +18,47 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
-    private GameObject _player;
-    private GameObject _enemy;
+    private static GameObject _player;
+    private static GameObject _enemy;
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
     private Image _enemySprite;
-    private Turn _turn;
     private static GameObject _miniGameUI;
+    private Turn _turn;
     private bool _enemyHasActed = false;
 
     public void OnAtkClicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+        
+        print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+
         print("atk clicked");
         //await Task.Delay(1000);
 
         _battleUI.SetActive(false);
         _miniGameUI.SetActive(true);
-        print(_miniGameUI.IsUnityNull());
+
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
         
     }
-    public static void OnAttackEnded()
+    public static void OnAttackEnded(TimingMiniGame.HitResult  hitResult)
     {
+
+
+        switch (hitResult)
+        {
+            case TimingMiniGame.HitResult.PerfectHit:
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+                break;
+            case TimingMiniGame.HitResult.MediumHit:
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 3);
+                break;
+            case TimingMiniGame.HitResult.NoHit:
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 2);
+                break;
+        }
+        
         _miniGameUI.SetActive(false);
         _battleUI.SetActive(true);
         
@@ -91,8 +108,8 @@ public class CombatManager : MonoBehaviour
         Instance._battleOngoing = true;
         Time.timeScale = 0;
     
-        Instance._player = PlayerGO;
-        Instance._enemy = EnemyGO;
+        _player = PlayerGO;
+        _enemy = EnemyGO;
         //GameStateManager.Instance.TogglePause();
         
         
@@ -119,7 +136,6 @@ public class CombatManager : MonoBehaviour
 
     private void SwitchBattleUIPanel()
     {
-        
         switch (_turn)
         {
             case Turn.Player:
@@ -127,15 +143,18 @@ public class CombatManager : MonoBehaviour
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _miniGameUI.SetActive(false);
 
-                // Set the focus on the attack button only once
-                
+                // Set the focus on the attack button
+                GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+
+                // Ensure focus is set to the attack button, if it's not already focused
                 if (EventSystem.current.currentSelectedGameObject == null)
                 {
-                    GameObject firstButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
-                    EventSystem.current.SetSelectedGameObject(firstButton);
+                    EventSystem.current.SetSelectedGameObject(attackButton);
                     Debug.Log("Attack button focus set");
                 }
+
                 break;
+
             case Turn.Enemy:
                 // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
