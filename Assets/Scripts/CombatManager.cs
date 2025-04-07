@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 internal enum Turn
@@ -22,24 +23,29 @@ public class CombatManager : MonoBehaviour
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
     private Image _enemySprite;
+    private static GameObject battleUI;
     private static GameObject _miniGameUI;
     private Turn _turn;
     private bool _enemyHasActed = false;
 
     public async void OnAtkClicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
-
+        //_enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+        print("atk clicked");
         //await Task.Delay(1000);
 
+        
+        _miniGameUI.SetActive(true);
+        print(_miniGameUI.IsUnityNull());
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
+        
     }
     public static void OnAttackEnded()
     {
         _miniGameUI.SetActive(false);
-        _battleUI.SetActive(true);
-
+        battleUI.SetActive(true);
+        
         Instance._turn = Turn.Player;
         Instance._guardMultiplayer = 1;
         Instance._enemyHasActed = false; 
@@ -62,7 +68,7 @@ public class CombatManager : MonoBehaviour
     {
         _guardMultiplayer = 0.3f;
         _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
+        //SwitchBattleUIPanel();
     }
     
     private void Awake()
@@ -72,6 +78,7 @@ public class CombatManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
+            battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
             _miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
         }
         else
@@ -83,12 +90,12 @@ public class CombatManager : MonoBehaviour
     public static void InitiateCombat(bool enemyAdvantage, GameObject PlayerGO, GameObject EnemyGO)
     {
         Instance._battleOngoing = true;
+        Time.timeScale = 0;
     
         Instance._player = PlayerGO;
         Instance._enemy = EnemyGO;
         //GameStateManager.Instance.TogglePause();
-        Time.timeScale = 0;
-
+        
         
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
@@ -102,7 +109,7 @@ public class CombatManager : MonoBehaviour
         
         Instance.SwitchBattleUIPanel();
     
-        Instance.StartCoroutine(Instance. BattleLoop());
+        Instance.StartCoroutine(Instance.BattleLoop());
     }
 
     private void EnemyAction()
@@ -116,19 +123,30 @@ public class CombatManager : MonoBehaviour
         switch (_turn)
         {
             case Turn.Player:
+                // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
-                _miniGameUI.SetActive(false); 
+                _miniGameUI.SetActive(false);
+
+                // Set the focus on the attack button only once
+                if (EventSystem.current.currentSelectedGameObject == null)
+                {
+                    GameObject firstButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+                    EventSystem.current.SetSelectedGameObject(firstButton);
+                    Debug.Log("Attack button focus set");
+                }
                 break;
             case Turn.Enemy:
+                // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
-                _miniGameUI.SetActive(true); 
+                _miniGameUI.SetActive(true);
                 break;
         }
     }
 
+
     private void GameOver()
     {
-        //print("hi");
+        print("hi");
         _battleUI.SetActive(false); 
         Destroy(_player);
         _battleOngoing = false;
@@ -138,14 +156,11 @@ public class CombatManager : MonoBehaviour
 
     private void EnemyDefeated()
     {
-        Time.timeScale = 1;
         Destroy(_enemy);
         _battleOngoing = false;
         _battleUI.SetActive(false); 
-        print("marcin");
-
         
-
+        Time.timeScale = 1;
     }
     
     private IEnumerator BattleLoop()
@@ -159,14 +174,13 @@ public class CombatManager : MonoBehaviour
             if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
             {
                 GameOver();
-                break;
+                yield break;
             }
 
             if (_enemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
             {
                 EnemyDefeated();
-                print(_battleOngoing);
-                break;
+                yield break;
             }
 
             if (_turn == Turn.Enemy && !_enemyHasActed) 
@@ -174,11 +188,11 @@ public class CombatManager : MonoBehaviour
                 EnemyAction();
                 _enemyHasActed = true; 
             }
+
             yield return null;
         }
 
         Time.timeScale = 1;
-        print("ended");
     }
 
 
