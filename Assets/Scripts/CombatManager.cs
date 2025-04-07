@@ -23,18 +23,17 @@ public class CombatManager : MonoBehaviour
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
     private Image _enemySprite;
-    private static GameObject battleUI;
     private static GameObject _miniGameUI;
     private Turn _turn;
     private bool _enemyHasActed = false;
 
-    public async void OnAtkClicked()
+    public void OnAtkClicked()
     {
         //_enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
         print("atk clicked");
         //await Task.Delay(1000);
 
-        
+        _battleUI.SetActive(false);
         _miniGameUI.SetActive(true);
         print(_miniGameUI.IsUnityNull());
         _turn = Turn.Enemy;
@@ -44,7 +43,7 @@ public class CombatManager : MonoBehaviour
     public static void OnAttackEnded()
     {
         _miniGameUI.SetActive(false);
-        battleUI.SetActive(true);
+        _battleUI.SetActive(true);
         
         Instance._turn = Turn.Player;
         Instance._guardMultiplayer = 1;
@@ -78,7 +77,7 @@ public class CombatManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
-            battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
+
             _miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
         }
         else
