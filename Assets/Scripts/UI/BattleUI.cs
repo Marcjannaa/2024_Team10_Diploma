@@ -11,6 +11,8 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Image _enemySprite;
     [SerializeField] private GameObject _playerActionFirst;
     
+    
+    
 
     public void SetPlayerHealthText(string text)
     {
