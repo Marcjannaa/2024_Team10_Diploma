@@ -637,7 +637,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 713259017947486385, guid: f7c62ffe3b0df024f92bc54f62dbb129, type: 3}
       propertyPath: Health.StatValue
-      value: 371.2
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 713259017947486385, guid: f7c62ffe3b0df024f92bc54f62dbb129, type: 3}
       propertyPath: Strength.StatValue
@@ -645,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 713259017947486385, guid: f7c62ffe3b0df024f92bc54f62dbb129, type: 3}
       propertyPath: MaxHealth.StatValue
-      value: 497.2
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3513291987900765542, guid: f7c62ffe3b0df024f92bc54f62dbb129, type: 3}
       propertyPath: m_LocalPosition.x

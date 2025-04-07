@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class TimingMiniGame : MonoBehaviour
 {
-    private enum HitResult { PerfectHit, MediumHit, NoHit }
+    public enum HitResult { PerfectHit, MediumHit, NoHit }
 
     private bool _isTouchingTarget;
 
@@ -11,7 +12,7 @@ public class TimingMiniGame : MonoBehaviour
     [SerializeField] private Collider2D targetCollider;
     [SerializeField] private RectTransform panelBounds;
     [SerializeField] private float targetRadius = 0.5f; 
-
+    private HitResult _hitResult;
     private Vector2 _startPos;
     private Collider2D _selfCollider;
 
@@ -64,7 +65,7 @@ public class TimingMiniGame : MonoBehaviour
 
     private void EndGame(HitResult result)
     {
-
+        _hitResult = result;
         switch (result)
         {
             case HitResult.PerfectHit:
@@ -79,11 +80,15 @@ public class TimingMiniGame : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(result), result, null);
         }
-        CombatManager.OnAttackEnded();
+        CombatManager.OnAttackEnded(result);
         transform.position = _startPos;
         
     }
-    
+
+    public HitResult GetHit()
+    {
+        return _hitResult;
+    }
 
     private void OnDrawGizmos()
     {
