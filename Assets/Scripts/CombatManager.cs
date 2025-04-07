@@ -31,6 +31,7 @@ public class CombatManager : MonoBehaviour
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
     
+    
     void Update()
     {
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
@@ -148,9 +149,8 @@ public class CombatManager : MonoBehaviour
     
         _player = PlayerGO;
         _enemy = EnemyGO;
-        //GameStateManager.Instance.TogglePause();
-        
-        
+
+        _player.GetComponent<PlayerController>().inCombat = true;    
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
         Instance._enemyFirstStrike = enemyAdvantage;
@@ -263,6 +263,8 @@ public class CombatManager : MonoBehaviour
         }
 
         Time.timeScale = 1;
+        _player.GetComponent<PlayerController>().inCombat = false;
+        //_player.SetActive(true);
     }
 
 
