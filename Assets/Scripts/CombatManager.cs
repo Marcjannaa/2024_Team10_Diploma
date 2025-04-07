@@ -29,7 +29,7 @@ public class CombatManager : MonoBehaviour
 
     public void OnAtkClicked()
     {
-        //_enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
         print("atk clicked");
         //await Task.Delay(1000);
 
