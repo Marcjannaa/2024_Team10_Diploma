@@ -21,11 +21,13 @@ public class CombatManager : MonoBehaviour
     private static GameObject _battleUI;
     private static GameObject _player;
     private static GameObject _enemy;
+    private bool _enemyFirstStrike = false;
     private bool _battleOngoing;
-    private float _guardMultiplayer = 1;
+    private float _guardMultiplier = 1;
     private Image _enemySprite;
     private static GameObject _miniGameUI;
     private Turn _turn;
+    private bool _playerAttacked = false;
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
     
@@ -50,17 +52,20 @@ public class CombatManager : MonoBehaviour
 
         _battleUI.SetActive(false);
         _miniGameUI.SetActive(true);
-
-        _turn = Turn.Enemy;
+        
         
     }
 
     public void OnSkill1Clicked()
     {
         _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 8);
+        print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
 
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
         
+        
+        _playerAttacked = true;
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
     }
@@ -83,10 +88,11 @@ public class CombatManager : MonoBehaviour
         
         _miniGameUI.SetActive(false);
         _battleUI.SetActive(true);
+        Instance._playerAttacked = true;
         
-        Instance._turn = Turn.Player;
-        Instance._guardMultiplayer = 1;
-        Instance._enemyHasActed = false; 
+        Instance._turn = Turn.Enemy;
+        Instance._guardMultiplier = 1;
+
         Instance.SwitchBattleUIPanel();
     }
 
@@ -106,7 +112,7 @@ public class CombatManager : MonoBehaviour
     
     public void OnGuardClicked()
     {
-        _guardMultiplayer = 0.3f;
+        _guardMultiplier = 0.3f;
         _turn = Turn.Enemy;
         //SwitchBattleUIPanel();
     }
@@ -139,6 +145,7 @@ public class CombatManager : MonoBehaviour
         
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
+        Instance._enemyFirstStrike = enemyAdvantage;
     
         Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
     
@@ -152,9 +159,15 @@ public class CombatManager : MonoBehaviour
         Instance.StartCoroutine(Instance.BattleLoop());
     }
 
-    private void EnemyAction()
+    private async void EnemyAction()
     {
-        _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplayer); 
+        print("kckckckc");
+        _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplier); 
+        await Task.Delay(1000);
+
+        _turn = Turn.Player;
+        SwitchBattleUIPanel();
+
 
     }
 
@@ -165,6 +178,7 @@ public class CombatManager : MonoBehaviour
             case Turn.Player:
                 // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
+                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGameUI.SetActive(false);
 
                 // Set the focus on the attack button
@@ -182,7 +196,8 @@ public class CombatManager : MonoBehaviour
             case Turn.Enemy:
                 // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
-                _miniGameUI.SetActive(true);
+                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
+                //_miniGameUI.SetActive(true);
                 break;
         }
     }
@@ -228,10 +243,12 @@ public class CombatManager : MonoBehaviour
                 yield break;
             }
 
-            if (_turn == Turn.Enemy && !_enemyHasActed) 
+            if (_turn == Turn.Enemy && (_playerAttacked || _enemyFirstStrike)) 
             {
+                _enemyFirstStrike = false;
+                print("kc!");
                 EnemyAction();
-                _enemyHasActed = true; 
+                _playerAttacked = false;
             }
 
             yield return null;
