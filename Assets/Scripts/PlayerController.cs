@@ -4,17 +4,29 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _speed = 5.0f;
     private bool _canCombat = false;
     private GameObject _enemyInRange = null;
-    
+    [SerializeField] private Animator anim;
     void Update ()
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
+
+            if (horizontal != 0 || vertical != 0)
+            {
+                anim.SetBool("IsRunning", true);
+            }
+            else
+            {
+                anim.SetBool("IsRunning", false);
+            }
+            gameObject.GetComponentInChildren<PlayerSprites>().LookLeft(Input.GetAxis("Horizontal") < 0);
+
+            
             var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             
             transform.Translate(direction * _speed * Time.deltaTime);
