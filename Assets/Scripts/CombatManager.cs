@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 internal enum Turn
@@ -26,21 +27,42 @@ public class CombatManager : MonoBehaviour
     private static GameObject _miniGameUI;
     private Turn _turn;
     private bool _enemyHasActed = false;
+    private bool _inDifferentPanel = false;
+    
+    void Update()
+    {
+        if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
+        {
+            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            print("closing panel");
+            _inDifferentPanel = false;
+        }
+            
+    
+
+    }
 
     public void OnAtkClicked()
     {
         
         print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
-
         print("atk clicked");
-        //await Task.Delay(1000);
 
         _battleUI.SetActive(false);
         _miniGameUI.SetActive(true);
 
         _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
         
+    }
+
+    public void OnSkill1Clicked()
+    {
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 8);
+
+        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+        
+        _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
     }
     public static void OnAttackEnded(TimingMiniGame.HitResult  hitResult)
     {
@@ -72,7 +94,9 @@ public class CombatManager : MonoBehaviour
     
     public void OnSkillClicked()
     {
-        
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
+        _inDifferentPanel = true;
     }
     
     public void OnItemClicked()
@@ -187,6 +211,7 @@ public class CombatManager : MonoBehaviour
     {
         while (_battleOngoing)
         {
+            
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
