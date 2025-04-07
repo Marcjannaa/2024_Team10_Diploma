@@ -102,6 +102,14 @@ public class CombatManager : MonoBehaviour
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
+        GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
+        
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(skillButton);
+            Debug.Log("Attack button focus set");
+        }
+        
         _inDifferentPanel = true;
     }
     

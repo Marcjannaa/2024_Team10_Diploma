@@ -10,6 +10,7 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private Slider _enemyHealthSlider;
     [SerializeField] private Image _enemySprite;
     [SerializeField] private GameObject _playerActionFirst;
+    [SerializeField] private GameObject _skillActionFirst;
     
     
     
@@ -37,5 +38,6 @@ public class BattleUI : MonoBehaviour
     }
     
     public GameObject GetPlayerActionFirst() => _playerActionFirst;
+    public GameObject GetSkillActionFirst() => _skillActionFirst;
 
 }

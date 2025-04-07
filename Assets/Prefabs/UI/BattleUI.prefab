@@ -327,6 +327,7 @@ MonoBehaviour:
   _enemyHealthSlider: {fileID: 9023850594246273635}
   _enemySprite: {fileID: 2474915575568098437}
   _playerActionFirst: {fileID: 1078921666637224554}
+  _skillActionFirst: {fileID: 2369922304081698917}
 --- !u!1 &2369922304081698917
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +428,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.8490566, g: 0.26032397, b: 0.26032397, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.09829593, g: 1, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
