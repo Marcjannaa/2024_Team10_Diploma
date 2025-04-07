@@ -22,7 +22,6 @@ public class CombatManager : MonoBehaviour
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
     private Image _enemySprite;
-    private static GameObject battleUI;
     private static GameObject _miniGameUI;
     private Turn _turn;
     private bool _enemyHasActed = false;
@@ -34,14 +33,12 @@ public class CombatManager : MonoBehaviour
         //await Task.Delay(1000);
 
         _turn = Turn.Enemy;
-        _miniGameUI.SetActive(true);
-        battleUI.SetActive(false);
-        //SwitchBattleUIPanel();
+        SwitchBattleUIPanel();
     }
     public static void OnAttackEnded()
     {
         _miniGameUI.SetActive(false);
-        battleUI.SetActive(true);
+        _battleUI.SetActive(true);
 
         Instance._turn = Turn.Player;
         Instance._guardMultiplayer = 1;
@@ -65,7 +62,7 @@ public class CombatManager : MonoBehaviour
     {
         _guardMultiplayer = 0.3f;
         _turn = Turn.Enemy;
-        //SwitchBattleUIPanel();
+        SwitchBattleUIPanel();
     }
     
     private void Awake()
@@ -75,7 +72,6 @@ public class CombatManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
-            battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
             _miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
         }
         else
@@ -87,12 +83,12 @@ public class CombatManager : MonoBehaviour
     public static void InitiateCombat(bool enemyAdvantage, GameObject PlayerGO, GameObject EnemyGO)
     {
         Instance._battleOngoing = true;
-        Time.timeScale = 0;
     
         Instance._player = PlayerGO;
         Instance._enemy = EnemyGO;
         //GameStateManager.Instance.TogglePause();
-        
+        Time.timeScale = 0;
+
         
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
@@ -106,7 +102,7 @@ public class CombatManager : MonoBehaviour
         
         Instance.SwitchBattleUIPanel();
     
-        Instance.StartCoroutine(Instance.BattleLoop());
+        Instance.StartCoroutine(Instance. BattleLoop());
     }
 
     private void EnemyAction()
@@ -132,7 +128,7 @@ public class CombatManager : MonoBehaviour
 
     private void GameOver()
     {
-        print("hi");
+        //print("hi");
         _battleUI.SetActive(false); 
         Destroy(_player);
         _battleOngoing = false;
@@ -142,11 +138,14 @@ public class CombatManager : MonoBehaviour
 
     private void EnemyDefeated()
     {
+        Time.timeScale = 1;
         Destroy(_enemy);
         _battleOngoing = false;
         _battleUI.SetActive(false); 
+        print("marcin");
+
         
-        Time.timeScale = 1;
+
     }
     
     private IEnumerator BattleLoop()
@@ -160,13 +159,14 @@ public class CombatManager : MonoBehaviour
             if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
             {
                 GameOver();
-                yield break;
+                break;
             }
 
             if (_enemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
             {
                 EnemyDefeated();
-                yield break;
+                print(_battleOngoing);
+                break;
             }
 
             if (_turn == Turn.Enemy && !_enemyHasActed) 
@@ -174,11 +174,11 @@ public class CombatManager : MonoBehaviour
                 EnemyAction();
                 _enemyHasActed = true; 
             }
-
             yield return null;
         }
 
         Time.timeScale = 1;
+        print("ended");
     }
 
 
