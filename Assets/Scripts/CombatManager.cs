@@ -60,7 +60,6 @@ public class CombatManager : MonoBehaviour
     public void OnSkill1Clicked()
     {
         _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 8);
-        print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
 
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
@@ -105,10 +104,10 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
         GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
         
-        if (EventSystem.current.currentSelectedGameObject == null)
+        if (EventSystem.current.currentSelectedGameObject != skillButton)
         {
             EventSystem.current.SetSelectedGameObject(skillButton);
-            Debug.Log("Attack button focus set");
+            Debug.Log("Skill button focus set");
         }
         
         _inDifferentPanel = true;
@@ -193,7 +192,7 @@ public class CombatManager : MonoBehaviour
                 GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
 
                 // Ensure focus is set to the attack button, if it's not already focused
-                if (EventSystem.current.currentSelectedGameObject == null)
+                if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
                     EventSystem.current.SetSelectedGameObject(attackButton);
                     Debug.Log("Attack button focus set");
@@ -223,10 +222,13 @@ public class CombatManager : MonoBehaviour
 
     private void EnemyDefeated()
     {
+        _player.GetComponent<PlayerController>().RemoveEnemyFromList(_enemy);
         Destroy(_enemy);
         _battleOngoing = false;
         _battleUI.SetActive(false); 
-        
+
+        _player.GetComponent<PlayerController>().inCombat = false;
+
         Time.timeScale = 1;
     }
     
@@ -263,7 +265,7 @@ public class CombatManager : MonoBehaviour
         }
 
         Time.timeScale = 1;
-        _player.GetComponent<PlayerController>().inCombat = false;
+
         //_player.SetActive(true);
     }
 
