@@ -54,6 +54,9 @@ public class GameStateManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        Time.timeScale = 0f;
+
     }
     public bool IsPaused => currentState == GameState.Paused;
 }

@@ -22,33 +22,34 @@ public class CombatManager : MonoBehaviour
     private bool _battleOngoing;
     private float _guardMultiplayer = 1;
     private Image _enemySprite;
-    
+    private static GameObject battleUI;
+    private static GameObject _miniGameUI;
     private Turn _turn;
+    private bool _enemyHasActed = false;
 
     public async void OnAtkClicked()
     {
         _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
 
-        await Task.Delay(1000);
+        //await Task.Delay(1000);
 
         _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
-    private static CombatManager Instance { get; set; }
-    private static GameObject battleUI;
-    private Turn _turn;
-    private static GameObject _miniGameUI;
-    public void OnAtkClicked()
-    {
         _miniGameUI.SetActive(true);
-        _miniGameUI.GetComponent<Canvas>().enabled = true;
         battleUI.SetActive(false);
+        //SwitchBattleUIPanel();
     }
-
     public static void OnAttackEnded()
     {
         _miniGameUI.SetActive(false);
         battleUI.SetActive(true);
+
+        Instance._turn = Turn.Player;
+        Instance._guardMultiplayer = 1;
+        Instance._enemyHasActed = false; 
+        Instance.SwitchBattleUIPanel();
     }
+
+
     
     public void OnSkillClicked()
     {
@@ -64,7 +65,7 @@ public class CombatManager : MonoBehaviour
     {
         _guardMultiplayer = 0.3f;
         _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
+        //SwitchBattleUIPanel();
     }
     
     private void Awake()
@@ -90,7 +91,7 @@ public class CombatManager : MonoBehaviour
     
         Instance._player = PlayerGO;
         Instance._enemy = EnemyGO;
-        GameStateManager.Instance.TogglePause();
+        //GameStateManager.Instance.TogglePause();
         
         
     
@@ -116,21 +117,22 @@ public class CombatManager : MonoBehaviour
 
     private void SwitchBattleUIPanel()
     {
-        switch (Instance._turn)
+        switch (_turn)
         {
             case Turn.Player:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
-                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false); 
+                _miniGameUI.SetActive(false); 
                 break;
             case Turn.Enemy:
-                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);  
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
+                _miniGameUI.SetActive(true); 
                 break;
         }
     }
 
     private void GameOver()
     {
+        print("hi");
         _battleUI.SetActive(false); 
         Destroy(_player);
         _battleOngoing = false;
@@ -154,8 +156,7 @@ public class CombatManager : MonoBehaviour
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
-            
-            
+
             if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
             {
                 GameOver();
@@ -168,14 +169,10 @@ public class CombatManager : MonoBehaviour
                 yield break;
             }
 
-            if (_turn == Turn.Enemy)
+            if (_turn == Turn.Enemy && !_enemyHasActed) 
             {
                 EnemyAction();
-                yield return new WaitForSecondsRealtime(1.5f);
-
-                _turn = Turn.Player;
-                _guardMultiplayer = 1;
-                SwitchBattleUIPanel();
+                _enemyHasActed = true; 
             }
 
             yield return null;
@@ -183,6 +180,7 @@ public class CombatManager : MonoBehaviour
 
         Time.timeScale = 1;
     }
+
 
 }
 

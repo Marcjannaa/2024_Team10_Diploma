@@ -81,7 +81,9 @@ public class TimingMiniGame : MonoBehaviour
         }
         CombatManager.OnAttackEnded();
         transform.position = _startPos;
+        
     }
+    
 
     private void OnDrawGizmos()
     {
