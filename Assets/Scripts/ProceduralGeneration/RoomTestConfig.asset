@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RoomTestConfig
   m_EditorClassIdentifier: 
   roomName: TestRoom
-  prefab: {fileID: 5390966604219338592, guid: 3b7c0662b088f1a44ab9b2f32a31eb6e, type: 3}
+  prefab: {fileID: 2076947885952240501, guid: 26e041627573bdb4b87546aaf311bc16, type: 3}
   isSpecialRoom: 0
   isBossRoom: 0

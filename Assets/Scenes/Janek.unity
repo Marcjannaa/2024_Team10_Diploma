@@ -151,7 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da271ba6dee24d579dc263b230741018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorGenerator: {fileID: 1275925069}
+  _floorGenerator: {fileID: 1275925069}
+  floorConfigs:
+  - {fileID: 11400000, guid: d0ed7434b17892643b0fef576eee38be, type: 2}
 --- !u!4 &168175087
 Transform:
   m_ObjectHideFlags: 0
@@ -161,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 168175085}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.17693806, y: -0.6651902, z: 0.70011187}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -229,7 +231,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 100
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -253,13 +255,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694750320}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 163.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1275925068
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,10 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64507c1729c643308d8c666d5f9d8a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingRoom: {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
-  standardRooms:
-  - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
-  roomsToGenerate: 10
 --- !u!4 &1275925070
 Transform:
   m_ObjectHideFlags: 0

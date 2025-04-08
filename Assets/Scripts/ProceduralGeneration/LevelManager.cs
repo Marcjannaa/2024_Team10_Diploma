@@ -1,25 +1,48 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using ProceduralGeneration;
 
-namespace ProceduralGeneration
+public class LevelManager : MonoBehaviour
 {
-     public class LevelManager : MonoBehaviour
+    public static LevelManager Instance { get; private set; }
+
+    [SerializeField] private FloorGenerator _floorGenerator;
+    [SerializeField] private List<FloorConfig> floorConfigs;
+
+    private int currentFloorIndex = 0;
+
+    private void Awake()
     {
-        [SerializeField] private FloorGenerator floorGenerator;
-
-        private void Start()
+        if (Instance != null && Instance != this)
         {
-            floorGenerator.Initialize(this);
-            StartNewFloor();
+            Destroy(this.gameObject);
+            return;
         }
 
-        public void StartNewFloor()
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        GenerateNextFloor();
+    }
+
+    public void GenerateNextFloor()
+    {
+        if (currentFloorIndex >= floorConfigs.Count)
         {
-            floorGenerator.GenerateFloor();
+            Debug.Log("All floors generated.");
+            return;
         }
 
-        public void OnFloorGenerationComplete()
-        {
-            Debug.Log("Floor generation complete!");
-        }
+        FloorConfig config = floorConfigs[currentFloorIndex];
+        _floorGenerator.GenerateFloor(config);
+    }
+
+    public void OnFloorGenerationComplete()
+    {
+        Debug.Log($"Floor {currentFloorIndex + 1} generated.");
+        currentFloorIndex++;
+        // #TODO Maybe trigger something else and connect with game manager
     }
 }
