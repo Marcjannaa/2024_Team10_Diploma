@@ -14,6 +14,7 @@ public class Player_Stats : MonoBehaviour
     public Stat Coins = new Stat (0, StatType.Coin);
     public Stat Bombs = new Stat (0, StatType.Bomb);
     public Stat Keys = new Stat (0, StatType.Key);
+    public Stat LockPick = new Stat(false, StatType.LockPick);
     [SerializeField] private InventoryUI inventoryUI;
 
    

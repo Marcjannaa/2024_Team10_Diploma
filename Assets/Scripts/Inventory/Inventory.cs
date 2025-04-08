@@ -25,11 +25,19 @@ public class Inventory : MonoBehaviour
     {
         if (Items.Count < 9)
         {
-            stats.MaxHealth.Modify(item.MaxHp);
-            stats.Health.Modify(item.MaxHp);
-            stats.Strength.Modify(item.STR);
-            stats.Agility.Modify(item.AGL);
-            stats.Intelligence.Modify(item.INT);
+            if (item.allowLockPick)
+            {
+                Debug.Log("Yummers");
+                stats.LockPick.setFlag(true);
+            }
+            else
+            {
+                stats.MaxHealth.Modify(item.MaxHp);
+                stats.Health.Modify(item.MaxHp);
+                stats.Strength.Modify(item.STR);
+                stats.Agility.Modify(item.AGL);
+                stats.Intelligence.Modify(item.INT);
+            }
             Items.Add(item);
         }
         

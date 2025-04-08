@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     [SerializeField] public int INT;
     [SerializeField] public Sprite image;
     [SerializeField] public InventoryUI ui;
+    [SerializeField] public bool allowLockPick;
     
     
     // Start is called before the first frame update
