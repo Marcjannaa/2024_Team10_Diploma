@@ -9,54 +9,75 @@ namespace ProceduralGeneration
 
     public class FloorGenerator : MonoBehaviour
     {
-        public RoomConfig startingRoom;
-        public List<RoomConfig> standardRooms;
-        private LevelManager levelManager;
+        private FloorConfig floorConfig;
         private List<PlacedRoom> activeRooms = new();
-        private List<BoxCollider> Colliders = new();
+        private List<BoxCollider> colliders = new();
         private List<ExitPoint> exitPoints = new();
-        [SerializeField] int roomsToGenerate = 10;
-
-        public void Initialize(LevelManager manager)
+        private int attempts = 0;
+        public void GenerateFloor(FloorConfig config)
         {
-            levelManager = manager;
-        }
+            floorConfig = config;
 
-        public void GenerateFloor()
-        {
             ClearPreviousFloor();
 
-            var startRoom = Instantiate(startingRoom.prefab);
+            var startRoom = Instantiate(floorConfig.startingRoom.prefab);
             var placedStart = startRoom.GetComponentInChildren<PlacedRoom>();
-            placedStart.Initialize(startingRoom);
+            placedStart.Initialize(floorConfig.startingRoom);
 
             activeRooms.Add(placedStart);
-            Colliders.Add(placedStart.GetRoomCollider());
-            RoomPlacementHelper.AddRoomExits(placedStart,exitPoints);
+            colliders.Add(placedStart.GetRoomCollider());
+            RoomPlacementHelper.AddRoomExits(placedStart, exitPoints);
 
             StartCoroutine(GenerateLoop());
         }
 
         private IEnumerator GenerateLoop()
         {
-            int attempts = 0;
             int maxGlobalAttempts = 200;
-            print($"Attempts: {attempts}, Active rooms: {activeRooms.Count}");
 
-            while (activeRooms.Count < roomsToGenerate && attempts < maxGlobalAttempts)
+            yield return StartCoroutine(GenerateRooms(floorConfig.standardRooms, floorConfig.standardRoomsToGenerate,
+                attempts, maxGlobalAttempts));
+            yield return StartCoroutine(GenerateRooms(floorConfig.treasureRooms, floorConfig.treasureRoomsToGenerate,
+                attempts, maxGlobalAttempts));
+            yield return StartCoroutine(GenerateRooms(floorConfig.bossRooms, floorConfig.bossRoomsToGenerate, attempts,
+                maxGlobalAttempts));
+
+            LevelManager.Instance.OnFloorGenerationComplete(); // use singleton
+        }
+
+        private IEnumerator GenerateRooms(List<RoomConfig> roomPool, int countToGenerate, int attempts, int maxAttempts)
+        {
+            int roomsPlaced = 0;
+
+            while (roomsPlaced < countToGenerate && attempts < maxAttempts)
             {
                 attempts++;
+                Debug.Log($"Attempts: {attempts}, Active rooms: {activeRooms.Count + 1}");
 
                 var selectedExit = RoomPlacementHelper.GetRandomUnconnectedExit(exitPoints);
-                RoomConfig newRoomDef = RoomPlacementHelper.GetRandomRoom(standardRooms); // #todo add generating special rooms etc
-                TryPlaceRoomAtExit(selectedExit, newRoomDef);
+                if (selectedExit is null)
+                {
+                    Debug.LogWarning("No valid exit point found, aborting.");
+                    yield break;
+                }
+
+                RoomConfig roomDef = RoomPlacementHelper.GetRandomRoom(roomPool);
+                if (roomDef is null)
+                {
+                    Debug.LogWarning("No valid room config, aborting.");
+                    yield break;
+                }
+
+                int initialCount = activeRooms.Count;
+                TryPlaceRoomAtExit(selectedExit, roomDef);
+                if (activeRooms.Count > initialCount)
+                {
+                    roomsPlaced++;
+                }
 
                 yield return new WaitForSeconds(0.5f);
             }
-
-            levelManager.OnFloorGenerationComplete();
         }
-
 
         private void ClearPreviousFloor()
         {
@@ -67,20 +88,19 @@ namespace ProceduralGeneration
             }
 
             activeRooms.Clear();
-            Colliders.Clear();
+            colliders.Clear();
             exitPoints.Clear();
         }
 
 
         private void TryPlaceRoomAtExit(ExitPoint exit, RoomConfig roomDef)
         {
-            
             if (exit is null || roomDef is null)
             {
                 Debug.LogWarning("Exit or RoomConfig is null, skipping room placement.");
                 return;
             }
-            
+
             var room = RoomPlacementHelper.PlaceRoom(roomDef, exit.transform.position, exit.transform.rotation);
             if (room is null)
             {
@@ -88,22 +108,20 @@ namespace ProceduralGeneration
                 return;
             }
 
-            if (RoomPlacementHelper.IsRoomOverlapping(room, Colliders))
+            if (RoomPlacementHelper.IsRoomOverlapping(room, colliders))
             {
-                Object.Destroy(room);
+                Destroy(room);
                 exit.isConnected = true;
                 Debug.Log("Overlap detected, room destroyed.");
             }
             else
             {
                 activeRooms.Add(room);
-                Colliders.Add(room.GetRoomCollider());
+                colliders.Add(room.GetRoomCollider());
                 RoomPlacementHelper.AddRoomExits(room, exitPoints);
                 exit.isConnected = true;
                 RoomPlacementHelper.CloseNearestExit(exit, exitPoints);
             }
         }
-
-        
     }
 }
