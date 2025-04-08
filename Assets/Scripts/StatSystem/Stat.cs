@@ -7,6 +7,8 @@ public class Stat
 {
     public StatType Type { get; set; }
     public float StatValue;
+
+    private bool checkFlag;
     //private int _modifiedValue;
 
     private static List<Stat> _stats = new List<Stat>();
@@ -23,19 +25,38 @@ public class Stat
         _stats.Add(this);
         Debug.Log(_stats);
     }
+    
+    public Stat(bool statValue, StatType type)
+    {
+        setFlag(statValue);
+        Type = type;
+        _stats.Add(this);
+        Debug.Log(_stats);
+    }
 
     public float Value
     {
-
         get
         {
             //Debug.Log(StatValue);
             return StatValue;
         }
-        
     }
 
-    
+    public bool getFlag()
+    {
+        if (checkFlag)
+        {
+            return checkFlag;
+        }
+        return false;
+    }
+    public void setFlag(bool flag)
+    {
+        Debug.Log(checkFlag);
+        checkFlag = flag;
+        Debug.Log(checkFlag);
+    }
     
     public void Modify(float amount)
     {
@@ -55,10 +76,7 @@ public class Stat
                 Debug.Log(currHp.Value);
                 break;
         }
-        
         StatValue = tmp;
-       
-       
     }
 
     public void ResetModifiers()

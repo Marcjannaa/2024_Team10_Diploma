@@ -11,6 +11,7 @@ public enum StatType
     Intelligence,
     Coin,
     Bomb,
-    Key
+    Key,
+    LockPick
     
 }
