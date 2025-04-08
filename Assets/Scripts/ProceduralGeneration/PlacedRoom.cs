@@ -15,13 +15,7 @@ namespace ProceduralGeneration
             definition = def;
             Exits = new List<ExitPoint>(GetComponentsInChildren<ExitPoint>());
         }
-
-        public ExitPoint GetRandomUnconnectedExit()
-        {
-            var available = Exits.FindAll(e => !e.isConnected);
-            if (available.Count == 0) return null;
-            return available[Random.Range(0, available.Count)];
-        }
+        
 
         public BoxCollider GetRoomCollider()
         {
@@ -39,5 +33,16 @@ namespace ProceduralGeneration
 
             return resList;
         }
+        
+        public void DestroyWithAllChildren()
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+            
+            Destroy(gameObject);
+        }
+        
     }
 }
