@@ -37,8 +37,17 @@ public class CombatManager : MonoBehaviour
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
         {
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            
+            _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
             print("closing panel");
             _inDifferentPanel = false;
+            
+            GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+            if (EventSystem.current.currentSelectedGameObject != attackButton)
+            {
+                EventSystem.current.SetSelectedGameObject(attackButton);
+                Debug.Log("Attack button focus set");
+            }
         }
             
     
@@ -121,8 +130,9 @@ public class CombatManager : MonoBehaviour
     public void OnGuardClicked()
     {
         _guardMultiplier = 0.3f;
+        _playerAttacked = true;
         _turn = Turn.Enemy;
-        //SwitchBattleUIPanel();
+        SwitchBattleUIPanel();
     }
     
     private void Awake()
@@ -183,15 +193,12 @@ public class CombatManager : MonoBehaviour
         switch (_turn)
         {
             case Turn.Player:
-                // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGameUI.SetActive(false);
-
-                // Set the focus on the attack button
+                
                 GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
-
-                // Ensure focus is set to the attack button, if it's not already focused
+                
                 if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
                     EventSystem.current.SetSelectedGameObject(attackButton);
@@ -201,10 +208,8 @@ public class CombatManager : MonoBehaviour
                 break;
 
             case Turn.Enemy:
-                // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
-                //_miniGameUI.SetActive(true);
                 break;
         }
     }
