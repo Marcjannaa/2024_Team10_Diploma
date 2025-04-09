@@ -25,7 +25,7 @@ public class CombatManager : MonoBehaviour
     private bool _battleOngoing;
     private float _guardMultiplier = 1;
     private Image _enemySprite;
-    private static GameObject _miniGameUI;
+    private static GameObject _miniGamePanel;
     private Turn _turn;
     private bool _playerAttacked = false;
     private bool _enemyHasActed = false;
@@ -37,24 +37,16 @@ public class CombatManager : MonoBehaviour
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
         {
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
-            print("closing panel");
             _inDifferentPanel = false;
         }
-            
-    
-
     }
 
     public void OnAtkClicked()
     {
-        
-        print(_enemy.GetComponent<Enemy_Stats>().Health.Value);
-        print("atk clicked");
-
-        _battleUI.SetActive(false);
-        _miniGameUI.SetActive(true);
-        
-        
+        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject
+            .transform.Find("ActionPanel").gameObject
+            .SetActive(false);
+        _miniGamePanel.SetActive(true);
     }
 
     public void OnSkill1Clicked()
@@ -86,8 +78,11 @@ public class CombatManager : MonoBehaviour
                 break;
         }
         
-        _miniGameUI.SetActive(false);
-        _battleUI.SetActive(true);
+        _miniGamePanel.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject
+            .transform.Find("ActionPanel").gameObject
+            .SetActive(true);
+        
         Instance._playerAttacked = true;
         
         Instance._turn = Turn.Enemy;
@@ -132,8 +127,8 @@ public class CombatManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
-
-            _miniGameUI = Instance.gameObject.transform.Find("MiniGame").gameObject;
+            _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
+                .transform.Find("MiniGamePanel").gameObject;
         }
         else
         {
@@ -168,7 +163,6 @@ public class CombatManager : MonoBehaviour
 
     private async void EnemyAction()
     {
-        print("kckckckc");
         _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplier); 
         await Task.Delay(1000);
 
@@ -186,7 +180,7 @@ public class CombatManager : MonoBehaviour
                 // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
-                _miniGameUI.SetActive(false);
+                _miniGamePanel.SetActive(false);
 
                 // Set the focus on the attack button
                 GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
@@ -197,9 +191,8 @@ public class CombatManager : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(attackButton);
                     Debug.Log("Attack button focus set");
                 }
-
                 break;
-
+            
             case Turn.Enemy:
                 // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
@@ -212,7 +205,6 @@ public class CombatManager : MonoBehaviour
 
     private void GameOver()
     {
-        print("hi");
         _battleUI.SetActive(false); 
         Destroy(_player);
         _battleOngoing = false;
@@ -256,7 +248,6 @@ public class CombatManager : MonoBehaviour
             if (_turn == Turn.Enemy && (_playerAttacked || _enemyFirstStrike)) 
             {
                 _enemyFirstStrike = false;
-                print("kc!");
                 EnemyAction();
                 _playerAttacked = false;
             }
