@@ -9,13 +9,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _speed = 5.0f;
     private bool _canCombat = false;
     public bool inCombat = false;
+    public bool _inBJ = false;
+    private bool _canEnterBJ;
     private GameObject _enemyInRange;
+    private GameObject _BJTable;
     private List<GameObject> _enemiesInRange = new List<GameObject>();
     [SerializeField] private Animator anim;
     void Update ()
     {
-        //print(_enemiesInRange.Count);
-        if (inCombat) return;
+        if (inCombat || _inBJ) return;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
@@ -34,11 +36,20 @@ public class PlayerController : MonoBehaviour
         var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         
         transform.Translate(direction * _speed * Time.deltaTime);
-        //print(_canCombat);
         if (_canCombat && Input.GetKeyDown(KeyCode.Return))
         {
             CombatManager.InitiateCombat(false,gameObject,_enemyInRange);
         }
+
+        
+        if (_canEnterBJ && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("BRAKJAK");
+            _inBJ = true;
+            _BJTable.GetComponent<BlackJack>().StartGame(this.gameObject);
+        }
+        
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -49,6 +60,12 @@ public class PlayerController : MonoBehaviour
             _enemyInRange = other.gameObject;
             _canCombat = true;
         }
+
+        if (other.CompareTag("BJTable") && _enemiesInRange.Count == 0)
+        {
+            _canEnterBJ = true;
+            _BJTable = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -58,17 +75,24 @@ public class PlayerController : MonoBehaviour
             _enemiesInRange.Remove(other.gameObject);
             print(_enemiesInRange.Remove(other.gameObject));
 
-            // Przypisz nowego wroga jeśli są jeszcze inni w zasięgu
+
             if (_enemiesInRange.Count > 0)
             {
                 _enemyInRange = _enemiesInRange[0];
+                _canEnterBJ = false;
                 _canCombat = true;
             }
             else
             {
                 _enemyInRange = null;
+                _canEnterBJ = false;
                 _canCombat = false;
             }
+        }
+
+        if (other.CompareTag("BJTable"))
+        {
+            _canEnterBJ = false;
         }
     }
 
@@ -77,5 +101,9 @@ public class PlayerController : MonoBehaviour
         _enemiesInRange.Remove(enemy);
     }
 
-
+    public void LeaveBJ()
+    {
+        _inBJ = false;
+        _canEnterBJ = true;
+    }
 }
