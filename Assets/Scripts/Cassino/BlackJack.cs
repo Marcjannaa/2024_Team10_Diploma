@@ -122,7 +122,6 @@ public class BlackJack : MonoBehaviour
         _gameOver = true;
         print("ps: " + _playerScore + " ds: " + _dealerScore);
         Debug.Log("game lost");
-        // CloseGame() teraz wywoływane w coroutine
     }
 
     private void GameWon(bool blackjack)
@@ -138,7 +137,6 @@ public class BlackJack : MonoBehaviour
             _player.GetComponent<Player_Stats>().Coins.Modify(_currentBet * 2);
         }
         Debug.Log("game won");
-        // CloseGame() teraz wywoływane w coroutine
     }
 
     Card PickRandomCard()

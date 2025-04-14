@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator anim;
     void Update ()
     {
-        //print(_enemiesInRange.Count);
         if (inCombat || _inBJ) return;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
         var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         
         transform.Translate(direction * _speed * Time.deltaTime);
-        //print(_canCombat);
         if (_canCombat && Input.GetKeyDown(KeyCode.Return))
         {
             CombatManager.InitiateCombat(false,gameObject,_enemyInRange);
