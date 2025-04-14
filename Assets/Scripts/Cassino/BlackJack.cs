@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
 
 public class BlackJack : MonoBehaviour
 {
@@ -20,19 +18,16 @@ public class BlackJack : MonoBehaviour
     [SerializeField] private GameObject _BJ_UI;
     private GameObject _betPanel;
     private GameObject _gamePanel;
-    [SerializeField] private TMP_Text _palyerCoinText;
+    [SerializeField] private TMP_Text _playerCoinText;
     [SerializeField] private TMP_Text _currentBetText;
     [SerializeField] private TMP_Text _playerScoreText;
     [SerializeField] private TMP_Text _dealerScoreText;
     [SerializeField] private GameObject _betPanelFocus;
     [SerializeField] private GameObject _gamePanelFocus;
-    
-    
+
     private bool _inBJRound;
     private bool _initialAction;
-    
-    
-    
+    private bool _gameOver;
 
     public void StartGame(GameObject player)
     {
@@ -43,17 +38,15 @@ public class BlackJack : MonoBehaviour
         _BJ_UI.SetActive(true);
         _betPanel = _BJ_UI.transform.Find("BetPanel").gameObject;
         _gamePanel = _BJ_UI.transform.Find("GamePanel").gameObject;
-        
-        
+
         _inGame = true;
         _inBJRound = false;
         _initialAction = true;
-        
+
         _betPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(_betPanelFocus);
         SetPlayerCoinsText();
         StartCoroutine(BlackJackLoop());
-
     }
 
     private IEnumerator BlackJackLoop()
@@ -63,20 +56,21 @@ public class BlackJack : MonoBehaviour
             if (_initialAction && _inBJRound)
             {
                 _initialAction = false;
-                EventSystem.current.SetSelectedGameObject(_gamePanelFocus);
+                
                 _playerScore += PickRandomCard().GetValue();
                 _dealerScore += PickRandomCard().GetValue();
                 _playerScore += PickRandomCard().GetValue();
                 _dealerSecretCard = PickRandomCard();
-                
+
                 SetPlayerScoreText();
                 SetDealerScoreText();
             }
-            
+
             if (_playerScore == 21)
             {
                 GameWon(true);
                 yield return new WaitForSeconds(1);
+                CloseGame();
                 break;
             }
 
@@ -84,22 +78,23 @@ public class BlackJack : MonoBehaviour
             {
                 GameOver();
                 yield return new WaitForSeconds(1);
+                CloseGame();
                 break;
             }
-
-
 
             if (_dealerScore == 21)
             {
                 GameOver();
                 yield return new WaitForSeconds(1);
+                CloseGame();
                 break;
             }
-            
+
             if (_dealerScore > 21)
             {
                 GameWon(false);
                 yield return new WaitForSeconds(1);
+                CloseGame();
                 break;
             }
 
@@ -109,29 +104,30 @@ public class BlackJack : MonoBehaviour
                 {
                     GameWon(false);
                     yield return new WaitForSeconds(1);
+                    CloseGame();
                     break;
                 }
                 GameOver();
                 yield return new WaitForSeconds(1);
+                CloseGame();
                 break;
             }
+
             yield return null;
         }
-        
-        _BJ_UI.SetActive(false);
-        _player.GetComponent<PlayerController>().LeaveBJ();
-        print("coins: " + _player.GetComponent<Player_Stats>().Coins.Value);
     }
 
     private void GameOver()
     {
+        _gameOver = true;
         print("ps: " + _playerScore + " ds: " + _dealerScore);
         Debug.Log("game lost");
-        CloseGame();
+        // CloseGame() teraz wywoływane w coroutine
     }
 
     private void GameWon(bool blackjack)
     {
+        _gameOver = true;
         print("ps: " + _playerScore + " ds: " + _dealerScore);
         if (blackjack)
         {
@@ -142,10 +138,8 @@ public class BlackJack : MonoBehaviour
             _player.GetComponent<Player_Stats>().Coins.Modify(_currentBet * 2);
         }
         Debug.Log("game won");
-        CloseGame();
+        // CloseGame() teraz wywoływane w coroutine
     }
-    
-    
 
     Card PickRandomCard()
     {
@@ -160,7 +154,6 @@ public class BlackJack : MonoBehaviour
         _deck.RemoveAt(index);
         return pickedCard;
     }
-    
 
     List<Card> CreateDeck()
     {
@@ -176,7 +169,7 @@ public class BlackJack : MonoBehaviour
 
                 if (int.TryParse(name, out value))
                 {
-                    
+                    // 2-10
                 }
                 else if (name == "Ace")
                 {
@@ -194,7 +187,7 @@ public class BlackJack : MonoBehaviour
 
         return deck;
     }
-    
+
     void PrintDeck()
     {
         foreach (Card card in _deck)
@@ -220,25 +213,25 @@ public class BlackJack : MonoBehaviour
             SetBetText(_currentBet.ToString());
         }
     }
-    
+
     public void SetPlayerScoreText()
     {
         _playerScoreText.text = "Player Score: " + _playerScore;
     }
-    
+
     public void SetDealerScoreText()
     {
         _dealerScoreText.text = "Dealer Score: " + _dealerScore;
     }
-    
+
     public void SetBetText(string text)
     {
         _currentBetText.text = text;
     }
-    
+
     public void SetPlayerCoinsText()
     {
-        _palyerCoinText.text = "Coins " + _player.GetComponent<Player_Stats>().Coins.Value;
+        _playerCoinText.text = "Coins " + _player.GetComponent<Player_Stats>().Coins.Value;
     }
 
     public void PlaceBet()
@@ -248,34 +241,63 @@ public class BlackJack : MonoBehaviour
             _player.GetComponent<Player_Stats>().Coins.Modify(-_currentBet);
             _betPanel.SetActive(false);
             _gamePanel.SetActive(true);
-            _inBJRound = true; 
+            EventSystem.current.SetSelectedGameObject(_gamePanelFocus);
+            _inBJRound = true;
         }
-
     }
 
     public void Hit()
     {
+        if (_gameOver || !_inBJRound) return;
+    
         _playerScore += PickRandomCard().GetValue();
         SetPlayerScoreText();
     }
 
+
     public void Stand()
     {
+        if (_gameOver || !_inBJRound) return;
+
         _dealerScore += _dealerSecretCard.GetValue();
         SetDealerScoreText();
         while (_dealerScore < 17)
         {
             _dealerScore += PickRandomCard().GetValue();
             SetDealerScoreText();
-            _standFinished = true;
         }
-        
+        _standFinished = true;
     }
+
 
     public void CloseGame()
     {
-        _currentBet = 0;
+        ResetGameState();
+        _inGame = false;
         _BJ_UI.SetActive(false);
         _player.GetComponent<PlayerController>().LeaveBJ();
+        print("coins: " + _player.GetComponent<Player_Stats>().Coins.Value);
     }
+    
+    
+    private void ResetGameState()
+    {
+        _deck.Clear();
+        _playerScore = 0;
+        _dealerScore = 0;
+        _currentBet = 0;
+        _inBJRound = false;
+        _initialAction = true;
+        _standFinished = false;
+        _dealerSecretCard = null;
+        _gameOver = false;
+
+        if (_betPanel != null) _betPanel.SetActive(false);
+        if (_gamePanel != null) _gamePanel.SetActive(false);
+    
+        SetPlayerScoreText();
+        SetDealerScoreText();
+        SetBetText("0");
+    }
+    
 }

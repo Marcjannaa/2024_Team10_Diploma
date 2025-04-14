@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("BJ_Table"))
+        if (other.CompareTag("BJTable"))
         {
             _canEnterBJ = false;
         }

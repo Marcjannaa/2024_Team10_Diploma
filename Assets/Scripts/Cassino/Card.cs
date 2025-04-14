@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Card : MonoBehaviour
+
+public class Card
 {
     private string color;
     private string name;
