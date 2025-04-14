@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 
 public class BlackJack : MonoBehaviour
@@ -14,6 +15,7 @@ public class BlackJack : MonoBehaviour
     [SerializeField] private int _maxBet;
     private int _playerScore;
     private int _dealerScore;
+    private bool _standFinished = false;
     private Card _dealerSecretCard;
     [SerializeField] private GameObject _BJ_UI;
     private GameObject _betPanel;
@@ -22,6 +24,8 @@ public class BlackJack : MonoBehaviour
     [SerializeField] private TMP_Text _currentBetText;
     [SerializeField] private TMP_Text _playerScoreText;
     [SerializeField] private TMP_Text _dealerScoreText;
+    [SerializeField] private GameObject _betPanelFocus;
+    [SerializeField] private GameObject _gamePanelFocus;
     
     
     private bool _inBJRound;
@@ -46,6 +50,7 @@ public class BlackJack : MonoBehaviour
         _initialAction = true;
         
         _betPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_betPanelFocus);
         SetPlayerCoinsText();
         StartCoroutine(BlackJackLoop());
 
@@ -58,6 +63,7 @@ public class BlackJack : MonoBehaviour
             if (_initialAction && _inBJRound)
             {
                 _initialAction = false;
+                EventSystem.current.SetSelectedGameObject(_gamePanelFocus);
                 _playerScore += PickRandomCard().GetValue();
                 _dealerScore += PickRandomCard().GetValue();
                 _playerScore += PickRandomCard().GetValue();
@@ -66,44 +72,80 @@ public class BlackJack : MonoBehaviour
                 SetPlayerScoreText();
                 SetDealerScoreText();
             }
+            
+            if (_playerScore == 21)
+            {
+                GameWon(true);
+                yield return new WaitForSeconds(1);
+                break;
+            }
 
             if (_playerScore > 21)
             {
                 GameOver();
+                yield return new WaitForSeconds(1);
+                break;
             }
 
-            if (_playerScore == 21)
-            {
-                GameWon();
-            }
+
 
             if (_dealerScore == 21)
             {
                 GameOver();
+                yield return new WaitForSeconds(1);
+                break;
             }
             
             if (_dealerScore > 21)
             {
-                GameWon();
+                GameWon(false);
+                yield return new WaitForSeconds(1);
+                break;
+            }
+
+            if (_standFinished)
+            {
+                if (_playerScore > _dealerScore)
+                {
+                    GameWon(false);
+                    yield return new WaitForSeconds(1);
+                    break;
+                }
+                GameOver();
+                yield return new WaitForSeconds(1);
+                break;
             }
             yield return null;
-        } 
+        }
         
         _BJ_UI.SetActive(false);
         _player.GetComponent<PlayerController>().LeaveBJ();
+        print("coins: " + _player.GetComponent<Player_Stats>().Coins.Value);
     }
 
     private void GameOver()
     {
+        print("ps: " + _playerScore + " ds: " + _dealerScore);
         Debug.Log("game lost");
-        //CloseGame();
+        CloseGame();
     }
 
-    private void GameWon()
+    private void GameWon(bool blackjack)
     {
+        print("ps: " + _playerScore + " ds: " + _dealerScore);
+        if (blackjack)
+        {
+            _player.GetComponent<Player_Stats>().Coins.Modify((float)(_currentBet * 2.5));
+        }
+        else
+        {
+            _player.GetComponent<Player_Stats>().Coins.Modify(_currentBet * 2);
+        }
         Debug.Log("game won");
-        //CloseGame();
+        CloseGame();
     }
+    
+    
 
     Card PickRandomCard()
     {
@@ -201,10 +243,14 @@ public class BlackJack : MonoBehaviour
 
     public void PlaceBet()
     {
-        _player.GetComponent<Player_Stats>().Coins.Modify(-_currentBet);
-        _betPanel.SetActive(false);
-        _gamePanel.SetActive(true);
-        _inBJRound = true;
+        if (_currentBet > 0)
+        {
+            _player.GetComponent<Player_Stats>().Coins.Modify(-_currentBet);
+            _betPanel.SetActive(false);
+            _gamePanel.SetActive(true);
+            _inBJRound = true; 
+        }
+
     }
 
     public void Hit()
@@ -221,7 +267,9 @@ public class BlackJack : MonoBehaviour
         {
             _dealerScore += PickRandomCard().GetValue();
             SetDealerScoreText();
+            _standFinished = true;
         }
+        
     }
 
     public void CloseGame()

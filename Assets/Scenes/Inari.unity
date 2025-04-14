@@ -1666,6 +1666,8 @@ MonoBehaviour:
   _currentBetText: {fileID: 811877738}
   _playerScoreText: {fileID: 553644067}
   _dealerScoreText: {fileID: 853459012}
+  _betPanelFocus: {fileID: 1273310500}
+  _gamePanelFocus: {fileID: 137727447}
 --- !u!1 &811877736
 GameObject:
   m_ObjectHideFlags: 0

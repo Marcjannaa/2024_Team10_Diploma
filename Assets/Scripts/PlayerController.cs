@@ -81,13 +81,20 @@ public class PlayerController : MonoBehaviour
             if (_enemiesInRange.Count > 0)
             {
                 _enemyInRange = _enemiesInRange[0];
+                _canEnterBJ = false;
                 _canCombat = true;
             }
             else
             {
                 _enemyInRange = null;
+                _canEnterBJ = false;
                 _canCombat = false;
             }
+        }
+
+        if (other.CompareTag("BJ_Table"))
+        {
+            _canEnterBJ = false;
         }
     }
 
