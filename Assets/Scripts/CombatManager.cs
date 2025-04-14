@@ -117,7 +117,8 @@ public class CombatManager : MonoBehaviour
     {
         _guardMultiplier = 0.3f;
         _turn = Turn.Enemy;
-        //SwitchBattleUIPanel();
+        SwitchBattleUIPanel();
+        _playerAttacked = true;
     }
     
     private void Awake()
