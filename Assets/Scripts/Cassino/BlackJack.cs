@@ -173,7 +173,7 @@ public class BlackJack : MonoBehaviour
                 {
                     value = 11;
                 }
-                else
+                else 
                 {
                     value = 10;
                 }
