@@ -14,11 +14,14 @@ namespace MiniGame.DodgeMiniGame
 
         private void Update()
         {
-            _moveDir.x = Input.GetAxis("Horizontal");
-            _moveDir.y = Input.GetAxis("Vertical");
-            
-            if (_moveDir is { x: 0, y: 0 }) return;
-            var move = new Vector3(_moveDir.x, _moveDir.y, 0) * (Time.unscaledDeltaTime * speed);
+            _moveDir = Vector2.zero;
+
+            if (Input.GetKey(KeyCode.W)) _moveDir.y = 1;
+            if (Input.GetKey(KeyCode.S)) _moveDir.y = -1;
+            if (Input.GetKey(KeyCode.D)) _moveDir.x = 1;
+            if (Input.GetKey(KeyCode.A)) _moveDir.x = -1;
+
+            Vector3 move = new Vector3(_moveDir.x, _moveDir.y, 0).normalized * (Time.unscaledDeltaTime * speed);
             transform.Translate(move);
 
         }
