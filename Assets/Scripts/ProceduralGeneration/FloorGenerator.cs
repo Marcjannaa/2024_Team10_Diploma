@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEngine.Events;
 using UnityEngine.SocialPlatforms;
 
 namespace ProceduralGeneration
@@ -14,6 +15,8 @@ namespace ProceduralGeneration
         private List<BoxCollider> colliders = new();
         private List<ExitPoint> exitPoints = new();
         private int attempts = 0;
+        [SerializeField] private float roomPlacementDelay = 0;
+        public UnityEvent OnFloorGenerated;
         public void GenerateFloor(FloorConfig config)
         {
             floorConfig = config;
@@ -42,7 +45,7 @@ namespace ProceduralGeneration
             yield return StartCoroutine(GenerateRooms(floorConfig.bossRooms, floorConfig.bossRoomsToGenerate, attempts,
                 maxGlobalAttempts));
 
-            LevelManager.Instance.OnFloorGenerationComplete(); 
+            OnFloorGenerated?.Invoke(); 
         }
 
         private IEnumerator GenerateRooms(List<RoomConfig> roomPool, int countToGenerate, int attempts, int maxAttempts)
@@ -75,7 +78,7 @@ namespace ProceduralGeneration
                     roomsPlaced++;
                 }
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(roomPlacementDelay);
             }
         }
 
