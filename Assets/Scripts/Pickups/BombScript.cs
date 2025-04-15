@@ -7,6 +7,7 @@ public class BombScript : MonoBehaviour
 {
     [SerializeField] private GameObject Bomb;
     private GameObject placed;
+    
     // Start is called before the first frame update
     private Vector3 position;
     void Start()
@@ -17,7 +18,7 @@ public class BombScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             position = transform.position;
             if (PickupScript.getStats().Bombs.Value > 0)

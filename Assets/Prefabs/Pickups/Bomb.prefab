@@ -49,11 +49,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.36050424, y: 0.32225388, z: 1}
+  m_Size: {x: 0.7, y: 0.7, z: 2}
   m_Center: {x: -0.057835937, y: -0.0007837663, z: 0}
 --- !u!212 &4421316098828731195
 SpriteRenderer:
