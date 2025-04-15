@@ -42,7 +42,7 @@ namespace ProceduralGeneration
             yield return StartCoroutine(GenerateRooms(floorConfig.bossRooms, floorConfig.bossRoomsToGenerate, attempts,
                 maxGlobalAttempts));
 
-            LevelManager.Instance.OnFloorGenerationComplete(); // use singleton
+            LevelManager.Instance.OnFloorGenerationComplete(); 
         }
 
         private IEnumerator GenerateRooms(List<RoomConfig> roomPool, int countToGenerate, int attempts, int maxAttempts)
@@ -84,7 +84,7 @@ namespace ProceduralGeneration
             foreach (var room in activeRooms)
             {
                 if (room is not null)
-                    room.DestroyWithAllChildren();
+                    Destroy(room.transform.root.gameObject);
             }
 
             activeRooms.Clear();
@@ -107,10 +107,12 @@ namespace ProceduralGeneration
                 Debug.LogWarning("Failed to place room.");
                 return;
             }
-
+            
+            
             if (RoomPlacementHelper.IsRoomOverlapping(room, colliders))
             {
-                Destroy(room);
+                Destroy(room.transform.root.gameObject);
+
                 exit.isConnected = true;
                 Debug.Log("Overlap detected, room destroyed.");
             }
