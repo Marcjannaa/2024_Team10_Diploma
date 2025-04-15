@@ -21,7 +21,7 @@ namespace MiniGame.DodgeMiniGame
             if (Input.GetKey(KeyCode.D)) _moveDir.x = 1;
             if (Input.GetKey(KeyCode.A)) _moveDir.x = -1;
 
-            Vector3 move = new Vector3(_moveDir.x, _moveDir.y, 0).normalized * (Time.unscaledDeltaTime * speed);
+            var move = new Vector3(_moveDir.x, _moveDir.y, 0).normalized * (Time.unscaledDeltaTime * speed);
             transform.Translate(move);
 
         }

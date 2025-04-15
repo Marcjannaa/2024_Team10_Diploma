@@ -5,26 +5,32 @@ namespace MiniGame.DodgeMiniGame
     public class EnemyMovement : MonoBehaviour
     {
         private GameObject _player;
-        private Vector2 _playerPosition,_startPosition;
-        private int _multiplierX, _multiplierY; 
+        private Vector2 _direction;
+        private int _multiplierX, _multiplierY;
         [SerializeField] private float speed = 5f;
+
         private void Start()
         {
             _player = transform.GetComponentInParent<DodgeGameManager>().player;
-            _playerPosition = _player.transform.position;
-            _startPosition = transform.position;
-            _multiplierX = _playerPosition.x > _startPosition.x ? 1 : -1;
-            _multiplierY = _playerPosition.y > _startPosition.y ? 1 : -1;
+            if (_player == null)
+            {
+                Debug.LogError("Player not found in DodgeGameManager!");
+                return;
+            }
+
+            var startPosition = transform.position;
+            var playerPosition = _player.transform.position;
+            _multiplierX = startPosition.x > playerPosition.x ? -1 : 1;
+            _multiplierY = startPosition.y > playerPosition.y ? -1 : 1;
+            _direction = (playerPosition - startPosition).normalized;
+
+            Debug.Log($"Enemy spawned at {startPosition}, targeting {playerPosition}, direction: {_direction}");
         }
 
         private void Update()
         {
-            transform.Translate(
-                new Vector2(
-                    transform.position.x + speed * Time.unscaledDeltaTime * _multiplierX,
-                    transform.position.y + speed * Time.unscaledDeltaTime * _multiplierY
-                )
-            );
+            transform.Translate(new Vector2(_multiplierX * speed * Time.unscaledDeltaTime, _multiplierY * speed * Time.unscaledDeltaTime));
         }
+
     }
 }

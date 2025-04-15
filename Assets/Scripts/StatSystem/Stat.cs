@@ -23,7 +23,7 @@ public class Stat
         StatValue = statValue;
         Type = type;
         _stats.Add(this);
-        Debug.Log(_stats);
+        //Debug.Log(_stats);
     }
     
     public Stat(bool statValue, StatType type)
@@ -31,7 +31,7 @@ public class Stat
         setFlag(statValue);
         Type = type;
         _stats.Add(this);
-        Debug.Log(_stats);
+        //Debug.Log(_stats);
     }
 
     public float Value
@@ -53,9 +53,9 @@ public class Stat
     }
     public void setFlag(bool flag)
     {
-        Debug.Log(checkFlag);
+        //Debug.Log(checkFlag);
         checkFlag = flag;
-        Debug.Log(checkFlag);
+        //Debug.Log(checkFlag);
     }
     
     public void Modify(float amount)
