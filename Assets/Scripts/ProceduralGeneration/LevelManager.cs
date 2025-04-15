@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using ProceduralGeneration;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
-
     [SerializeField] private FloorGenerator _floorGenerator;
     [SerializeField] private List<FloorConfig> floorConfigs;
-
+    
     private int currentFloorIndex = 0;
 
     private void Awake()
@@ -24,6 +24,8 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        _floorGenerator.OnFloorGenerated.AddListener(OnFloorGenerationComplete);
+        
         GenerateNextFloor(); // move the start of creating new floor to game manager if made and if not just call it 
         // in the boss room exit script when made
     }
