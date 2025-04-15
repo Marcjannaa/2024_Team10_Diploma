@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MiniGame.DodgeMiniGame
 {
-    public class MiniGamePlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         private Vector2 _moveDir;
         [SerializeField] private float speed = 5f;

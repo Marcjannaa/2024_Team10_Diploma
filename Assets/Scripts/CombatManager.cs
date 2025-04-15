@@ -63,8 +63,6 @@ public class CombatManager : MonoBehaviour
     }
     public static void OnAttackEnded(TimingMiniGame.HitResult  hitResult)
     {
-
-
         switch (hitResult)
         {
             case TimingMiniGame.HitResult.PerfectHit:
@@ -78,6 +76,18 @@ public class CombatManager : MonoBehaviour
                 break;
         }
         
+        _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
+        
+        Instance._enemyHasActed = true;
+        Instance._playerAttacked = false;
+        
+        Instance._turn = Turn.Player;
+        Instance.SwitchBattleUIPanel();
+    }
+
+    public static void OnDodgeEnded()
+    {
         _miniGamePanel.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").gameObject
             .transform.Find("ActionPanel").gameObject
@@ -90,8 +100,6 @@ public class CombatManager : MonoBehaviour
 
         Instance.SwitchBattleUIPanel();
     }
-
-
     
     public void OnSkillClicked()
     {

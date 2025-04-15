@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MiniGame.DodgeMiniGame
 {
-    public class MiniGameEnemyMovement : MonoBehaviour
+    public class EnemyMovement : MonoBehaviour
     {
         private GameObject _player;
         private Vector2 _playerPosition,_startPosition;
