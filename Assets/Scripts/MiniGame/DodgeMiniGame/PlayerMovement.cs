@@ -5,7 +5,7 @@ namespace MiniGame.DodgeMiniGame
     public class PlayerMovement : MonoBehaviour
     {
         private Vector2 _moveDir;
-        [SerializeField] private float speed = 5f;
+        [SerializeField] private float speed = 100f;
 
         private void Start()
         {

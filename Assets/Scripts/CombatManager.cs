@@ -96,6 +96,7 @@ public class CombatManager : MonoBehaviour
     {
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(true);
     
         Instance._playerAttacked = false;
         Instance._turn = Turn.Player;

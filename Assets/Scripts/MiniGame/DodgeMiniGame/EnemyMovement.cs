@@ -7,7 +7,8 @@ namespace MiniGame.DodgeMiniGame
         private GameObject _player;
         private Vector2 _direction;
         private int _multiplierX, _multiplierY;
-        [SerializeField] private float speed = 5f;
+        [SerializeField] private float speed = 500f;
+
 
         private void Start()
         {
@@ -29,8 +30,9 @@ namespace MiniGame.DodgeMiniGame
 
         private void Update()
         {
-            transform.Translate(new Vector2(_multiplierX * speed * Time.unscaledDeltaTime, _multiplierY * speed * Time.unscaledDeltaTime));
+            transform.Translate(_direction * speed * Time.unscaledDeltaTime);
         }
+
 
     }
 }
