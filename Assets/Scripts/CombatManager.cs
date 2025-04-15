@@ -5,9 +5,11 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-enum Turn
+internal enum Turn
 {
     Player,
     Enemy
@@ -17,27 +19,93 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
-    private GameObject _player;
-    private GameObject _enemy;
+    private static GameObject _player;
+    private static GameObject _enemy;
+    private bool _enemyFirstStrike = false;
     private bool _battleOngoing;
-    private float _guardMultiplayer = 1;
+    private float _guardMultiplier = 1;
     private Image _enemySprite;
-    
+    private static GameObject _miniGamePanel;
     private Turn _turn;
-
-    public async void OnAtkClicked()
+    private bool _playerAttacked = false;
+    private bool _enemyHasActed = false;
+    private bool _inDifferentPanel = false;
+    
+    
+    void Update()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+        if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
+        {
+            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _inDifferentPanel = false;
+        }
+    }
 
-        await Task.Delay(1000);
+    public void OnAtkClicked()
+    {
+        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject
+            .transform.Find("ActionPanel").gameObject
+            .SetActive(false);
+        _miniGamePanel.SetActive(true);
+    }
 
+    public void OnSkill1Clicked()
+    {
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 8);
+
+        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+        
+        
+        _playerAttacked = true;
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
     }
+    public static void OnAttackEnded(TimingMiniGame.HitResult  hitResult)
+    {
+
+
+        switch (hitResult)
+        {
+            case TimingMiniGame.HitResult.PerfectHit:
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+                break;
+            case TimingMiniGame.HitResult.MediumHit:
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 3);
+                break;
+            case TimingMiniGame.HitResult.NoHit:
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 2);
+                break;
+        }
+        
+        _miniGamePanel.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject
+            .transform.Find("ActionPanel").gameObject
+            .SetActive(true);
+        
+        Instance._playerAttacked = true;
+        
+        Instance._turn = Turn.Enemy;
+        Instance._guardMultiplier = 1;
+
+        Instance.SwitchBattleUIPanel();
+    }
+
+
     
     public void OnSkillClicked()
     {
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
+        GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
         
+        if (EventSystem.current.currentSelectedGameObject != skillButton)
+        {
+            EventSystem.current.SetSelectedGameObject(skillButton);
+            Debug.Log("Skill button focus set");
+        }
+        
+        _inDifferentPanel = true;
     }
     
     public void OnItemClicked()
@@ -47,9 +115,10 @@ public class CombatManager : MonoBehaviour
     
     public void OnGuardClicked()
     {
-        _guardMultiplayer = 0.3f;
+        _guardMultiplier = 0.3f;
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
+        _playerAttacked = true;
     }
     
     private void Awake()
@@ -59,6 +128,8 @@ public class CombatManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
+            _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
+                .transform.Find("MiniGamePanel").gameObject;
         }
         else
         {
@@ -71,12 +142,13 @@ public class CombatManager : MonoBehaviour
         Instance._battleOngoing = true;
         Time.timeScale = 0;
     
-        Instance._player = PlayerGO;
-        Instance._enemy = EnemyGO;
-        
-        
+        _player = PlayerGO;
+        _enemy = EnemyGO;
+
+        _player.GetComponent<PlayerController>().inCombat = true;    
     
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
+        Instance._enemyFirstStrike = enemyAdvantage;
     
         Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
     
@@ -90,26 +162,47 @@ public class CombatManager : MonoBehaviour
         Instance.StartCoroutine(Instance.BattleLoop());
     }
 
-    private void EnemyAction()
+    private async void EnemyAction()
     {
-        _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplayer); 
+        _player.GetComponent<Player_Stats>().Health.Modify(- _enemy.GetComponent<Enemy_Stats>().Strength.Value * _guardMultiplier); 
+        await Task.Delay(1000);
+
+        _turn = Turn.Player;
+        SwitchBattleUIPanel();
+
 
     }
 
     private void SwitchBattleUIPanel()
     {
-        switch (Instance._turn)
+        switch (_turn)
         {
             case Turn.Player:
+                // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
-                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false); 
+                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
+                _miniGamePanel.SetActive(false);
+
+                // Set the focus on the attack button
+                GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+
+                // Ensure focus is set to the attack button, if it's not already focused
+                if (EventSystem.current.currentSelectedGameObject != attackButton)
+                {
+                    EventSystem.current.SetSelectedGameObject(attackButton);
+                    Debug.Log("Attack button focus set");
+                }
                 break;
+            
             case Turn.Enemy:
-                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);  
+                // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
+                _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
+                //_miniGameUI.SetActive(true);
                 break;
         }
     }
+
 
     private void GameOver()
     {
@@ -122,10 +215,13 @@ public class CombatManager : MonoBehaviour
 
     private void EnemyDefeated()
     {
+        _player.GetComponent<PlayerController>().RemoveEnemyFromList(_enemy);
         Destroy(_enemy);
         _battleOngoing = false;
         _battleUI.SetActive(false); 
-        
+
+        _player.GetComponent<PlayerController>().inCombat = false;
+
         Time.timeScale = 1;
     }
     
@@ -133,11 +229,11 @@ public class CombatManager : MonoBehaviour
     {
         while (_battleOngoing)
         {
+            
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
-            
-            
+
             if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
             {
                 GameOver();
@@ -150,21 +246,21 @@ public class CombatManager : MonoBehaviour
                 yield break;
             }
 
-            if (_turn == Turn.Enemy)
+            if (_turn == Turn.Enemy && (_playerAttacked || _enemyFirstStrike)) 
             {
+                _enemyFirstStrike = false;
                 EnemyAction();
-                yield return new WaitForSecondsRealtime(1.5f);
-
-                _turn = Turn.Player;
-                _guardMultiplayer = 1;
-                SwitchBattleUIPanel();
+                _playerAttacked = false;
             }
 
             yield return null;
         }
 
         Time.timeScale = 1;
+
+        //_player.SetActive(true);
     }
+
 
 }
 
