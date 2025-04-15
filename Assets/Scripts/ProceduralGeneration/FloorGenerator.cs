@@ -107,10 +107,11 @@ namespace ProceduralGeneration
                 Debug.LogWarning("Failed to place room.");
                 return;
             }
-
+            
+            
             if (RoomPlacementHelper.IsRoomOverlapping(room, colliders))
             {
-                Destroy(room);
+                Destroy(room.gameObject);
                 exit.isConnected = true;
                 Debug.Log("Overlap detected, room destroyed.");
             }
