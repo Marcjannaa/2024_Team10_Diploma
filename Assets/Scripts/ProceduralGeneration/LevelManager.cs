@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<FloorConfig> floorConfigs;
     
     private int currentFloorIndex = 0;
+    private bool HasMoreFloors => currentFloorIndex < floorConfigs.Count;
 
     private void Awake()
     {
@@ -24,15 +25,21 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        _floorGenerator.OnFloorGenerated.AddListener(OnFloorGenerationComplete);
+        if (_floorGenerator is null)
+        {
+            Debug.LogError("FloorGenerator reference not assigned!");
+            return;
+        }
         
-        GenerateNextFloor(); // move the start of creating new floor to game manager if made and if not just call it 
+        _floorGenerator.OnFloorGenerated.AddListener(OnFloorGenerationComplete);
+        GenerateNextFloor(); 
+        // #TODO move the start of creating new floor to game manager if made and if not just call it 
         // in the boss room exit script when made
     }
 
     public void GenerateNextFloor()
     {
-        if (currentFloorIndex >= floorConfigs.Count)
+        if (!HasMoreFloors)
         {
             Debug.Log("All floors generated.");
             return;
