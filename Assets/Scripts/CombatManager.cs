@@ -177,15 +177,12 @@ public class CombatManager : MonoBehaviour
         switch (_turn)
         {
             case Turn.Player:
-                // Make the player action panel visible
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
-                // Set the focus on the attack button
                 GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
 
-                // Ensure focus is set to the attack button, if it's not already focused
                 if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
                     EventSystem.current.SetSelectedGameObject(attackButton);
@@ -194,10 +191,8 @@ public class CombatManager : MonoBehaviour
                 break;
             
             case Turn.Enemy:
-                // Hide the player action panel and show the mini-game UI
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
-                //_miniGameUI.SetActive(true);
                 break;
         }
     }
