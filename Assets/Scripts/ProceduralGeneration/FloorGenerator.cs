@@ -14,6 +14,7 @@ namespace ProceduralGeneration
         private List<BoxCollider> colliders = new();
         private List<ExitPoint> exitPoints = new();
         private int attempts = 0;
+        [SerializeField] private float roomPlacementDelay = 0;
         public void GenerateFloor(FloorConfig config)
         {
             floorConfig = config;
@@ -75,7 +76,7 @@ namespace ProceduralGeneration
                     roomsPlaced++;
                 }
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(roomPlacementDelay);
             }
         }
 

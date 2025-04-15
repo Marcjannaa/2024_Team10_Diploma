@@ -24,7 +24,8 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        GenerateNextFloor();
+        GenerateNextFloor(); // move the start of creating new floor to game manager if made and if not just call it 
+        // in the boss room exit script when made
     }
 
     public void GenerateNextFloor()
@@ -43,6 +44,6 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log($"Floor {currentFloorIndex + 1} generated.");
         currentFloorIndex++;
-        // #TODO Maybe trigger something else and connect with game manager
+        // #TODO Maybe trigger something else and connect with game manager when and if implemented
     }
 }
