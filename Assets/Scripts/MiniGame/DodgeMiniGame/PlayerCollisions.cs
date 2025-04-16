@@ -4,21 +4,20 @@ using UnityEngine.Serialization;
 
 namespace MiniGame.DodgeMiniGame
 {
-    public class Player : MonoBehaviour
+    public class PlayerCollisions : MonoBehaviour
     {
         [SerializeField] private Collider2D targetCollider;
         private Collider2D _selfCollider;
-        public Vector2 startPos;
+        private DodgeGameManager _dodgeGameManager;
         private void Start()
         {
-            startPos = new Vector2(transform.position.x, transform.position.y);
+            _dodgeGameManager = transform.GetComponentInParent<DodgeGameManager>();
             _selfCollider = GetComponent<Collider2D>();
         }
         
         private void Update()
         {
-            if (IsCollidingWithTarget())
-                Die();
+            if (IsCollidingWithTarget()) Die();
         }
 
 
@@ -29,7 +28,7 @@ namespace MiniGame.DodgeMiniGame
 
         private void Die()
         {
-            transform.GetComponentInParent<DodgeGameManager>().OnGameEnded(false);
+            _dodgeGameManager.OnGameEnded(false);
         }
         
     }
