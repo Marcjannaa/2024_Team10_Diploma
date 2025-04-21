@@ -13,13 +13,9 @@ MonoBehaviour:
   m_Name: FloorConfigTest
   m_EditorClassIdentifier: 
   startingRoom: {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
-  standardRooms:
-  - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
-  - {fileID: 11400000, guid: 601d0439a25ee4546938076100bfa502, type: 2}
-  treasureRooms:
-  - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
-  bossRooms:
-  - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
-  standardRoomsToGenerate: 10
-  treasureRoomsToGenerate: 1
-  bossRoomsToGenerate: 1
+  roomGenerationData:
+  - type: 0
+    rooms:
+    - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
+    - {fileID: 11400000, guid: 601d0439a25ee4546938076100bfa502, type: 2}
+    roomsToGenerate: 10

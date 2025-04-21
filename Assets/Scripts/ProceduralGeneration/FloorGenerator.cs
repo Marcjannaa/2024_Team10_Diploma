@@ -21,8 +21,8 @@ namespace ProceduralGeneration
         {
             floorConfig = config;
 
+            // first room gen
             ClearPreviousFloor();
-
             var startRoom = Instantiate(floorConfig.startingRoom.prefab);
             var placedStart = startRoom.GetComponentInChildren<PlacedRoom>();
             placedStart.Initialize(floorConfig.startingRoom);
@@ -37,13 +37,15 @@ namespace ProceduralGeneration
         private IEnumerator GenerateLoop()
         {
             int maxGlobalAttempts = 200;
+            
+            var generationMap = floorConfig.GetGenerationMap();
 
-            yield return StartCoroutine(GenerateRooms(floorConfig.standardRooms, floorConfig.standardRoomsToGenerate,
-                attempts, maxGlobalAttempts));
-            yield return StartCoroutine(GenerateRooms(floorConfig.treasureRooms, floorConfig.treasureRoomsToGenerate,
-                attempts, maxGlobalAttempts));
-            yield return StartCoroutine(GenerateRooms(floorConfig.bossRooms, floorConfig.bossRoomsToGenerate, attempts,
-                maxGlobalAttempts));
+            foreach (var entry in generationMap)
+            {
+                yield return StartCoroutine(
+                    GenerateRooms(entry.Value.rooms, entry.Value.roomsToGenerate, attempts, maxGlobalAttempts)
+                );
+            }
 
             OnFloorGenerated?.Invoke(); 
         }
