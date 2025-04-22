@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Quaternion = System.Numerics.Quaternion;
 
 internal enum Turn
 {
@@ -17,6 +18,7 @@ internal enum Turn
 
 public class CombatManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _rewardItem;
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
     private static GameObject _player;
@@ -228,12 +230,13 @@ public class CombatManager : MonoBehaviour
     private void EnemyDefeated()
     {
         _player.GetComponent<PlayerController>().RemoveEnemyFromList(_enemy);
+        Vector3 pos = _enemy.transform.position;
         Destroy(_enemy);
         _battleOngoing = false;
-        _battleUI.SetActive(false); 
-
+        _battleUI.SetActive(false);
+        Instantiate(_rewardItem,pos,UnityEngine.Quaternion.identity);
         _player.GetComponent<PlayerController>().inCombat = false;
-
+        
         Time.timeScale = 1;
     }
     

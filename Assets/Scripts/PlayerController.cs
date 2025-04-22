@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,10 +13,19 @@ public class PlayerController : MonoBehaviour
     public bool inCombat = false;
     public bool _inBJ = false;
     private bool _canEnterBJ;
+    private bool _canPlaySlots;
     private GameObject _enemyInRange;
     private GameObject _BJTable;
+    private GameObject _slots;
     private List<GameObject> _enemiesInRange = new List<GameObject>();
     [SerializeField] private Animator anim;
+    private Player_Stats _playerStats;
+
+    private void Start()
+    {
+        _playerStats = gameObject.GetComponent<Player_Stats>();
+    }
+
     void Update ()
     {
         if (inCombat || _inBJ) return;
@@ -47,6 +58,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("BRAKJAK");
             _inBJ = true;
             _BJTable.GetComponent<BlackJack>().StartGame(this.gameObject);
+        }else if (_canPlaySlots && Input.GetKeyDown(KeyCode.E) && _playerStats.Coins.Value >= 1)
+        {
+            Debug.Log("SLOTS");
+            _playerStats.Coins.Modify(-1);
+            _slots.GetComponent<Slots>().Play();
         }
         
         
@@ -66,6 +82,12 @@ public class PlayerController : MonoBehaviour
             _canEnterBJ = true;
             _BJTable = other.gameObject;
         }
+        
+        if (other.CompareTag("Slots") && _enemiesInRange.Count == 0)
+        {
+            _canPlaySlots = true;
+            _slots = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -80,12 +102,14 @@ public class PlayerController : MonoBehaviour
             {
                 _enemyInRange = _enemiesInRange[0];
                 _canEnterBJ = false;
+                _canPlaySlots = false;
                 _canCombat = true;
             }
             else
             {
                 _enemyInRange = null;
                 _canEnterBJ = false;
+                _canPlaySlots = false;
                 _canCombat = false;
             }
         }
@@ -93,6 +117,11 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("BJTable"))
         {
             _canEnterBJ = false;
+        }
+        
+        if (other.CompareTag("Slots"))
+        {
+            _canPlaySlots = false;
         }
     }
 
