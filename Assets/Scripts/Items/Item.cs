@@ -13,7 +13,6 @@ public class Item : MonoBehaviour
     [SerializeField] public int AGL;
     [SerializeField] public int INT;
     [SerializeField] public Sprite image;
-    [SerializeField] public InventoryUI ui;
     [SerializeField] public bool allowLockPick;
     
     
@@ -35,7 +34,7 @@ public class Item : MonoBehaviour
         if (other.collider.tag.Equals("Player"))
         {
             Inventory.addItem(this);
-            ui.updateInv();
+            InventoryUI.Instance.updateInv();
             Destroy(gameObject);
         }
     }
