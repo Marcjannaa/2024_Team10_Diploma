@@ -99,6 +99,11 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(true);
+
+        if (!win)
+        {
+            _player.GetComponent<Player_Stats>().Health.Modify(-(int)_enemy.GetComponent<Enemy_Stats>().Strength.Value*Instance._guardMultiplier);
+        }
     
         Instance._playerAttacked = false;
         Instance._turn = Turn.Player;
