@@ -36,6 +36,7 @@ namespace MiniGame.DodgeMiniGame
             foreach (var e in EnemySpawner.GetEnemies())
                 Destroy(e);
             EnemySpawner.ClearEnemies();
+            FindObjectOfType<EnemySpawner>()?.RestartSpawning();
         }
         
         public Vector2 GetPanelSize()

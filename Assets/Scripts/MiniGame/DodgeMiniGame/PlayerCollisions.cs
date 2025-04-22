@@ -17,8 +17,18 @@ namespace MiniGame.DodgeMiniGame
         
         private void Update()
         {
-            if (IsCollidingWithTarget()) Die();
+            foreach (var enemy in EnemySpawner.GetEnemies())
+            {
+                if (enemy == null) continue;
+                var enemyCollider = enemy.GetComponent<Collider2D>();
+                if (enemyCollider != null && _selfCollider.bounds.Intersects(enemyCollider.bounds))
+                {
+                    Die();
+                    break;
+                }
+            }
         }
+
 
 
         private bool IsCollidingWithTarget()
@@ -29,6 +39,7 @@ namespace MiniGame.DodgeMiniGame
         private void Die()
         {
             _dodgeGameManager.OnGameEnded(false);
+            print("Przegrana");
         }
         
     }

@@ -104,8 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27d04ba0149a534197520b68cca0bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCollider: {fileID: 5980666241552271259}
-  startPos: {x: 0, y: 0}
+  targetCollider: {fileID: 8395338283546362268, guid: 0c07fe7a451ee6d4eab94a96cd2acc58, type: 3}
 --- !u!61 &5980666241552271259
 BoxCollider2D:
   m_ObjectHideFlags: 0

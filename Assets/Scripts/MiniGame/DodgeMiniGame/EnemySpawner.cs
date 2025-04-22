@@ -2,52 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using MiniGame.DodgeMiniGame;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private static List<GameObject> Enemies;
-    
+    private static List<GameObject> Enemies = new List<GameObject>();
     [SerializeField] private int rounds;
-    [SerializeField] private int space = 10;
-    [SerializeField] private float delay = 5f;
-    [SerializeField] private List<GameObject> spawnPoints;
+    [SerializeField] private float delay = 1f;
+    [SerializeField] private List<Transform> spawnPoints;
+
     private DodgeGameManager _dodgeGameManager;
     private GameObject enemy;
-    private float _delayTimer = 0f; 
+
     private void Start()
     {
-        var dodgeGameManager = GetComponent<DodgeGameManager>();
-        enemy = dodgeGameManager.enemy;
-        
-        Enemies = new List<GameObject>();
-        spawnPoints = new List<GameObject>();
-        
+        _dodgeGameManager = GetComponent<DodgeGameManager>();
+        if (_dodgeGameManager == null)
+        {
+            Debug.LogError("DodgeGameManager not found on the same GameObject!");
+            return;
+        }
+
+        enemy = _dodgeGameManager.enemy;
+
+        if (enemy == null)
+        {
+            Debug.LogError("Enemy prefab not assigned in DodgeGameManager!");
+            return;
+        }
+
+        if (spawnPoints == null || spawnPoints.Count == 0)
+        {
+            Debug.LogError("Spawn points not assigned in EnemySpawner!");
+            return;
+        }
         StartCoroutine(SpawnInRounds());
     }
 
     private IEnumerator SpawnInRounds()
     {
-        for (var i = 0; i < rounds; i++)
+        for (int i = 0; i < rounds; i++)
         {
             Spawn();
+            yield return new WaitForSecondsRealtime(delay); 
         }
-        
-        if (_delayTimer > delay)
-        {
-            yield return null;
-        }
-        
-        _delayTimer += Time.unscaledDeltaTime;
     }
 
     private void Spawn()
     {
         foreach (var spawnPoint in spawnPoints)
         {
-            var enemyGo = Instantiate(enemy.gameObject, spawnPoint.transform);
+            var enemyGo = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+            enemyGo.transform.SetParent(_dodgeGameManager.transform);
+            enemyGo.GetComponent<EnemyMovement>().Init(_dodgeGameManager.player);
             Enemies.Add(enemyGo);
         }
     }
@@ -59,6 +66,17 @@ public class EnemySpawner : MonoBehaviour
 
     public static void ClearEnemies()
     {
+        if (Enemies == null) return;
+        foreach (var e in Enemies)
+        {
+            if (e != null)
+                Destroy(e);
+        }
         Enemies.Clear();
     }
+    public void RestartSpawning()
+    {
+        StartCoroutine(SpawnInRounds());
+    }
+
 }
