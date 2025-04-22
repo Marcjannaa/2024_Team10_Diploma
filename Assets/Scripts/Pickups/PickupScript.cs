@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 
 public class PickupScript : MonoBehaviour
 {
-    [SerializeField] private int id;
-    private static Player_Stats _stats;
+    [SerializeField] protected int id;
+    protected static Player_Stats _stats;
     
     void Start()
     {
@@ -21,21 +21,31 @@ public class PickupScript : MonoBehaviour
         
     }
 
-    void Collect()
+    protected virtual void Collect()
     {
         switch (id)
         {
             case 1:
                 _stats.Coins.Modify(1);
+                Destroy(gameObject);
                 break;
             case 2:
                 _stats.Bombs.Modify(1);
+                Destroy(gameObject);
                 break;
             case 3:
                 _stats.Keys.Modify(1);
+                Destroy(gameObject);
+                break;
+            case 4:
+                if (_stats.Health.Value >= _stats.MaxHealth.Value)
+                {
+                    break;
+                }
+                _stats.Health.Modify(10);
+                Destroy(gameObject);
                 break;
         }
-        
     }
 
     private void OnCollisionEnter(Collision other)
@@ -44,7 +54,6 @@ public class PickupScript : MonoBehaviour
         if (other.collider.tag.Equals("Player"))
         {
             Collect();
-            Destroy(gameObject);
         }
     }
 

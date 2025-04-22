@@ -33,9 +33,14 @@ public class Item : MonoBehaviour
         Debug.Log(other.collider.tag);
         if (other.collider.tag.Equals("Player"))
         {
-            Inventory.addItem(this);
-            InventoryUI.Instance.updateInv();
-            Destroy(gameObject);
+            pickUp();
         }
+    }
+
+    protected virtual void pickUp()
+    {
+        Inventory.addItem(this);
+        InventoryUI.Instance.updateInv();
+        Destroy(gameObject);
     }
 }
