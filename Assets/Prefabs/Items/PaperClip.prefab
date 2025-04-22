@@ -119,11 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13334d3c930edc64a9413a2b6beaba80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Test
-  effect: Test
-  MaxHp: 10
-  STR: 10
-  AGL: 10
-  INT: 10
+  name: PaperClip
+  effect: Open Chests for free
+  MaxHp: 0
+  STR: 0
+  AGL: 0
+  INT: 0
   image: {fileID: 21300000, guid: adeacd18afae3314f9403e710ef917fa, type: 3}
-  ui: {fileID: 0}
+  allowLockPick: 1

@@ -99,6 +99,8 @@ MonoBehaviour:
   Coin: {fileID: 1741084037409390732, guid: 83306ccc213bcd34283b3b304348b3b2, type: 3}
   Bomb: {fileID: 1589841431416482293, guid: fde951762640dea4cb310ffe36d2d205, type: 3}
   Key: {fileID: 628055650892061666, guid: c5a5a1c10603d3b48afaf32df302aa83, type: 3}
+  items:
+  - {fileID: 1440443232745650121, guid: 3548e2718b99e294fb41b5a62f336583, type: 3}
 --- !u!65 &5046330206883502845
 BoxCollider:
   m_ObjectHideFlags: 0
