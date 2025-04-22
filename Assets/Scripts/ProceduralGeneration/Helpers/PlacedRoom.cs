@@ -7,7 +7,7 @@ namespace ProceduralGeneration
     public class PlacedRoom : MonoBehaviour
     {
         public RoomConfig definition;
-        
+
         public List<ExitPoint> Exits { get; private set; }
 
         public void Initialize(RoomConfig def)
@@ -15,12 +15,11 @@ namespace ProceduralGeneration
             definition = def;
             Exits = new List<ExitPoint>(GetComponentsInChildren<ExitPoint>());
         }
-        
+
 
         public BoxCollider GetRoomCollider()
         {
             return GetComponentInChildren<BoxCollider>();
-            
         }
 
         public List<ExitPoint> GetExits()
@@ -33,16 +32,5 @@ namespace ProceduralGeneration
 
             return resList;
         }
-        
-        public void DestroyWithAllChildren()
-        {
-            foreach (Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
-            
-            Destroy(gameObject);
-        }
-        
     }
 }
