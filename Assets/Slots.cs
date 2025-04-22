@@ -7,7 +7,7 @@ public class Slots : MonoBehaviour
     [SerializeField] private GameObject _rewardItem;
     public void Play()
     {
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
         Instantiate(_rewardItem,pos,Quaternion.identity);
     }
 }
