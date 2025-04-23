@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 3149501826645771403}
   - component: {fileID: 8617117715524096389}
   - component: {fileID: 1932406722982758480}
+  - component: {fileID: 951144046338303385}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -402,7 +403,7 @@ MonoBehaviour:
   Intelligence:
     StatValue: 10
   Coins:
-    StatValue: 3
+    StatValue: 10
   Bombs:
     StatValue: 0
   Keys:
@@ -422,6 +423,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25bf0a78676dfe4b9973e642e6b85c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &951144046338303385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327995856416819966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7832b4916d8404e46876695a0593adc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bomb: {fileID: 5480074535425394934, guid: cf14cac0fbb96014f808227d0f1d2204, type: 3}
 --- !u!1 &6540478604799125483
 GameObject:
   m_ObjectHideFlags: 0
