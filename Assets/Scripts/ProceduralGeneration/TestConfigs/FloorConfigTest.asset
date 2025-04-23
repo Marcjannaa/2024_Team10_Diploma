@@ -18,7 +18,7 @@ MonoBehaviour:
     rooms:
     - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
     - {fileID: 11400000, guid: 9b072e9a96ae37742852780982f20143, type: 2}
-    roomsToGenerate: 10
+    roomsToGenerate: 5
   - type: 1
     rooms:
     - {fileID: 11400000, guid: 4ea4fbbe39f1a644f95f8e5bf70a6eee, type: 2}
@@ -33,5 +33,5 @@ MonoBehaviour:
     roomsToGenerate: 1
   - type: 3
     rooms:
-    - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
+    - {fileID: 11400000, guid: 6b0aedcfbb0b9cf438102ce498917d16, type: 2}
     roomsToGenerate: 1
