@@ -20,6 +20,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject _rewardItem;
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
+    private  GameObject  attackButton;
     private static GameObject _player;
     private static GameObject _enemy;
     private bool _enemyFirstStrike = false;
@@ -39,6 +40,8 @@ public class CombatManager : MonoBehaviour
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
         {
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(attackButton);
             _inDifferentPanel = false;
         }
     }
@@ -205,7 +208,7 @@ public class CombatManager : MonoBehaviour
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
-                GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+                attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
 
                 if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
