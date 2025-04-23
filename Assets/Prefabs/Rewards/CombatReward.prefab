@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 944571817745796088}
   - component: {fileID: 5136945804258497868}
   m_Layer: 0
-  m_Name: RoomReward
+  m_Name: CombatReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,6 +121,12 @@ MonoBehaviour:
   Coin: {fileID: 1741084037409390732, guid: 83306ccc213bcd34283b3b304348b3b2, type: 3}
   Bomb: {fileID: 1589841431416482293, guid: fde951762640dea4cb310ffe36d2d205, type: 3}
   Key: {fileID: 628055650892061666, guid: c5a5a1c10603d3b48afaf32df302aa83, type: 3}
-  Heart: {fileID: 0}
+  Heart: {fileID: 1376339253250881603, guid: 5fa630f3b0ded4c47bd7a013fdb9218b, type: 3}
   Chest: {fileID: 8685130810020325372, guid: 334648450b7049d438c594de9f1039a0, type: 3}
   GoldenChest: {fileID: 973804497523311384, guid: dd41459bd2a533c4dbd233c5c0a6ae6d, type: 3}
+  goldenChestChance: 2
+  chestChance: 5
+  keyChance: 10
+  bombChance: 10
+  coinChance: 15
+  heartChance: 15

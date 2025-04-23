@@ -6,6 +6,7 @@
         Treasure,
         Shop,
         Boss,
-        Secret
+        Secret,
+        Casino
     }
 }
