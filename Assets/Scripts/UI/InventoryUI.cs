@@ -50,6 +50,7 @@ public class InventoryUI : MonoBehaviour
 
     public void ToggleUI()
     {
+        Debug.Log(1);
         canvas.gameObject.SetActive(!canvas.gameObject.activeSelf);
     }
     void Update()

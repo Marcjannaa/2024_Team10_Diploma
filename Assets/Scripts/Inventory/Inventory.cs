@@ -12,7 +12,10 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         Items.Clear();
-        stats = FindObjectOfType<Player_Stats>();
+        if (!stats)
+        {
+            stats = FindObjectOfType<Player_Stats>();
+        }
     }
 
     // Update is called once per frame
@@ -27,11 +30,12 @@ public class Inventory : MonoBehaviour
         {
             if (item.allowLockPick)
             {
-                Debug.Log("Yummers");
                 stats.LockPick.setFlag(true);
             }
             else
             {
+                Debug.Log(item);
+                Debug.Log(stats);
                 stats.MaxHealth.Modify(item.MaxHp);
                 stats.Health.Modify(item.MaxHp);
                 stats.Strength.Modify(item.STR);
