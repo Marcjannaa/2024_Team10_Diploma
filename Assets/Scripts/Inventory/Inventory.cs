@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    static Player_Stats stats;
+    [SerializeField] static Player_Stats stats;
 
     public static List<Item> Items = new List<Item>();
     // Start is called before the first frame update
     void Start()
     {
         Items.Clear();
-        stats = FindObjectOfType<Player_Stats>();
+        Debug.Log(stats);
+        if (!stats)
+        {
+            stats = FindObjectOfType<Player_Stats>();
+        }
     }
 
     // Update is called once per frame
@@ -27,11 +31,13 @@ public class Inventory : MonoBehaviour
         {
             if (item.allowLockPick)
             {
-                Debug.Log("Yummers");
                 stats.LockPick.setFlag(true);
             }
             else
             {
+                Debug.Log(item);
+                Debug.Log(stats);
+                stats = FindObjectOfType<Player_Stats>();
                 stats.MaxHealth.Modify(item.MaxHp);
                 stats.Health.Modify(item.MaxHp);
                 stats.Strength.Modify(item.STR);

@@ -5,7 +5,14 @@ using UnityEngine;
 public class ShopItem : Item
 {
     [SerializeField] private Player_Stats Stats;
-    
+
+    void Start()
+    {
+        if (!Stats)
+        {
+            Stats = FindObjectOfType<Player_Stats>();
+        }
+    }
     protected override void pickUp()
     {
         if (Stats.Coins.StatValue >= 15.0)

@@ -130,7 +130,8 @@ public class BlackJack : MonoBehaviour
         print("ps: " + _playerScore + " ds: " + _dealerScore);
         if (blackjack)
         {
-            _player.GetComponent<Player_Stats>().Coins.Modify((float)(_currentBet * 2.5));
+            int val = (int)(_currentBet * 2.5);
+            _player.GetComponent<Player_Stats>().Coins.Modify(val);
         }
         else
         {

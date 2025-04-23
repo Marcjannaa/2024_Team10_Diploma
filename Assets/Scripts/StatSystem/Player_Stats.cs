@@ -21,11 +21,10 @@ public class Player_Stats : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump"))
-            if (inventoryUI != null)
-            {
-                inventoryUI.ToggleUI();
-            }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventoryUI.ToggleUI();
+        }
     }
     
     

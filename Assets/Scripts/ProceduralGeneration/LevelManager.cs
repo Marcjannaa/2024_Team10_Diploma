@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private FloorGenerator _floorGenerator;
     [SerializeField] private List<FloorConfig> floorConfigs;
     
+    public UnityEvent OnPlayerSpawnRequest = new UnityEvent();
+    
     private int currentFloorIndex = 0;
     private bool HasMoreFloors => currentFloorIndex < floorConfigs.Count;
 
@@ -53,6 +55,8 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log($"Floor {currentFloorIndex + 1} generated.");
         currentFloorIndex++;
+        
+        OnPlayerSpawnRequest.Invoke();
         // #TODO Maybe trigger something else and connect with game manager when and if implemented
     }
 }

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Janek.unity
+    guid: 9a59acc271e3cbf4fb705538b99fc998
   m_configObjects: {}
