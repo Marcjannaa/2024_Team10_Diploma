@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    static Player_Stats stats;
+    [SerializeField] static Player_Stats stats;
 
     public static List<Item> Items = new List<Item>();
     // Start is called before the first frame update
     void Start()
     {
         Items.Clear();
+        Debug.Log(stats);
         if (!stats)
         {
             stats = FindObjectOfType<Player_Stats>();
@@ -36,6 +37,7 @@ public class Inventory : MonoBehaviour
             {
                 Debug.Log(item);
                 Debug.Log(stats);
+                stats = FindObjectOfType<Player_Stats>();
                 stats.MaxHealth.Modify(item.MaxHp);
                 stats.Health.Modify(item.MaxHp);
                 stats.Strength.Modify(item.STR);
