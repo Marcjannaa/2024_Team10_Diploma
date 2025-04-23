@@ -23,7 +23,6 @@ public class Player_Stats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Debug.Log(inventoryUI != null);
             inventoryUI.ToggleUI();
         }
     }
