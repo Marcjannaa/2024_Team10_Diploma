@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14539eb1189986438bc7e4e71ca7eea, type: 3}
   m_Name: Casino1Config
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1912572961399607685, guid: 00fe09f860234ba42b079964edfb46a4, type: 3}
+  prefab: {fileID: 9080601557949404134, guid: 25cce3ae69983f04e8434f374d7ca0e1, type: 3}
   roomType: 5

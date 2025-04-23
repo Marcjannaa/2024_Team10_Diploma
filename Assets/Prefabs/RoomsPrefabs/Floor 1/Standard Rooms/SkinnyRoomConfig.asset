@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a14539eb1189986438bc7e4e71ca7eea, type: 3}
-  m_Name: Treasure1Config
+  m_Name: SkinnyRoomConfig
   m_EditorClassIdentifier: 
-  prefab: {fileID: 802589600331359242, guid: 0dc361439b998954ab2550ff8a824389, type: 3}
-  roomType: 1
+  prefab: {fileID: 4897790253187372244, guid: 306e17dc030649f40b07ade9c92fa559, type: 3}
+  roomType: 0
