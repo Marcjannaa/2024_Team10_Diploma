@@ -33,6 +33,7 @@ public class CombatManager : MonoBehaviour
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
 
+    
 
     void Update()
     {
@@ -152,6 +153,7 @@ public class CombatManager : MonoBehaviour
             _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
             _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
                 .transform.Find("MiniGamePanel").gameObject;
+            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
         }
         else
         {
@@ -205,6 +207,7 @@ public class CombatManager : MonoBehaviour
         {
             case Turn.Player:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
+                _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
