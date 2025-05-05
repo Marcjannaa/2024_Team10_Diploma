@@ -7,7 +7,10 @@ public class TrapRoom : MonoBehaviour
 {
     private int _buttonCount;
     private int _pressedButtonCount;
+    [SerializeField] private GameObject rewardPosition;
     [SerializeField] private GameObject spikeSet;
+    [SerializeField] private GameObject rewardItem;
+    private bool _rewardSpawned;
 
     private void Start()
     {
@@ -26,6 +29,11 @@ public class TrapRoom : MonoBehaviour
         if (_pressedButtonCount == _buttonCount)
         {
             spikeSet.SetActive(false);
+            if (!_rewardSpawned)
+            {
+                Instantiate(rewardItem, rewardPosition.transform.position, Quaternion.identity);
+                _rewardSpawned = true;
+            }
             //doors open
         }
     }
