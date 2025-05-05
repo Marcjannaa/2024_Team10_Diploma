@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Debug.Log(_enemyInRange);
+//        Debug.Log(_enemyInRange);
 
         if (horizontal != 0 || vertical != 0)
         {
