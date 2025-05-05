@@ -90,12 +90,7 @@ public class PlayerController : MonoBehaviour
             _slots = other.gameObject;
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Spikes"))
-            _playerStats.Health.Modify(-30);
-    }
+    
 
     private void OnTriggerExit(Collider other)
     {
