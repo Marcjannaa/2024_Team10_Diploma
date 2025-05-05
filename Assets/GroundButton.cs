@@ -5,16 +5,23 @@ using UnityEngine;
 
 public class GroundButton : MonoBehaviour
 {
-    private GameObject _spikeSet;
+    [SerializeField] GameObject room;
+    private TrapRoom trapRoom;
+
+    public void Start()
+    {
+        trapRoom = room.GetComponent<TrapRoom>();
+    }
     public void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
             print("OnTriggerEnter");
             transform.Find("Unpressed").gameObject.SetActive(false);
             transform.Find("Pressed").gameObject.SetActive(true);
             
-            _spikeSet.SetActive(false);
+            trapRoom.AddPressedButton();
         }
     }
 }
