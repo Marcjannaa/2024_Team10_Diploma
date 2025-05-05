@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        Debug.Log(_enemyInRange);
 
         if (horizontal != 0 || vertical != 0)
         {
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         
         transform.Translate(direction * _speed * Time.deltaTime);
-        if (_canCombat && Input.GetKeyDown(KeyCode.Return))
+        if (_enemyInRange != null && _canCombat && Input.GetKeyDown(KeyCode.Return))
         {
             CombatManager.InitiateCombat(false,gameObject,_enemyInRange);
         }

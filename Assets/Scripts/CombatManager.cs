@@ -20,6 +20,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject _rewardItem;
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
+    private  GameObject  attackButton;
     private static GameObject _player;
     private static GameObject _enemy;
     private bool _enemyFirstStrike = false;
@@ -31,14 +32,17 @@ public class CombatManager : MonoBehaviour
     private bool _playerAttacked = false;
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
+
     
-    
+
     void Update()
     {
         //print(_turn);
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
         {
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(attackButton);
             _inDifferentPanel = false;
         }
     }
@@ -57,13 +61,13 @@ public class CombatManager : MonoBehaviour
 
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
-        
-        
+
+
         _playerAttacked = true;
         _turn = Turn.Enemy;
         SwitchBattleUIPanel();
     }
-    public static void OnAttackEnded(TimingMiniGame.HitResult  hitResult)
+    public static void OnAttackEnded(TimingMiniGame.HitResult hitResult)
     {
         switch (hitResult)
         {
@@ -101,9 +105,9 @@ public class CombatManager : MonoBehaviour
 
         if (!win)
         {
-            _player.GetComponent<Player_Stats>().Health.Modify(-(int)_enemy.GetComponent<Enemy_Stats>().Strength.Value*Instance._guardMultiplier);
+            _player.GetComponent<Player_Stats>().Health.Modify(-(int)_enemy.GetComponent<Enemy_Stats>().Strength.Value * Instance._guardMultiplier);
         }
-    
+
         Instance._playerAttacked = false;
         Instance._turn = Turn.Player;
         Instance._guardMultiplier = 1;
@@ -111,27 +115,27 @@ public class CombatManager : MonoBehaviour
         Instance.SwitchBattleUIPanel();
     }
 
-    
+
     public void OnSkillClicked()
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
         GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
-        
+
         if (EventSystem.current.currentSelectedGameObject != skillButton)
         {
             EventSystem.current.SetSelectedGameObject(skillButton);
             Debug.Log("Skill button focus set");
         }
-        
+
         _inDifferentPanel = true;
     }
-    
+
     public void OnItemClicked()
     {
-        
+
     }
-    
+
     public void OnGuardClicked()
     {
         _guardMultiplier = 0.3f;
@@ -139,16 +143,17 @@ public class CombatManager : MonoBehaviour
         SwitchBattleUIPanel();
         _playerAttacked = true;
     }
-    
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;      
+            _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
             _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
                 .transform.Find("MiniGamePanel").gameObject;
+            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
         }
         else
         {
@@ -160,24 +165,24 @@ public class CombatManager : MonoBehaviour
     {
         Instance._battleOngoing = true;
         Time.timeScale = 0;
-    
+
         _player = PlayerGO;
         _enemy = EnemyGO;
 
-        _player.GetComponent<PlayerController>().inCombat = true;    
-    
+        _player.GetComponent<PlayerController>().inCombat = true;
+
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
         Instance._enemyFirstStrike = enemyAdvantage;
-    
+
         //Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
-    
+
         _battleUI.SetActive(true);
         Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
         Instance._enemySprite = battleSpriteTransform.GetComponent<Image>();
-        
-        
+
+
         Instance.SwitchBattleUIPanel();
-    
+
         Instance.StartCoroutine(Instance.BattleLoop());
     }
 
@@ -202,10 +207,11 @@ public class CombatManager : MonoBehaviour
         {
             case Turn.Player:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
+                _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
-                GameObject attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
+                attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
 
                 if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
@@ -213,7 +219,7 @@ public class CombatManager : MonoBehaviour
                     Debug.Log("Attack button focus set");
                 }
                 break;
-            
+
             case Turn.Enemy:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
@@ -224,10 +230,10 @@ public class CombatManager : MonoBehaviour
 
     private void GameOver()
     {
-        _battleUI.SetActive(false); 
+        _battleUI.SetActive(false);
         Destroy(_player);
         _battleOngoing = false;
-        
+
         Time.timeScale = 1;
     }
 
@@ -238,17 +244,17 @@ public class CombatManager : MonoBehaviour
         Destroy(_enemy);
         _battleOngoing = false;
         _battleUI.SetActive(false);
-        Instantiate(_rewardItem,pos,UnityEngine.Quaternion.identity);
+        Instantiate(_rewardItem, pos, UnityEngine.Quaternion.identity);
         _player.GetComponent<PlayerController>().inCombat = false;
-        
+
         Time.timeScale = 1;
     }
-    
+
     private IEnumerator BattleLoop()
     {
         while (_battleOngoing)
         {
-            
+
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
@@ -265,7 +271,7 @@ public class CombatManager : MonoBehaviour
                 yield break;
             }
 
-            if (_turn == Turn.Enemy && (_playerAttacked || _enemyFirstStrike)) 
+            if (_turn == Turn.Enemy && (_playerAttacked || _enemyFirstStrike))
             {
                 _enemyFirstStrike = false;
                 EnemyAction();
@@ -282,4 +288,3 @@ public class CombatManager : MonoBehaviour
 
 
 }
-

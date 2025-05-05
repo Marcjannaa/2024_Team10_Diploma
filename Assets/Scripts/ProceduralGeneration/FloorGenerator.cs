@@ -46,7 +46,8 @@ namespace ProceduralGeneration
                     GenerateRooms(entry.Value.rooms, entry.Value.roomsToGenerate, attempts, maxGlobalAttempts)
                 );
             }
-
+            
+            CloseUnconnectedExits();
             OnFloorGenerated?.Invoke(); 
         }
 
@@ -95,6 +96,17 @@ namespace ProceduralGeneration
             activeRooms.Clear();
             colliders.Clear();
             exitPoints.Clear();
+        }
+
+        private void CloseUnconnectedExits()
+        {
+            foreach (var exit in exitPoints)
+            {
+                if (!exit.isConnected)
+                {
+                    exit.activateWall();
+                }
+            }
         }
 
 
