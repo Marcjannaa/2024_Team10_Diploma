@@ -91,6 +91,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Spikes"))
+            _playerStats.Health.Modify(-30);
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Enemy"))

@@ -9,6 +9,7 @@ TagManager:
   - Target
   - BJTable
   - Slots
+  - Spikes
   layers:
   - Default
   - TransparentFX
