@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8895c87657324f34cb351c0d29337644, type: 3}
+  m_Name: FloorConfigTest
+  m_EditorClassIdentifier: 
+  startingRoom: {fileID: 11400000, guid: 193243ea758da6543be96828cc4e7cf4, type: 2}
+  roomGenerationData:
+  - type: 0
+    rooms:
+    - {fileID: 11400000, guid: d97d7755f8914d547baaec13021effeb, type: 2}
+    - {fileID: 11400000, guid: 9b072e9a96ae37742852780982f20143, type: 2}
+    roomsToGenerate: 5
+  - type: 1
+    rooms:
+    - {fileID: 11400000, guid: 4ea4fbbe39f1a644f95f8e5bf70a6eee, type: 2}
+    roomsToGenerate: 1
+  - type: 5
+    rooms:
+    - {fileID: 11400000, guid: f013a0459a445f6459c03bc731c80f42, type: 2}
+    roomsToGenerate: 1
+  - type: 2
+    rooms:
+    - {fileID: 11400000, guid: a6bde1714a412584b8da49af82227042, type: 2}
+    roomsToGenerate: 1
+  - type: 3
+    rooms:
+    - {fileID: 11400000, guid: 6b0aedcfbb0b9cf438102ce498917d16, type: 2}
+    roomsToGenerate: 1
