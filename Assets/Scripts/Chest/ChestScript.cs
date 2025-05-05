@@ -18,12 +18,6 @@ public class ChestScript : MonoBehaviour
         position = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void Open()
     {
         

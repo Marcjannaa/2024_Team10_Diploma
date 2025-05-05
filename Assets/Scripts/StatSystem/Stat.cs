@@ -65,7 +65,9 @@ public class Stat
         {
             case StatType.Health:
                 float maxHp = _stats.Find(x => x.Type == StatType.MaxHealth).Value;
-                if ( tmp > maxHp)
+                Debug.Log(maxHp);
+                Debug.Log(tmp);
+                if ( tmp >= maxHp)
                 {
                     tmp = StatValue;
                 }
