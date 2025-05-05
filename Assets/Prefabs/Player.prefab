@@ -280,9 +280,6 @@ GameObject:
   - component: {fileID: 3149501826645771403}
   - component: {fileID: 8617117715524096389}
   - component: {fileID: 1932406722982758480}
-  - component: {fileID: 8341371305564295237}
-  - component: {fileID: 3850318317048489386}
-  - component: {fileID: 6951234291265635185}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -405,9 +402,9 @@ MonoBehaviour:
   Intelligence:
     StatValue: 10
   Coins:
-    StatValue: 15
+    StatValue: 3
   Bombs:
-    StatValue: 1
+    StatValue: 0
   Keys:
     StatValue: 0
   LockPick:
@@ -423,43 +420,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25bf0a78676dfe4b9973e642e6b85c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8341371305564295237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2327995856416819966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7832b4916d8404e46876695a0593adc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bomb: {fileID: 5480074535425394934, guid: cf14cac0fbb96014f808227d0f1d2204, type: 3}
---- !u!114 &3850318317048489386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2327995856416819966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28961de077fde4043a6a1ee186175b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6951234291265635185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2327995856416819966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9607ce88bd625d74db47603e3f7665c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6540478604799125483
