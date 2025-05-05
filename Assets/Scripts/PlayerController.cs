@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
 
     void Update ()
     {
+        if (_playerStats.Health.Value <= 0)
+        {
+            Die();
+        }
+        
         if (inCombat || _inBJ) return;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -67,6 +72,11 @@ public class PlayerController : MonoBehaviour
         }
         
         
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerStay(Collider other)
