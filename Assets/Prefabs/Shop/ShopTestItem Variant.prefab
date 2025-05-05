@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5207392532449236671}
   - component: {fileID: 3725675059848775045}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15$
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -333,6 +333,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: ec0c53e985c4d8c4292839e10e20d2c1, type: 3}
   allowLockPick: 0
   Stats: {fileID: 0}
+  price: 15
+  pricetag: {fileID: 3725675059848775045}
 --- !u!224 &8886839784856185476 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3122221047699877222, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}

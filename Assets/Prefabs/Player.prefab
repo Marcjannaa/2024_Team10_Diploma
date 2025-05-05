@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 8617117715524096389}
   - component: {fileID: 1932406722982758480}
   - component: {fileID: 951144046338303385}
+  - component: {fileID: 6847430366651714322}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -403,9 +404,9 @@ MonoBehaviour:
   Intelligence:
     StatValue: 10
   Coins:
-    StatValue: 10
+    StatValue: 15
   Bombs:
-    StatValue: 0
+    StatValue: 1
   Keys:
     StatValue: 0
   LockPick:
@@ -436,6 +437,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bomb: {fileID: 5480074535425394934, guid: cf14cac0fbb96014f808227d0f1d2204, type: 3}
+--- !u!114 &6847430366651714322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327995856416819966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9607ce88bd625d74db47603e3f7665c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6540478604799125483
 GameObject:
   m_ObjectHideFlags: 0
