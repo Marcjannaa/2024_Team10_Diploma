@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
     [SerializeField] private FloorGenerator _floorGenerator;
     [SerializeField] private List<FloorConfig> floorConfigs;
+    private IFloorGenerationStrategy strategy = new StandardGenerationStrategy(); // #TODO add many strategies and logic to change them
     
     public UnityEvent OnPlayerSpawnRequest = new UnityEvent();
     
@@ -48,7 +49,7 @@ public class LevelManager : MonoBehaviour
         }
 
         FloorConfig config = floorConfigs[currentFloorIndex];
-        _floorGenerator.GenerateFloor(config);
+        _floorGenerator.GenerateFloor(config, strategy);
     }
 
     public void OnFloorGenerationComplete()
