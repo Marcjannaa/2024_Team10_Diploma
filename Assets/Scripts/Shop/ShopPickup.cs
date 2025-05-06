@@ -20,13 +20,17 @@ public class ShopPickup : PickupScript
                     _stats.Coins.Modify(-5);
                     Destroy(gameObject);
                     break;
+                case 4:
+                    _stats.Health.Modify(10);
+                    _stats.Coins.Modify(-3);
+                    Destroy(gameObject);
+                    break;
             }
-        } else if (_stats.Coins.StatValue >= 3)
+        } else if (_stats.Coins.StatValue >= 3.0)
         {
             switch (id)
             {
                 case 4:
-                    
                     _stats.Health.Modify(10);
                     _stats.Coins.Modify(-3);
                     Destroy(gameObject);

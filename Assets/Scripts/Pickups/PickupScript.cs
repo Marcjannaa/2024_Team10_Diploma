@@ -38,10 +38,6 @@ public class PickupScript : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case 4:
-                if (_stats.Health.Value >= _stats.MaxHealth.Value)
-                {
-                    break;
-                }
                 _stats.Health.Modify(10);
                 Destroy(gameObject);
                 break;
