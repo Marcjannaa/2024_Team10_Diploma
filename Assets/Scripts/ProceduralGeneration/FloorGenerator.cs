@@ -105,6 +105,7 @@ namespace ProceduralGeneration
                 if (!exit.isConnected)
                 {
                     exit.activateWall();
+                    exit.deactivateArc();
                 }
             }
         }
