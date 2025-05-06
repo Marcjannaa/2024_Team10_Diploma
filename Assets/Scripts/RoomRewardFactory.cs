@@ -23,11 +23,18 @@ public class RoomRewardFactory : MonoBehaviour
     {
         float roll = Random.Range(0f, 100f);
         float cumulative = 0f;
-
+        RaycastHit hitInfo;
+        Ray ray = new Ray(transform.position, Vector3.down);
         cumulative += goldenChestChance;
         if (roll <= cumulative)
         {
-            Instantiate(GoldenChest, transform.position, Quaternion.identity);
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
+                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    var pos = new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z);
+                    Instantiate(GoldenChest, pos, Quaternion.Euler(new Vector3(0, -90, 0)));
+                }
+            }
             Destroy(gameObject);
             return;
         }
@@ -35,7 +42,13 @@ public class RoomRewardFactory : MonoBehaviour
         cumulative += chestChance;
         if (roll <= cumulative)
         {
-            Instantiate(Chest, transform.position, Quaternion.identity);
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
+                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                {
+                    var pos = new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z);
+                    Instantiate(Chest, pos, Quaternion.Euler(new Vector3(0, -90, 0)));
+                }
+            }
             Destroy(gameObject);
             return;
         }

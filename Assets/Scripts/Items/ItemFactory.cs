@@ -10,7 +10,15 @@ public class ItemFactory : MonoBehaviour
     void Start()
     {
         int choice = Random.Range(0, items.Count);
-        Instantiate(items[choice], transform.position, Quaternion.identity);
+        RaycastHit hitInfo;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
+            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                var pos = new Vector3(hitInfo.point.x, hitInfo.point.y + 1.0f, hitInfo.point.z);
+                Instantiate(items[choice], pos, Quaternion.identity);
+            }
+        }
         Destroy(gameObject);
     }
 
