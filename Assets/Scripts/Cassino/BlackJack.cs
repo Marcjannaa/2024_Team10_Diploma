@@ -131,11 +131,11 @@ public class BlackJack : MonoBehaviour
         if (blackjack)
         {
             int val = (int)(_currentBet * 2.5);
-            _player.GetComponent<Player_Stats>().Coins.Modify(val);
+            Player_Stats.Coins.Modify(val);
         }
         else
         {
-            _player.GetComponent<Player_Stats>().Coins.Modify(_currentBet * 2);
+            Player_Stats.Coins.Modify(_currentBet * 2);
         }
         Debug.Log("game won");
     }
@@ -197,7 +197,7 @@ public class BlackJack : MonoBehaviour
 
     public void IncreaseBet()
     {
-        if (_currentBet < _maxBet && _currentBet < _player.GetComponent<Player_Stats>().Coins.Value)
+        if (_currentBet < _maxBet && _currentBet < Player_Stats.Coins.Value)
         {
             _currentBet += 1;
             SetBetText(_currentBet.ToString());
@@ -230,14 +230,14 @@ public class BlackJack : MonoBehaviour
 
     public void SetPlayerCoinsText()
     {
-        _playerCoinText.text = "Coins " + _player.GetComponent<Player_Stats>().Coins.Value;
+        _playerCoinText.text = "Coins " + Player_Stats.Coins.Value;
     }
 
     public void PlaceBet()
     {
         if (_currentBet > 0)
         {
-            _player.GetComponent<Player_Stats>().Coins.Modify(-_currentBet);
+            Player_Stats.Coins.Modify(-_currentBet);
             _betPanel.SetActive(false);
             _gamePanel.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_gamePanelFocus);
@@ -275,7 +275,7 @@ public class BlackJack : MonoBehaviour
         _inGame = false;
         _BJ_UI.SetActive(false);
         _player.GetComponent<PlayerController>().LeaveBJ();
-        print("coins: " + _player.GetComponent<Player_Stats>().Coins.Value);
+        print("coins: " + Player_Stats.Coins.Value);
     }
     
     

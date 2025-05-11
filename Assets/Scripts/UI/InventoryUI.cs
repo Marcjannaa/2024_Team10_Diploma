@@ -38,7 +38,7 @@ public class InventoryUI : MonoBehaviour
             tmp.AddComponent<CanvasRenderer>();
             tmp.AddComponent<UnityEngine.UI.Image>();
             tmp.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
-            
+            // tmp.AddComponent<ToolTip>();
             buttons.Add(tmp);
             
             tmp.transform.SetParent(InventoryPanel);
@@ -55,9 +55,9 @@ public class InventoryUI : MonoBehaviour
     }
     void Update()
     {
-        Strength.text = "Strength: " + Stats.Strength.Value;
-        Agility.text = "Agility: " + Stats.Agility.Value;
-        Intelligence.text = "Intelligence: " + Stats.Intelligence.Value;
+        Strength.text = "Strength: " +  Player_Stats.Strength.Value;
+        Agility.text = "Agility: " + Player_Stats.Agility.Value;
+        Intelligence.text = "Intelligence: " + Player_Stats.Intelligence.Value;
     }
 
     public void updateInv()

@@ -21,10 +21,10 @@ public class BombScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             position = transform.position;
-            if (PickupScript.getStats().Bombs.Value > 0)
+            if (Player_Stats.Bombs.Value > 0)
             {
                 placed = Instantiate(Bomb, new Vector3(position.x, Bomb.transform.position.y, position.z), new Quaternion());
-                PickupScript.getStats().Bombs.Modify(-1);
+                Player_Stats.Bombs.Modify(-1);
             }
         }
     }
