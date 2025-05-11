@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine.Events;
 using UnityEngine.SocialPlatforms;
 
@@ -10,6 +11,7 @@ namespace ProceduralGeneration
 
     public class FloorGenerator : MonoBehaviour
     {
+        private IFloorGenerationStrategy currentGenerationStrategy;
         private FloorConfig floorConfig;
         private List<PlacedRoom> activeRooms = new();
         private List<BoxCollider> colliders = new();
@@ -17,9 +19,10 @@ namespace ProceduralGeneration
         private int attempts = 0;
         [SerializeField] private float roomPlacementDelay = 0;
         public UnityEvent OnFloorGenerated;
-        public void GenerateFloor(FloorConfig config)
+        public void GenerateFloor(FloorConfig config, IFloorGenerationStrategy strategy)
         {
             floorConfig = config;
+            currentGenerationStrategy = strategy;
 
             // first room gen
             ClearPreviousFloor();
@@ -43,7 +46,9 @@ namespace ProceduralGeneration
             foreach (var entry in generationMap)
             {
                 yield return StartCoroutine(
-                    GenerateRooms(entry.Value.rooms, entry.Value.roomsToGenerate, attempts, maxGlobalAttempts)
+                    //GenerateRooms(entry.Value.rooms, entry.Value.roomsToGenerate, attempts, maxGlobalAttempts)
+                    currentGenerationStrategy.GenerateRooms(entry.Value.rooms, entry.Value.roomsToGenerate, attempts, maxGlobalAttempts, 
+                        roomPlacementDelay, activeRooms , exitPoints, this)
                 );
             }
             
@@ -51,7 +56,8 @@ namespace ProceduralGeneration
             OnFloorGenerated?.Invoke(); 
         }
 
-        private IEnumerator GenerateRooms(List<RoomConfig> roomPool, int countToGenerate, int attempts, int maxAttempts)
+        [Obsolete] // done by strategy
+        private IEnumerator GenerateRooms(List<RoomConfig> roomPool, int countToGenerate, int attempts, int maxAttempts) 
         {
             int roomsPlaced = 0;
 
@@ -105,12 +111,13 @@ namespace ProceduralGeneration
                 if (!exit.isConnected)
                 {
                     exit.activateWall();
+                    exit.deactivateArc();
                 }
             }
         }
 
 
-        private void TryPlaceRoomAtExit(ExitPoint exit, RoomConfig roomDef)
+        public void TryPlaceRoomAtExit(ExitPoint exit, RoomConfig roomDef)
         {
             if (exit is null || roomDef is null)
             {
@@ -141,6 +148,11 @@ namespace ProceduralGeneration
                 exit.isConnected = true;
                 RoomPlacementHelper.CloseNearestExit(exit, exitPoints);
             }
+        }
+
+        public void setFloorGenerationStrategy(IFloorGenerationStrategy strategy)
+        {
+            currentGenerationStrategy = strategy;
         }
     }
 }

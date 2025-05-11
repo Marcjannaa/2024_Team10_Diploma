@@ -28,11 +28,16 @@ public class PlayerController : MonoBehaviour
 
     void Update ()
     {
+        if (_playerStats.Health.Value <= 0)
+        {
+            Die();
+        }
+        
         if (inCombat || _inBJ) return;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Debug.Log(_enemyInRange);
+//        Debug.Log(_enemyInRange);
 
         if (horizontal != 0 || vertical != 0)
         {
@@ -69,6 +74,11 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Enemy") && !_enemiesInRange.Contains(other.gameObject))
@@ -90,6 +100,7 @@ public class PlayerController : MonoBehaviour
             _slots = other.gameObject;
         }
     }
+    
 
     private void OnTriggerExit(Collider other)
     {
