@@ -7,20 +7,19 @@ public class StatsToHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Coins;
     [SerializeField] private TextMeshProUGUI Bombs;
     [SerializeField] private TextMeshProUGUI Keys;
-    [SerializeField] private Player_Stats Stats;
     void Start()
     {
-        Hp.text = Stats.Health.Value.ToString();
-        Coins.text = Stats.Health.Value.ToString();
-        Bombs.text = Stats.Health.Value.ToString();
-        Keys.text = Stats.Health.Value.ToString();
+        Hp.text = Player_Stats.Health.Value.ToString();
+        Coins.text = Player_Stats.Health.Value.ToString();
+        Bombs.text = Player_Stats.Health.Value.ToString();
+        Keys.text = Player_Stats.Health.Value.ToString();
     }
     
     void Update()
     {
-        Hp.text = Stats.Health.Value.ToString();
-        Coins.text = Stats.Coins.Value.ToString();
-        Bombs.text = Stats.Bombs.Value.ToString();
-        Keys.text = Stats.Keys.Value.ToString();
+        Hp.text = Player_Stats.Health.Value.ToString();
+        Coins.text = Player_Stats.Coins.Value.ToString();
+        Bombs.text = Player_Stats.Bombs.Value.ToString();
+        Keys.text = Player_Stats.Keys.Value.ToString();
     }
 }

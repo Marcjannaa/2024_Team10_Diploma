@@ -6,33 +6,33 @@ public class ShopPickup : PickupScript
 {
     protected override void Collect()
     {
-        if (_stats.Coins.StatValue >= 5.0)
+        if (Player_Stats.Coins.StatValue >= 5.0)
         {
             switch (id)
             {
                 case 2:
-                    _stats.Bombs.Modify(1);
-                    _stats.Coins.Modify(-5);
+                    Player_Stats.Bombs.Modify(1);
+                    Player_Stats.Coins.Modify(-5);
                     Destroy(gameObject);
                     break;
                 case 3:
-                    _stats.Keys.Modify(1);
-                    _stats.Coins.Modify(-5);
+                    Player_Stats.Keys.Modify(1);
+                    Player_Stats.Coins.Modify(-5);
                     Destroy(gameObject);
                     break;
                 case 4:
-                    _stats.Health.Modify(10);
-                    _stats.Coins.Modify(-3);
+                    Player_Stats.Health.Modify(10);
+                    Player_Stats.Coins.Modify(-3);
                     Destroy(gameObject);
                     break;
             }
-        } else if (_stats.Coins.StatValue >= 3.0)
+        } else if (Player_Stats.Coins.StatValue >= 3.0)
         {
             switch (id)
             {
                 case 4:
-                    _stats.Health.Modify(10);
-                    _stats.Coins.Modify(-3);
+                    Player_Stats.Health.Modify(10);
+                    Player_Stats.Coins.Modify(-3);
                     Destroy(gameObject);
                     break;
             }

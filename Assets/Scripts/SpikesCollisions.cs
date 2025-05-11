@@ -11,7 +11,7 @@ public class SpikesCollisions : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             print("ała");
-            other.gameObject.GetComponent<Player_Stats>().Health.Modify(-30);
+            Player_Stats.Health.Modify(-30);
         }
     }
 }

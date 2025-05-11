@@ -25,10 +25,10 @@ public class ChestScript : MonoBehaviour
         if (requireKey)
         {
             
-                if (PickupScript.getStats().Keys.Value > 0 || PickupScript.getStats().LockPick.getFlag())
+                if (Player_Stats.Keys.Value > 0 || Player_Stats.LockPick.getFlag())
                 {
-                    if(!PickupScript.getStats().LockPick.getFlag())
-                        PickupScript.getStats().Keys.Modify(-1);
+                    if(!Player_Stats.LockPick.getFlag())
+                        Player_Stats.Keys.Modify(-1);
                     float times = Random.Range(0f, 1f);
                     int choose;
                     int loopCount;

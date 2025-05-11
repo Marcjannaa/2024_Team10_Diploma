@@ -19,16 +19,16 @@ public class PlayerController : MonoBehaviour
     private GameObject _slots;
     private List<GameObject> _enemiesInRange = new List<GameObject>();
     [SerializeField] private Animator anim;
-    private Player_Stats _playerStats;
+
 
     private void Start()
     {
-        _playerStats = gameObject.GetComponent<Player_Stats>();
+       
     }
 
     void Update ()
     {
-        if (_playerStats.Health.Value <= 0)
+        if (Player_Stats.Health.Value <= 0)
         {
             Die();
         }
@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("BRAKJAK");
             _inBJ = true;
             _BJTable.GetComponent<BlackJack>().StartGame(this.gameObject);
-        }else if (_canPlaySlots && Input.GetKeyDown(KeyCode.E) && _playerStats.Coins.Value >= 1)
+        }else if (_canPlaySlots && Input.GetKeyDown(KeyCode.E) && Player_Stats.Coins.Value >= 1)
         {
             Debug.Log("SLOTS");
-            _playerStats.Coins.Modify(-1);
+            Player_Stats.Coins.Modify(-1);
             _slots.GetComponent<Slots>().Play();
         }
         

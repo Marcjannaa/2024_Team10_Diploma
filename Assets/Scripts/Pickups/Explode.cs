@@ -7,11 +7,9 @@ using UnityEngine;
 public class Explode : MonoBehaviour
 {
     private SpriteRenderer renderer;
-    private static Player_Stats _stats;
     private bool playerInRange;
     void Start()
     {
-        _stats = FindObjectOfType<Player_Stats>();
         renderer = GetComponent<SpriteRenderer>();
         StartCoroutine(ExplodeBomb());
     }
@@ -54,7 +52,7 @@ public class Explode : MonoBehaviour
 
         if (playerInRange)
         {
-            _stats.Health.Modify(-30);
+            Player_Stats.Health.Modify(-30);
         }
         Destroy(gameObject);
     }

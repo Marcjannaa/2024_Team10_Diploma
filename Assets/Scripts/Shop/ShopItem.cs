@@ -20,9 +20,9 @@ public class ShopItem : Item
     }
     protected override void pickUp()
     {
-        if (Stats.Coins.StatValue >= price)
+        if (Player_Stats.Coins.StatValue >= price)
         {
-            Stats.Coins.Modify(-price);
+            Player_Stats.Coins.Modify(-price);
             Inventory.addItem(this);
             InventoryUI.Instance.updateInv();
             Destroy(gameObject);

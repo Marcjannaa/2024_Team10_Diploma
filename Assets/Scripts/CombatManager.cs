@@ -57,7 +57,7 @@ public class CombatManager : MonoBehaviour
 
     public void OnSkill1Clicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 8);
+        _enemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 8);
 
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
@@ -72,13 +72,13 @@ public class CombatManager : MonoBehaviour
         switch (hitResult)
         {
             case TimingMiniGame.HitResult.PerfectHit:
-                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 4);
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 4);
                 break;
             case TimingMiniGame.HitResult.MediumHit:
-                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 3);
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 3);
                 break;
             case TimingMiniGame.HitResult.NoHit:
-                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-_player.GetComponent<Player_Stats>().Strength.Value * 2);
+                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 2);
                 break;
         }
         /*
@@ -105,7 +105,7 @@ public class CombatManager : MonoBehaviour
 
         if (!win)
         {
-            _player.GetComponent<Player_Stats>().Health.Modify(-(int)_enemy.GetComponent<Enemy_Stats>().Strength.Value * Instance._guardMultiplier);
+            Player_Stats.Health.Modify(-(int)_enemy.GetComponent<Enemy_Stats>().Strength.Value * Instance._guardMultiplier);
         }
 
         Instance._playerAttacked = false;
@@ -255,11 +255,11 @@ public class CombatManager : MonoBehaviour
         while (_battleOngoing)
         {
 
-            _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(_player.GetComponent<Player_Stats>().Health.Value.ToString());
+            _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
 
-            if (_player.GetComponent<Player_Stats>().Health.Value <= 0)
+            if (Player_Stats.Health.Value <= 0)
             {
                 GameOver();
                 yield break;
