@@ -10,11 +10,12 @@ TagManager:
   - BJTable
   - Slots
   - Spikes
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
