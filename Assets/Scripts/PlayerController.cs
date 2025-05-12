@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("BRAKJAK");
             _inBJ = true;
             _BJTable.GetComponent<BlackJack>().StartGame(this.gameObject);
-        }else if (_canPlaySlots && Input.GetKeyDown(KeyCode.E) && Player_Stats.Coins.Value >= 1)
+        }else if (_canPlaySlots && Input.GetKeyDown(KeyCode.E) && Player_Stats.Coins.Value >= 1 && !_slots.GetComponent<Slots>().GetPlayState())
         {
             Debug.Log("SLOTS");
             Player_Stats.Coins.Modify(-1);
