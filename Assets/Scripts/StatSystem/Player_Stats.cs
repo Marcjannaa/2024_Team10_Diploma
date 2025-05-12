@@ -6,6 +6,12 @@ using UnityEngine.Serialization;
 
 public class Player_Stats : MonoBehaviour
 {
+    [SerializeField] public int MaxHp = 100;
+    [SerializeField] public int Hp = 100;
+    [SerializeField] public int STR = 10;
+    [SerializeField] public int INT = 10;
+    [SerializeField] public int LUCK = 0;
+    [SerializeField] public int AGL = 10;
     [SerializeField] public int CoinVal = 0;
     [SerializeField] public int BombVal = 0;
     [SerializeField] public int KeyVal = 0;
@@ -21,10 +27,20 @@ public class Player_Stats : MonoBehaviour
     public static Stat Keys = new Stat (0, StatType.Key);
     public static Stat LockPick = new Stat(false, StatType.LockPick);
 
-    
-    private void Start()
+
+    private void Awake()
     {
         
+    }
+
+    private void Start()
+    {
+        MaxHealth.setValue(MaxHp);
+        Health.setValue(Hp);
+        Strength.setValue(STR);
+        Agility.setValue(AGL);
+        Intelligence.setValue(INT);
+        Luck.setValue(LUCK);
         Coins.setValue(CoinVal);
         Bombs.setValue(BombVal);
         Keys.setValue(KeyVal);
