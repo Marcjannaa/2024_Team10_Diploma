@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace ProceduralGeneration
     public class PlacedRoom : MonoBehaviour
     {
         public RoomConfig definition;
-
+        
         public List<ExitPoint> Exits { get; private set; }
 
         public void Initialize(RoomConfig def)
@@ -32,5 +33,8 @@ namespace ProceduralGeneration
 
             return resList;
         }
+
+        
+        
     }
 }

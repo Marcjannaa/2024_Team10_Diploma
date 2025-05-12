@@ -57,6 +57,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"Floor {currentFloorIndex + 1} generated.");
         currentFloorIndex++;
         
+        CameraManager.Instance.InitializeCameraList();
         OnPlayerSpawnRequest.Invoke();
         // #TODO Maybe trigger something else and connect with game manager when and if implemented
     }

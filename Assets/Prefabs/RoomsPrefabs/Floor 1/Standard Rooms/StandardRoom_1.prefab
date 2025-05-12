@@ -568,6 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4090914997744575840}
   - component: {fileID: 2972971075747703602}
+  - component: {fileID: 1421548564396650805}
   m_Layer: 0
   m_Name: RoomCollider
   m_TagString: Untagged
@@ -600,7 +601,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -611,6 +612,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 25, y: 5, z: 26}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1421548564396650805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292130854305573471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe607ea4d7244e3ad152b1506dce66e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomCamera: {fileID: 7172970100689396727}
 --- !u!1 &6770541711182338460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1281,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d470dc08e14858b458e276192649eb2c, type: 3}
+--- !u!20 &7172970100689396727 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8161720654042421126, guid: d470dc08e14858b458e276192649eb2c, type: 3}
+  m_PrefabInstance: {fileID: 1355517501038670961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7331122134692920616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8607121337751947609, guid: d470dc08e14858b458e276192649eb2c, type: 3}
