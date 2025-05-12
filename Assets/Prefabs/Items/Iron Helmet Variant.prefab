@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: 63847590ed12c3c47b3b72dd32247398, type: 3}
+      objectReference: {fileID: 21300000, guid: ae3034c795237ae4b8d1a782bac9a97a, type: 3}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: effect
       value: Not Implemented
@@ -155,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 7387991532678753622, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 63847590ed12c3c47b3b72dd32247398, type: 3}
+      objectReference: {fileID: 21300000, guid: ae3034c795237ae4b8d1a782bac9a97a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

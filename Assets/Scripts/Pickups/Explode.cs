@@ -8,9 +8,15 @@ public class Explode : MonoBehaviour
 {
     private SpriteRenderer renderer;
     private bool playerInRange;
+    private List<Collider> toDestroy = new List<Collider>();
+    private BoxCollider bc;
+    
+
     void Start()
     {
+        bc = GetComponent<BoxCollider>();
         renderer = GetComponent<SpriteRenderer>();
+        FindOverLap();
         StartCoroutine(ExplodeBomb());
     }
     
@@ -19,6 +25,24 @@ public class Explode : MonoBehaviour
         
     }
 
+    void FindOverLap()
+    {
+        Vector3 worldCenter = transform.TransformPoint(bc.center);
+        Vector3 halfExtents = Vector3.Scale(bc.size * 0.5f, transform.lossyScale);
+        Quaternion orientation = transform.rotation;
+
+        Collider[] hits = Physics.OverlapBox(worldCenter, halfExtents, orientation);
+        
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Destroyable"))
+            {
+                Debug.Log("Object already inside trigger: " + hit.name);
+                toDestroy.Add(hit);
+            }
+        }
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -53,6 +77,16 @@ public class Explode : MonoBehaviour
         if (playerInRange)
         {
             Player_Stats.Health.Modify(-30);
+        }
+
+        if (toDestroy.Count > 0)
+        {
+            Debug.Log(toDestroy.Count);
+            foreach (var obj in toDestroy)
+            {
+                Debug.Log("Destroyed!");
+                Destroy(obj.gameObject);
+            }
         }
         Destroy(gameObject);
     }
