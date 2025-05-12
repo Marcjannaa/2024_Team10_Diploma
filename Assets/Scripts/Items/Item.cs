@@ -12,6 +12,10 @@ public class Item : MonoBehaviour
     [SerializeField] public int STR;
     [SerializeField] public int AGL;
     [SerializeField] public int INT;
+    [SerializeField] public int Luck;
+    [SerializeField] public int Coins;
+    [SerializeField] public int Bombs;
+    [SerializeField] public int Keys;
     [SerializeField] public Sprite image;
     [SerializeField] public bool allowLockPick;
     

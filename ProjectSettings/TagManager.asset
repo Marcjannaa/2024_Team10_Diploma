@@ -11,6 +11,7 @@ TagManager:
   - Slots
   - Spikes
   - Ground
+  - Destroyable
   layers:
   - Default
   - TransparentFX

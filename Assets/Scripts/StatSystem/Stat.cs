@@ -75,7 +75,17 @@ public class Stat
             case StatType.MaxHealth:
                 var currHp =_stats.Find(x => x.Type == StatType.Health);
                 currHp.StatValue += amount;
+                if (Player_Stats.Health.StatValue > Player_Stats.MaxHealth.StatValue)
+                {
+                    Player_Stats.Health.setValue(Player_Stats.MaxHealth.StatValue);
+                }
                 Debug.Log(currHp.Value);
+                break;
+            default:
+                if (tmp < 0)
+                {
+                    tmp = 0;
+                }
                 break;
         }
         StatValue = tmp;

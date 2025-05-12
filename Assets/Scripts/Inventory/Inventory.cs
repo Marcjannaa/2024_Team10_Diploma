@@ -40,10 +40,13 @@ public class Inventory : MonoBehaviour
             {
                 Debug.Log(item);
                 Player_Stats.MaxHealth.Modify(item.MaxHp);
-                Player_Stats.Health.Modify(item.MaxHp);
                 Player_Stats.Strength.Modify(item.STR);
                 Player_Stats.Agility.Modify(item.AGL);
                 Player_Stats.Intelligence.Modify(item.INT);
+                Player_Stats.Luck.Modify(item.Luck);
+                Player_Stats.Coins.Modify(item.Coins);
+                Player_Stats.Bombs.Modify(item.Bombs);
+                Player_Stats.Keys.Modify(item.Keys);
             }
             Items.Add(item);
         }
