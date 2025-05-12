@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -9,6 +10,12 @@ public class Inventory : MonoBehaviour
 
     public static List<Item> Items = new List<Item>();
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Items.Clear();
+        Debug.Log(Items);
+    }
+
     void Start()
     {
         Items.Clear();
@@ -40,9 +47,10 @@ public class Inventory : MonoBehaviour
             }
             Items.Add(item);
         }
-        
-        
-        
+        else
+        {
+            Debug.Log("Over 9 items");
+        }
         Debug.Log(Items);
     }
     

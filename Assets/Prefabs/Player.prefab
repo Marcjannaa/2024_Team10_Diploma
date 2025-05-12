@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 951144046338303385}
   - component: {fileID: 6847430366651714322}
   - component: {fileID: 8367650231476230941}
+  - component: {fileID: -1158113299736262894}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -370,25 +371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9851172a2c17c459b6d6e1d14c9695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth:
-    StatValue: 100
-  Health:
-    StatValue: 100
-  Strength:
-    StatValue: 10
-  Agility:
-    StatValue: 10
-  Intelligence:
-    StatValue: 10
-  Coins:
-    StatValue: 15
-  Bombs:
-    StatValue: 1
-  Keys:
-    StatValue: 0
-  LockPick:
-    StatValue: 0
-  inventoryUI: {fileID: 0}
+  CoinVal: 0
+  BombVal: 0
+  KeyVal: 0
 --- !u!114 &1932406722982758480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +432,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 4.53, z: 2}
   m_Center: {x: 0, y: 1.1971797, z: 0}
+--- !u!114 &-1158113299736262894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327995856416819966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28961de077fde4043a6a1ee186175b22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6540478604799125483
 GameObject:
   m_ObjectHideFlags: 0

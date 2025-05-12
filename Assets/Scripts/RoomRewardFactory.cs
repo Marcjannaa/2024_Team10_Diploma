@@ -22,6 +22,7 @@ public class RoomRewardFactory : MonoBehaviour
     void Start()
     {
         float roll = Random.Range(0f, 100f);
+        roll += Player_Stats.Luck.Value / 100;
         float cumulative = 0f;
         RaycastHit hitInfo;
         Ray ray = new Ray(transform.position, Vector3.down);
