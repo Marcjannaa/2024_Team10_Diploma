@@ -1273,6 +1273,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 35855878671647752, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
+      propertyPath: rounds
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 230397840073669900, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
       propertyPath: m_Name
       value: CombatManager
