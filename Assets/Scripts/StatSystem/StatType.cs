@@ -9,6 +9,7 @@ public enum StatType
     Strength,
     Agility,
     Intelligence,
+    Luck,
     Coin,
     Bomb,
     Key,

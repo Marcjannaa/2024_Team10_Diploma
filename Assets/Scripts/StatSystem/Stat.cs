@@ -81,6 +81,11 @@ public class Stat
         StatValue = tmp;
     }
 
+    public void setValue(float value)
+    {
+        StatValue = value;
+    }
+
     public void ResetModifiers()
     {
         Debug.Log("Empty");

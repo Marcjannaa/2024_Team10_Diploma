@@ -32,6 +32,7 @@ public class ChestScript : MonoBehaviour
                     float times = Random.Range(0f, 1f);
                     int choose;
                     int loopCount;
+                    times += Player_Stats.Luck.Value / 100;
                     Debug.Log(times);
                     if (times > 0.9)
                     {
