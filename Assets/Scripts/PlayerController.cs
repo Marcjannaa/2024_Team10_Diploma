@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> _enemiesInRange = new List<GameObject>();
     [SerializeField] private Animator anim;
 
+    private Vector3 _roomForward = Vector3.forward;
 
     private void Start()
     {
@@ -49,10 +50,17 @@ public class PlayerController : MonoBehaviour
         }
         gameObject.GetComponentInChildren<PlayerSprites>().LookLeft(Input.GetAxis("Horizontal") < 0);
 
-        
+        /*
         var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        
         transform.Translate(direction * _speed * Time.deltaTime);
+        */
+        
+        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 moveDir = Quaternion.LookRotation(_roomForward) * input;
+
+        transform.Translate(moveDir * _speed * Time.deltaTime, Space.World);
+        
+        //
         if (_enemyInRange != null && _canCombat && Input.GetKeyDown(KeyCode.Return))
         {
             CombatManager.InitiateCombat(false,gameObject,_enemyInRange);
@@ -146,5 +154,10 @@ public class PlayerController : MonoBehaviour
     {
         _inBJ = false;
         _canEnterBJ = true;
+    }
+    
+    public void AlignToRoomDirection(Vector3 newForward)
+    {
+        _roomForward = newForward.normalized;
     }
 }
