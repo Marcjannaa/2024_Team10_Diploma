@@ -81,6 +81,24 @@ public class Stat
                 }
                 Debug.Log(currHp.Value);
                 break;
+            case StatType.Mana:
+                float maxMP = _stats.Find(x => x.Type == StatType.MaxMana).Value;
+                Debug.Log(maxMP);
+                Debug.Log(tmp);
+                if ( tmp >= maxMP)
+                {
+                    tmp = StatValue;
+                }
+                break;
+            case StatType.MaxMana:
+                var currMP =_stats.Find(x => x.Type == StatType.Mana);
+                currMP.StatValue += amount;
+                if (Player_Stats.Mana.StatValue > Player_Stats.MaxMana.StatValue)
+                {
+                    Player_Stats.Mana.setValue(Player_Stats.MaxMana.StatValue);
+                }
+                Debug.Log(currMP.Value);
+                break;
             default:
                 if (tmp < 0)
                 {

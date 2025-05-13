@@ -18,6 +18,7 @@ internal enum Turn
 public class CombatManager : MonoBehaviour
 {
     [SerializeField] private GameObject _rewardItem;
+    [SerializeField] private List<CombatSkill> _combatSkills;
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
     private  GameObject  attackButton;
@@ -49,23 +50,27 @@ public class CombatManager : MonoBehaviour
 
     public void OnAtkClicked()
     {
-        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject
-            .transform.Find("ActionPanel").gameObject
-            .SetActive(false);
+        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(false);
         _miniGamePanel.SetActive(true);
     }
 
     public void OnSkill1Clicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 8);
+        if (_combatSkills[0].GetMPCost() <= Player_Stats.Mana.Value)
+        {
+            Debug.Log("skill1");
+            _combatSkills[0].PerformSkill(this);
 
-        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
-        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
 
 
-        _playerAttacked = true;
-        _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
+            _playerAttacked = true;
+            _turn = Turn.Enemy;
+            SwitchBattleUIPanel();
+        }
+
     }
     public static void OnAttackEnded(TimingMiniGame.HitResult hitResult)
     {
@@ -102,6 +107,7 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(true);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
 
         if (!win)
         {
@@ -120,6 +126,10 @@ public class CombatManager : MonoBehaviour
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
+        for (int i = 0; i < _combatSkills.Count; i++)
+        {
+            _battleUI.GetComponent<BattleUI>().SetSkillCostText(i,_combatSkills[i].GetMPCost().ToString());
+        }
         GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
 
         if (EventSystem.current.currentSelectedGameObject != skillButton)
@@ -154,6 +164,7 @@ public class CombatManager : MonoBehaviour
             _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
                 .transform.Find("MiniGamePanel").gameObject;
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
         }
         else
         {
@@ -189,6 +200,7 @@ public class CombatManager : MonoBehaviour
     private void EnemyAction()
     {
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
+        
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
 
         GameObject dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
@@ -208,6 +220,7 @@ public class CombatManager : MonoBehaviour
             case Turn.Player:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+                _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
@@ -256,6 +269,7 @@ public class CombatManager : MonoBehaviour
         {
 
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
+            _battleUI.GetComponent<BattleUI>().SetPlayerMPText(Player_Stats.Mana.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
 
@@ -286,5 +300,9 @@ public class CombatManager : MonoBehaviour
         //_player.SetActive(true);
     }
 
-
+    public GameObject GetEnemy()
+    {
+        return _enemy;
+    }
+    
 }

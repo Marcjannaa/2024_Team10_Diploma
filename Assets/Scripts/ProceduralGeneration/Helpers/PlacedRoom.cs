@@ -9,6 +9,8 @@ namespace ProceduralGeneration
     {
         public RoomConfig definition;
         
+        public Transform roomForwardTransform;
+
         public List<ExitPoint> Exits { get; private set; }
 
         public void Initialize(RoomConfig def)
@@ -32,6 +34,13 @@ namespace ProceduralGeneration
             }
 
             return resList;
+        }
+        
+        public ExitPoint GetClosestExitTo(Vector3 worldPosition)
+        {
+            return GetExits()
+                .OrderBy(e => Vector3.Distance(e.transform.position, worldPosition))
+                .FirstOrDefault();
         }
 
         

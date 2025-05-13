@@ -6,6 +6,8 @@ public enum StatType
 {
     Health,
     MaxHealth,
+    Mana,
+    MaxMana,
     Strength,
     Agility,
     Intelligence,

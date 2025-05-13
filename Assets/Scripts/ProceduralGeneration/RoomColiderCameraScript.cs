@@ -10,10 +10,16 @@ namespace ProceduralGeneration
         
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.tag);
+           
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Player Entered Room Trigger");
+                var player = other.GetComponent<PlayerController>();
+                var room = GetComponentInParent<PlacedRoom>();
+                if (player != null && room != null && room.roomForwardTransform != null)
+                {
+                    player.AlignToRoomDirection(room.roomForwardTransform.forward);
+                }
+                
                 if (roomCamera != null)
                 {
                     CameraManager.Instance.SwitchToCamera(roomCamera);

@@ -124,14 +124,15 @@ namespace ProceduralGeneration
                 Debug.LogWarning("Exit or RoomConfig is null, skipping room placement.");
                 return;
             }
-
+            
             var room = RoomPlacementHelper.PlaceRoom(roomDef, exit.transform.position, exit.transform.rotation);
+            
             if (room is null)
             {
                 Debug.LogWarning("Failed to place room.");
                 return;
             }
-            
+           
             
             if (RoomPlacementHelper.IsRoomOverlapping(room, colliders))
             {

@@ -763,6 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   definition: {fileID: 0}
+  roomForwardTransform: {fileID: 7957156729180534834}
 --- !u!1 &8923089573347662427
 GameObject:
   m_ObjectHideFlags: 0
