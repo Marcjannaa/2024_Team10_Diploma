@@ -50,9 +50,8 @@ public class CombatManager : MonoBehaviour
 
     public void OnAtkClicked()
     {
-        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject
-            .transform.Find("ActionPanel").gameObject
-            .SetActive(false);
+        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(false);
         _miniGamePanel.SetActive(true);
     }
 
@@ -108,6 +107,7 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(true);
+        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
 
         if (!win)
         {
@@ -164,6 +164,7 @@ public class CombatManager : MonoBehaviour
             _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
                 .transform.Find("MiniGamePanel").gameObject;
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
         }
         else
         {
@@ -199,6 +200,7 @@ public class CombatManager : MonoBehaviour
     private void EnemyAction()
     {
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
+        
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
 
         GameObject dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
@@ -218,6 +220,7 @@ public class CombatManager : MonoBehaviour
             case Turn.Player:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+                _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
