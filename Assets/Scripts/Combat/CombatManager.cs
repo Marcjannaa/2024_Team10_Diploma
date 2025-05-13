@@ -18,6 +18,7 @@ internal enum Turn
 public class CombatManager : MonoBehaviour
 {
     [SerializeField] private GameObject _rewardItem;
+    [SerializeField] private List<CombatSkill> _combatSkills;
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
     private  GameObject  attackButton;
@@ -57,15 +58,20 @@ public class CombatManager : MonoBehaviour
 
     public void OnSkill1Clicked()
     {
-        _enemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 8);
+        if (_combatSkills[0].GetMPCost() <= Player_Stats.Mana.Value)
+        {
+            Debug.Log("skill1");
+            _combatSkills[0].PerformSkill(this);
 
-        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
-        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
 
 
-        _playerAttacked = true;
-        _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
+            _playerAttacked = true;
+            _turn = Turn.Enemy;
+            SwitchBattleUIPanel();
+        }
+
     }
     public static void OnAttackEnded(TimingMiniGame.HitResult hitResult)
     {
@@ -286,5 +292,9 @@ public class CombatManager : MonoBehaviour
         //_player.SetActive(true);
     }
 
-
+    public GameObject GetEnemy()
+    {
+        return _enemy;
+    }
+    
 }
