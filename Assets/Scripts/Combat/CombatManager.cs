@@ -126,6 +126,10 @@ public class CombatManager : MonoBehaviour
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
+        for (int i = 0; i < _combatSkills.Count; i++)
+        {
+            _battleUI.GetComponent<BattleUI>().SetSkillCostText(i,_combatSkills[i].GetMPCost().ToString());
+        }
         GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
 
         if (EventSystem.current.currentSelectedGameObject != skillButton)
@@ -262,6 +266,7 @@ public class CombatManager : MonoBehaviour
         {
 
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
+            _battleUI.GetComponent<BattleUI>().SetPlayerMPText(Player_Stats.Mana.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
 

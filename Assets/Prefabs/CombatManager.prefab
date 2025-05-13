@@ -437,7 +437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4586271261471800667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1103,7 +1103,7 @@ RectTransform:
   m_Father: {fileID: 6646308220872230704}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1833,7 +1833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8397826225901440605
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2452,7 +2452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110673257210801905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2549,7 +2549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bfd3d68b045cce4abd60836f8c8dfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillsCosts:
+  - {fileID: 5085837028750666292}
   _playerHealthText: {fileID: 873647204448190215}
+  _playerManaText: {fileID: 629278178775816394}
   _enemyHealthSlider: {fileID: 3604305734932052631}
   _enemySprite: {fileID: 861915944563365398}
   _playerActionFirst: {fileID: 2159272858017379072}
