@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daeb107008040f945a6a52b9a3c10452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rounds: 2
-  delay: 5
+  rounds: 5
+  delay: 0.5
   spawnPoints:
   - {fileID: 7669870843463523430}
   - {fileID: 8464064428856536783}
