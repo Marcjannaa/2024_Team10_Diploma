@@ -12,6 +12,7 @@ TagManager:
   - Spikes
   - Ground
   - Destroyable
+  - MiniGameEnemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - UI
   - Room Trigger
   - Player
-  - 
+  - MiniGame
   - 
   - 
   - 

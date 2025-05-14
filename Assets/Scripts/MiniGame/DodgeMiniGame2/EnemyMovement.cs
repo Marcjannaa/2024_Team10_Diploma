@@ -11,7 +11,7 @@ namespace MiniGame.DodgeMiniGame2
         [SerializeField] private float moveSpeed;
         private Vector3 _targetPosition;
         private Vector3 _direction;
-        private void Start()
+        private void OnEnable()
         {
             _targetPosition = chasingPoint.position;
             _direction = (_targetPosition - transform.position).normalized;

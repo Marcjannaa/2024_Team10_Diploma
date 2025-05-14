@@ -6,19 +6,20 @@ namespace MiniGame.DodgeMiniGame2
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private float miniGameTime = 10f;
+        private float _miniGameTime;
         [SerializeField] private GameObject enemy;
         [SerializeField] private int rounds = 5;
         [SerializeField] private List<Transform> spawners;
 
-        private void Start()
+        private void OnEnable()
         {
+            _miniGameTime = GetComponentInParent<DodgeMiniGameManager>().GetMiniGameTime();
             StartCoroutine(SpawnEnemies());
         }
 
         private IEnumerator SpawnEnemies()
         {
-            var interval = miniGameTime / rounds;
+            var interval = _miniGameTime / rounds;
 
             for (var i = 0; i < rounds; i++)
             {
@@ -31,7 +32,8 @@ namespace MiniGame.DodgeMiniGame2
         {
             foreach (var spawnPoint in spawners)
             {
-                Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+                var enemyClone = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+                enemyClone.transform.SetParent(this.gameObject.transform);
             }
         }
     }

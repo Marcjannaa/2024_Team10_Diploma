@@ -19,6 +19,7 @@ public class CombatManager : MonoBehaviour
 {
     [SerializeField] private GameObject _rewardItem;
     [SerializeField] private List<CombatSkill> _combatSkills;
+    [SerializeField] private GameObject dodgeMiniGameObject; 
     public static CombatManager Instance { get; private set; }
     private static GameObject _battleUI;
     private  GameObject  attackButton;
@@ -96,9 +97,9 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
 
-        var dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
-        dodgeMiniGame.SetActive(true);
-        dodgeMiniGame.GetComponent<MiniGame.DodgeMiniGame.DodgeGameManager>().ResetGame();
+        //var dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
+        //dodgeMiniGame.SetActive(true);
+        //dodgeMiniGame.GetComponent<MiniGame.DodgeMiniGame.DodgeGameManager>().ResetGame();
 
     }
 
@@ -117,7 +118,6 @@ public class CombatManager : MonoBehaviour
         Instance._playerAttacked = false;
         Instance._turn = Turn.Player;
         Instance._guardMultiplier = 1;
-
         Instance.SwitchBattleUIPanel();
     }
 
@@ -202,9 +202,10 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
         
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
-
-        GameObject dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
-        dodgeMiniGame.SetActive(true);
+        dodgeMiniGameObject.SetActive(true);
+        var dodgeMiniGamePanel = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
+        dodgeMiniGamePanel.SetActive(true);
+        
         //dodgeMiniGame.GetComponent<MiniGame.DodgeMiniGame.Player>().StartMiniGame();
 
 
