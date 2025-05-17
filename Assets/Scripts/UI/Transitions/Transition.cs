@@ -67,20 +67,22 @@ public class Transition : MonoBehaviour
         }
     }
 
-    public IEnumerator PlayTransition()
+    public IEnumerator PlayTransition(System.Action onComplete = null)
     {
+        
+        yield return SpiralCover(onComplete);
         ResetGrid();
-        yield return SpiralCover();
     }
     
-    public IEnumerator SpiralCover()
+    public IEnumerator SpiralCover(System.Action onComplete = null)
     {
         List<Vector2Int> order = GetSpiralOrder(cols, rows);
         foreach (var pos in order)
         {
             grid[pos.x, pos.y].SetActive(true);
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
         }
+        onComplete?.Invoke();
     }
 
     List<Vector2Int> GetSpiralOrder(int width, int height)
