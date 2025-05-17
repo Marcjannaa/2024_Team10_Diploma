@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
+    [SerializeField] private List<TMP_Text> _skillsCosts;
     [SerializeField] private TMP_Text _playerHealthText;
+    [SerializeField] private TMP_Text _playerManaText;
     [SerializeField] private Slider _enemyHealthSlider;
     [SerializeField] private Image _enemySprite;
     [SerializeField] private GameObject _playerActionFirst;
@@ -40,4 +42,13 @@ public class BattleUI : MonoBehaviour
     public GameObject GetPlayerActionFirst() => _playerActionFirst;
     public GameObject GetSkillActionFirst() => _skillActionFirst;
 
+    public void SetPlayerMPText(string text)
+    {
+        _playerManaText.text = "MP: " + text;
+    }
+
+    public void SetSkillCostText(int skillPos, string text)
+    {
+        _skillsCosts[skillPos].text = "MP COST: " + text;
+    }
 }
