@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class Transition : MonoBehaviour
         if (Transition.play)
         {
             StartCoroutine(PlayTransition());
-            
+            Transition.play = false;
         }
     }
 
@@ -72,17 +73,14 @@ public class Transition : MonoBehaviour
         yield return SpiralCover();
     }
     
-    public IEnumerator SpiralCover(System.Action onComplete = null)
+    public IEnumerator SpiralCover()
     {
-        ResetGrid();
         List<Vector2Int> order = GetSpiralOrder(cols, rows);
         foreach (var pos in order)
         {
             grid[pos.x, pos.y].SetActive(true);
             yield return new WaitForSeconds(delay);
         }
-
-        onComplete?.Invoke();
     }
 
     List<Vector2Int> GetSpiralOrder(int width, int height)
