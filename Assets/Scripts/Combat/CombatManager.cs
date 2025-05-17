@@ -186,15 +186,14 @@ public class CombatManager : MonoBehaviour
         Instance._enemyFirstStrike = enemyAdvantage;
 
         //Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
-
-        _battleUI.SetActive(true);
-        Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
-        Instance._enemySprite = battleSpriteTransform.GetComponent<Image>();
-
-
-        Instance.SwitchBattleUIPanel();
-
-        Instance.StartCoroutine(Instance.BattleLoop());
+        Instance.StartCoroutine(Transition.Instance.PlayTransition(() =>
+        {
+            _battleUI.SetActive(true);
+            Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
+            Instance._enemySprite = battleSpriteTransform.GetComponent<Image>();
+            Instance.SwitchBattleUIPanel();
+            Instance.StartCoroutine(Instance.BattleLoop());
+        }));
     }
 
     private void EnemyAction()
