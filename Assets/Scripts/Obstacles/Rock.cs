@@ -12,7 +12,6 @@ public class Rock : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("OH NOES I WAWA'D MY LAST WAWA");
         float roll = Random.Range(0f, 100f);
         float cumulative = 0f;
         roll += Player_Stats.Luck.Value / 100;
