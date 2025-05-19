@@ -9,6 +9,8 @@ public class TrapRoom : MonoBehaviour
     private int _pressedButtonCount;
     [SerializeField] private GameObject rewardPosition;
     [SerializeField] private GameObject spikeSet;
+    [SerializeField] private GameObject turretSet;
+    private List<Turret> _turrets = new List<Turret>();
     [SerializeField] private GameObject rewardItem;
     private bool _rewardSpawned;
 
@@ -17,6 +19,7 @@ public class TrapRoom : MonoBehaviour
         //doors close
         _pressedButtonCount = 0;
         _buttonCount = transform.Find("Buttons").childCount;
+        _turrets.AddRange(turretSet.GetComponentsInChildren<Turret>());
     }
 
     public void AddPressedButton()
@@ -29,12 +32,15 @@ public class TrapRoom : MonoBehaviour
         if (_pressedButtonCount == _buttonCount)
         {
             spikeSet.SetActive(false);
+            foreach (var turret in _turrets)
+            {
+                turret.DeactivateShooting();
+            }
             if (!_rewardSpawned)
             {
                 Instantiate(rewardItem, rewardPosition.transform.position, Quaternion.identity);
                 _rewardSpawned = true;
             }
-            //doors open
         }
     }
 }

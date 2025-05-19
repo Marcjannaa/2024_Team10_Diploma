@@ -12,6 +12,7 @@ TagManager:
   - Spikes
   - Ground
   - Destroyable
+  - Turret
   layers:
   - Default
   - TransparentFX
