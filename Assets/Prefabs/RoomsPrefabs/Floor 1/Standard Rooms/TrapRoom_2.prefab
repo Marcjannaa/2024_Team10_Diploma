@@ -556,7 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardPosition: {fileID: 3473228457941743150}
   spikeSet: {fileID: 8518386705732870648}
-  turretSet: {fileID: 0}
+  turretSet: {fileID: 2297113482610436261}
   rewardItem: {fileID: 811120168656707377, guid: 84ddf2ffc034a9847b680b1e6adc2527, type: 3}
 --- !u!1 &3076806734671925961
 GameObject:
