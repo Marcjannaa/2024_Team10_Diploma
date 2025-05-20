@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14539eb1189986438bc7e4e71ca7eea, type: 3}
   m_Name: TrapRoom1Config
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 2076947885952240501, guid: ea68b651351036e41a9779e73da0d74d, type: 3}
   roomType: 0
