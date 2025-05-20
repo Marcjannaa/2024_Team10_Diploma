@@ -12,18 +12,20 @@ namespace ProceduralGeneration
 
         public void activateWall()
         {
-            if (exitwall is not null)
+            if (exitwall is null)
             {
-                exitwall.gameObject.SetActive(true);
+                throw new MissingComponentException(" arc is null");
             }
+            exitwall.gameObject.SetActive(true);
         }
 
         public void deactivateArc()
         {
-            if (arc is not null)
+            if (arc is  null)
             {
-                arc.gameObject.SetActive(false);
+                throw new MissingComponentException(" arc is null");
             }
+            arc.gameObject.SetActive(false);
         }
         
     }
