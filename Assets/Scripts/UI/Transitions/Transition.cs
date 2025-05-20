@@ -45,8 +45,8 @@ public class Transition : MonoBehaviour
 
     void InitGrid()
     {
-        cols = 16;
-        rows = 9;
+        cols = Mathf.CeilToInt(canvasRect.rect.width / squareSize.x);
+        rows = Mathf.CeilToInt(canvasRect.rect.height / squareSize.y);
 
         grid = new GameObject[cols, rows];
 
