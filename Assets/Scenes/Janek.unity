@@ -579,6 +579,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8617117715524096389, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
+      propertyPath: CoinVal
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617117715524096389, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
       propertyPath: inventoryUI
       value: 
       objectReference: {fileID: 2056449721}

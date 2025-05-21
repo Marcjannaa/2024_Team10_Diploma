@@ -310,6 +310,12 @@ MonoBehaviour:
   STR: 10
   AGL: 0
   INT: 1
+  Luck: 0
+  Coins: 0
+  Bombs: 0
+  Keys: 0
   image: {fileID: 21300000, guid: ec0c53e985c4d8c4292839e10e20d2c1, type: 3}
   allowLockPick: 0
   Stats: {fileID: 0}
+  price: 15
+  pricetag: {fileID: 0}
