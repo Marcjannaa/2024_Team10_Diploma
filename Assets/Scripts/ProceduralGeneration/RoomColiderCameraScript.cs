@@ -13,13 +13,6 @@ namespace ProceduralGeneration
            
             if (other.CompareTag("Player"))
             {
-                var player = other.GetComponent<PlayerController>();
-                var room = GetComponentInParent<PlacedRoom>();
-                if (player != null && room != null && room.roomForwardTransform != null)
-                {
-                    player.AlignToRoomDirection(room.roomForwardTransform.forward);
-                }
-                
                 if (roomCamera != null)
                 {
                     CameraManager.Instance.SwitchToCamera(roomCamera);

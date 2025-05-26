@@ -33,6 +33,7 @@ namespace ProceduralGeneration
             activeRooms.Add(placedStart);
             colliders.Add(placedStart.GetRoomCollider());
             RoomPlacementHelper.AddRoomExits(placedStart, exitPoints);
+            CameraManager.Instance.SetReferenceCamera(placedStart.transform.root.gameObject.GetComponentInChildren<Camera>(true));
 
             StartCoroutine(GenerateLoop());
         }

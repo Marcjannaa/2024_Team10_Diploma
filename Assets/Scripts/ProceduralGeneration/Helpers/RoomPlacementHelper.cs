@@ -22,8 +22,7 @@ namespace ProceduralGeneration
                 Object.Destroy(roomObj);
                 return null;
             }
-
-            Debug.Log($"PlacedRoom found.");
+            
             placed.Initialize(config);
             return placed;
         }

@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour
         currentFloorIndex++;
 
         CameraManager.Instance.InitializeCameraList();
+        CameraManager.Instance.AlignAllCamerasToReference();
         OnPlayerSpawnRequest.Invoke();
         // #TODO Maybe trigger something else and connect with game manager when and if implemented
     }
