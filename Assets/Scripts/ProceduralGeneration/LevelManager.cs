@@ -10,6 +10,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<FloorConfig> floorConfigs;
     private IFloorGenerationStrategy strategy = new StandardGenerationStrategy(); // #TODO add many strategies and logic to change them
     
+    [SerializeField] private int seed = -1; // -1 = random
+    public int UsedSeed { get; private set; }
+    
     public UnityEvent OnPlayerSpawnRequest = new UnityEvent();
     
     private int currentFloorIndex = 0;
@@ -33,6 +36,10 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("FloorGenerator reference not assigned!");
             return;
         }
+        
+        UsedSeed = (seed == -1) ? Random.Range(0, int.MaxValue) : seed;
+        Random.InitState(UsedSeed);
+        Debug.Log($"Seed used for generation: {UsedSeed}");
         
         _floorGenerator.OnFloorGenerated.AddListener(OnFloorGenerationComplete);
         GenerateNextFloor(); 
