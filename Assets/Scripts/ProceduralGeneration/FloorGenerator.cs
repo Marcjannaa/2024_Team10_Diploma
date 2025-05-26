@@ -55,42 +55,7 @@ namespace ProceduralGeneration
             CloseUnconnectedExits();
             OnFloorGenerated?.Invoke(); 
         }
-
-        [Obsolete] // done by strategy
-        private IEnumerator GenerateRooms(List<RoomConfig> roomPool, int countToGenerate, int attempts, int maxAttempts) 
-        {
-            int roomsPlaced = 0;
-
-            while (roomsPlaced < countToGenerate && attempts < maxAttempts)
-            {
-                attempts++;
-                Debug.Log($"Attempts: {attempts}, Active rooms: {activeRooms.Count + 1}");
-
-                var selectedExit = RoomPlacementHelper.GetRandomUnconnectedExit(exitPoints);
-                if (selectedExit is null)
-                {
-                    Debug.LogWarning("No valid exit point found, aborting.");
-                    yield break;
-                }
-
-                RoomConfig roomDef = RoomPlacementHelper.GetRandomRoom(roomPool);
-                if (roomDef is null)
-                {
-                    Debug.LogWarning("No valid room config, aborting.");
-                    yield break;
-                }
-
-                int initialCount = activeRooms.Count;
-                TryPlaceRoomAtExit(selectedExit, roomDef);
-                if (activeRooms.Count > initialCount)
-                {
-                    roomsPlaced++;
-                }
-
-                yield return new WaitForSeconds(roomPlacementDelay);
-            }
-        }
-
+        
         private void ClearPreviousFloor()
         {
             foreach (var room in activeRooms)
@@ -151,7 +116,7 @@ namespace ProceduralGeneration
             }
         }
 
-        public void setFloorGenerationStrategy(IFloorGenerationStrategy strategy)
+        public void SetFloorGenerationStrategy(IFloorGenerationStrategy strategy)
         {
             currentGenerationStrategy = strategy;
         }

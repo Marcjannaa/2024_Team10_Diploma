@@ -57,8 +57,27 @@ namespace ProceduralGeneration
             var valid = roomList.Where(r => r is not null).ToList();
             if (valid.Count == 0)
             {
-                Debug.LogError("No valid standard rooms.");
+                Debug.LogError("No valid  rooms.");
                 return null;
+            }
+
+            return valid[Random.Range(0, valid.Count)];
+        }
+        public static RoomConfig GetRandomRoomWithBias(List<RoomConfig> roomList, RoomDifficulty favoredDifficulty, float biasProbability)
+        {
+            var valid = roomList.Where(r => r != null).ToList();
+            if (valid.Count == 0)
+            {
+                Debug.LogError("No valid  rooms.");
+                return null;
+            }
+            
+            float roll = Random.value;
+            if (roll < biasProbability)
+            {
+                var favored = valid.Where(r => r.difficulty == favoredDifficulty).ToList();
+                if (favored.Count > 0)
+                    return favored[Random.Range(0, favored.Count)];
             }
 
             return valid[Random.Range(0, valid.Count)];

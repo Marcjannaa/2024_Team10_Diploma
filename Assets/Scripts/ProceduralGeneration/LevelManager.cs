@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using ProceduralGeneration;
+using ProceduralGeneration.ScriptableObjects;
 using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
     [SerializeField] private FloorGenerator _floorGenerator;
+
     [SerializeField] private List<FloorConfig> floorConfigs;
-    private IFloorGenerationStrategy strategy = new StandardGenerationStrategy(); // #TODO add many strategies and logic to change them
-    
+
+    // #TODO [jn] when gamemanager is created than select based on it
+    [SerializeField] private FloorGenerationStrategySO strategyAsset;
+    private IFloorGenerationStrategy strategy = new StandardGenerationStrategy();
+
     [SerializeField] private int seed = -1; // -1 = random
     public int UsedSeed { get; private set; }
-    
+
     public UnityEvent OnPlayerSpawnRequest = new UnityEvent();
-    
+
     private int currentFloorIndex = 0;
     private bool HasMoreFloors => currentFloorIndex < floorConfigs.Count;
 
@@ -37,14 +42,16 @@ public class LevelManager : MonoBehaviour
             return;
         }
         
+        strategy = strategyAsset != null ? strategyAsset.GetStrategy() : new StandardGenerationStrategy();
+
+        
         UsedSeed = (seed == -1) ? Random.Range(0, int.MaxValue) : seed;
         Random.InitState(UsedSeed);
         Debug.Log($"Seed used for generation: {UsedSeed}");
-        
+
         _floorGenerator.OnFloorGenerated.AddListener(OnFloorGenerationComplete);
-        GenerateNextFloor(); 
-        // #TODO move the start of creating new floor to game manager if made and if not just call it 
-        // in the boss room exit script when made
+        GenerateNextFloor();
+        
     }
 
     public void GenerateNextFloor()
@@ -63,7 +70,7 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log($"Floor {currentFloorIndex + 1} generated.");
         currentFloorIndex++;
-        
+
         CameraManager.Instance.InitializeCameraList();
         OnPlayerSpawnRequest.Invoke();
         // #TODO Maybe trigger something else and connect with game manager when and if implemented

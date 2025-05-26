@@ -8,4 +8,5 @@ public class RoomConfig : ScriptableObject
 {
     public GameObject prefab;
     public RoomType roomType;
+    public RoomDifficulty difficulty;
 }
