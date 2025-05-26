@@ -155,6 +155,8 @@ MonoBehaviour:
   floorConfigs:
   - {fileID: 11400000, guid: d0ed7434b17892643b0fef576eee38be, type: 2}
   - {fileID: 11400000, guid: d0ed7434b17892643b0fef576eee38be, type: 2}
+  strategyAsset: {fileID: 11400000, guid: e875628c6e18ac4479d59dfb68487736, type: 2}
+  seed: -1
   OnPlayerSpawnRequest:
     m_PersistentCalls:
       m_Calls: []
