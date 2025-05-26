@@ -12,9 +12,10 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player") && _canMove)
         {
             Vector3 direction = (other.transform.position - transform.position).normalized;
-            direction.y = 0;
-
-            transform.Translate(direction * _speed * Time.deltaTime);
+            direction.y = 0f;
+            
+            transform.rotation = Quaternion.LookRotation(direction);
+            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
             
         }
     }
