@@ -120,5 +120,11 @@ namespace ProceduralGeneration
         {
             currentGenerationStrategy = strategy;
         }
+
+        public List<PlacedRoom> GetActiveRoomList()
+        {
+            return activeRooms;
+        }
+        
     }
 }
