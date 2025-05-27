@@ -13,17 +13,17 @@ public class ShopPickup : PickupScript
                 case 2:
                     Player_Stats.Bombs.Modify(1);
                     Player_Stats.Coins.Modify(-5);
-                    Destroy(gameObject);
+                    StartCoroutine(CollectAndShrink());
                     break;
                 case 3:
                     Player_Stats.Keys.Modify(1);
                     Player_Stats.Coins.Modify(-5);
-                    Destroy(gameObject);
+                    StartCoroutine(CollectAndShrink());
                     break;
                 case 4:
                     Player_Stats.Health.Modify(10);
                     Player_Stats.Coins.Modify(-3);
-                    Destroy(gameObject);
+                    StartCoroutine(CollectAndShrink());
                     break;
             }
         } else if (Player_Stats.Coins.StatValue >= 3.0)
@@ -33,7 +33,7 @@ public class ShopPickup : PickupScript
                 case 4:
                     Player_Stats.Health.Modify(10);
                     Player_Stats.Coins.Modify(-3);
-                    Destroy(gameObject);
+                    StartCoroutine(CollectAndShrink());
                     break;
             }
         }
