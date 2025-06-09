@@ -33,10 +33,17 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject tmp = new GameObject();
             tmp.name = i.ToString();
-            tmp.AddComponent<Button>();
+            
             tmp.AddComponent<GridLayoutGroup>();
-            tmp.AddComponent<CanvasRenderer>();
-            tmp.AddComponent<UnityEngine.UI.Image>();
+            Button btn = tmp.AddComponent<Button>();
+            Image img = tmp.AddComponent<Image>();
+            img.color = new Color(1f, 1f, 1f, 0f); 
+
+            ColorBlock cb = btn.colors;
+            cb.normalColor = new Color(1f, 1f, 1f, 0f); 
+            cb.highlightedColor = new Color(1f, 1f, 1f, 0.1f); 
+            cb.pressedColor = new Color(1f, 1f, 1f, 0.2f);    
+            btn.colors = cb;
             tmp.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
             // tmp.AddComponent<ToolTip>();
             buttons.Add(tmp);
@@ -62,10 +69,12 @@ public class InventoryUI : MonoBehaviour
 
     public void updateInv()
     {
-        var tmp = 0;
+        int tmp = 0;
         foreach (var item in items)
         {
-            buttons[tmp].gameObject.GetComponent<UnityEngine.UI.Image>().sprite = item.image;
+            var img = buttons[tmp].GetComponent<UnityEngine.UI.Image>();
+            img.sprite = item.image;
+                img.color = Color.white; 
             tmp++;
         }
     }
