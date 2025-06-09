@@ -13,10 +13,8 @@ public class Enemy : MonoBehaviour
         {
             Vector3 direction = (other.transform.position - transform.position).normalized;
             direction.y = 0f;
-            
-            transform.rotation = Quaternion.LookRotation(direction);
-            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-            
+
+            transform.position += direction * _speed * Time.deltaTime;
         }
     }
 
