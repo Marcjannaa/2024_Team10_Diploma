@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Quaternion = System.Numerics.Quaternion;
 
 internal enum Turn
 {
@@ -20,8 +17,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject _rewardItem;
     [SerializeField] private List<CombatSkill> _combatSkills;
     public static CombatManager Instance { get; private set; }
+
     private static GameObject _battleUI;
-    private  GameObject  attackButton;
+    private GameObject attackButton;
     private static GameObject _player;
     private static GameObject _enemy;
     private bool _enemyFirstStrike = false;
@@ -34,11 +32,8 @@ public class CombatManager : MonoBehaviour
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
 
-    
-
     void Update()
     {
-        //print(_turn);
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
         {
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
@@ -50,8 +45,8 @@ public class CombatManager : MonoBehaviour
 
     public void OnAtkClicked()
     {
-        _battleUI.gameObject.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(false);
-        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(false);
         _miniGamePanel.SetActive(true);
     }
 
@@ -59,19 +54,22 @@ public class CombatManager : MonoBehaviour
     {
         if (_combatSkills[0].GetMPCost() <= Player_Stats.Mana.Value)
         {
-            Debug.Log("skill1");
             _combatSkills[0].PerformSkill(this);
-
             _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
 
-
-            _playerAttacked = true;
-            _turn = Turn.Enemy;
-            SwitchBattleUIPanel();
+            StartCoroutine(PlayerSkillRoutine());
         }
-
     }
+
+    private IEnumerator PlayerSkillRoutine()
+    {
+        yield return StartCoroutine(FlashEnemySpriteRed());
+        _playerAttacked = true;
+        _turn = Turn.Enemy;
+        SwitchBattleUIPanel();
+    }
+
     public static void OnAttackEnded(TimingMiniGame.HitResult hitResult)
     {
         switch (hitResult)
@@ -86,28 +84,39 @@ public class CombatManager : MonoBehaviour
                 _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 2);
                 break;
         }
-        /*
-        _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
-        _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
-        
-        Instance._enemyHasActed = true;
-        Instance._playerAttacked = false;
-        */
+
+        Instance.StartCoroutine(Instance.AttackRoutineAfterHit());
+    }
+
+    private IEnumerator AttackRoutineAfterHit()
+    {
+        yield return StartCoroutine(FlashEnemySpriteRed());
+
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
 
         var dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
         dodgeMiniGame.GetComponent<MiniGame.DodgeMiniGame.DodgeGameManager>().ResetGame();
+    }
 
+    private IEnumerator FlashEnemySpriteRed()
+    {
+        Debug.Log("Highlighting enemy");
+        Color originalColor = _enemySprite.color;
+        _enemySprite.color = Color.red;
+        Debug.Log("Color set to red");
+        yield return new WaitForSecondsRealtime(1);
+        _enemySprite.color = originalColor;
+        Debug.Log("Color reset");
     }
 
     public static void OnDodgeEnded(bool win)
     {
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
-        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("ActionPanel").gameObject.SetActive(true);
-        _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+        _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(true);
 
         if (!win)
         {
@@ -121,37 +130,33 @@ public class CombatManager : MonoBehaviour
         Instance.SwitchBattleUIPanel();
     }
 
-
     public void OnSkillClicked()
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
         for (int i = 0; i < _combatSkills.Count; i++)
         {
-            _battleUI.GetComponent<BattleUI>().SetSkillCostText(i,_combatSkills[i].GetMPCost().ToString());
+            _battleUI.GetComponent<BattleUI>().SetSkillCostText(i, _combatSkills[i].GetMPCost().ToString());
         }
+
         GameObject skillButton = _battleUI.GetComponent<BattleUI>().GetSkillActionFirst();
 
         if (EventSystem.current.currentSelectedGameObject != skillButton)
         {
             EventSystem.current.SetSelectedGameObject(skillButton);
-            Debug.Log("Skill button focus set");
         }
 
         _inDifferentPanel = true;
     }
 
-    public void OnItemClicked()
-    {
-
-    }
+    public void OnItemClicked() {}
 
     public void OnGuardClicked()
     {
         _guardMultiplier = 0.3f;
         _turn = Turn.Enemy;
-        SwitchBattleUIPanel();
         _playerAttacked = true;
+        SwitchBattleUIPanel();
     }
 
     private void Awake()
@@ -160,11 +165,11 @@ public class CombatManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            _battleUI = Instance.gameObject.transform.Find("BattleUI").gameObject;
-            _miniGamePanel = _battleUI.gameObject.transform.Find("PlayerActionPanel")
-                .transform.Find("MiniGamePanel").gameObject;
+            _battleUI = Instance.transform.Find("BattleUI").gameObject;
+            _miniGamePanel = _battleUI.transform.Find("PlayerActionPanel").Find("MiniGamePanel").gameObject;
+
             _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
-            _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
+            _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(true);
         }
         else
         {
@@ -185,7 +190,6 @@ public class CombatManager : MonoBehaviour
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
         Instance._enemyFirstStrike = enemyAdvantage;
 
-        //Debug.Log(enemyAdvantage ? "Enemy Advantage" : "Player Advantage");
         Instance.StartCoroutine(Transition.Instance.PlayTransition(() =>
         {
             _battleUI.SetActive(true);
@@ -199,18 +203,11 @@ public class CombatManager : MonoBehaviour
     private void EnemyAction()
     {
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
-        
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
 
         GameObject dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
-        //dodgeMiniGame.GetComponent<MiniGame.DodgeMiniGame.Player>().StartMiniGame();
-
-
-        // _turn = Turn.Player
     }
-
-
 
     private void SwitchBattleUIPanel()
     {
@@ -219,7 +216,7 @@ public class CombatManager : MonoBehaviour
             case Turn.Player:
                 _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
-                _battleUI.transform.Find("PlayerActionPanel").gameObject.transform.Find("StatsPanel").gameObject.SetActive(true);
+                _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(true);
                 _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(false);
                 _miniGamePanel.SetActive(false);
 
@@ -228,7 +225,6 @@ public class CombatManager : MonoBehaviour
                 if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
                     EventSystem.current.SetSelectedGameObject(attackButton);
-                    Debug.Log("Attack button focus set");
                 }
                 break;
 
@@ -239,13 +235,11 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-
     private void GameOver()
     {
         _battleUI.SetActive(false);
         Destroy(_player);
         _battleOngoing = false;
-
         Time.timeScale = 1;
     }
 
@@ -256,21 +250,20 @@ public class CombatManager : MonoBehaviour
         Destroy(_enemy);
         _battleOngoing = false;
         _battleUI.SetActive(false);
-        Instantiate(_rewardItem, pos, UnityEngine.Quaternion.identity);
+        Instantiate(_rewardItem, pos, Quaternion.identity);
         _player.GetComponent<PlayerController>().inCombat = false;
-
         Time.timeScale = 1;
     }
 
     private IEnumerator BattleLoop()
     {
+        _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
         while (_battleOngoing)
         {
-
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetPlayerMPText(Player_Stats.Mana.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
-            _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
+            
 
             if (Player_Stats.Health.Value <= 0)
             {
@@ -295,13 +288,10 @@ public class CombatManager : MonoBehaviour
         }
 
         Time.timeScale = 1;
-
-        //_player.SetActive(true);
     }
 
     public GameObject GetEnemy()
     {
         return _enemy;
     }
-    
 }
