@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 977e35de780f23a47a8baa89aba1f89c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4cd8044ab2c4fdf48bacc679fa41a530, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2165081689628293416}
   - component: {fileID: 5911814611989876373}
   m_Layer: 0
-  m_Name: Boss
+  m_Name: Slime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +299,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 977e35de780f23a47a8baa89aba1f89c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4cd8044ab2c4fdf48bacc679fa41a530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
