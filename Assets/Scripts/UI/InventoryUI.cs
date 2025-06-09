@@ -62,9 +62,9 @@ public class InventoryUI : MonoBehaviour
     }
     void Update()
     {
-        Strength.text = "Strength: " +  Player_Stats.Strength.Value;
-        Agility.text = "Agility: " + Player_Stats.Agility.Value;
-        Intelligence.text = "Intelligence: " + Player_Stats.Intelligence.Value;
+        Strength.text = "STR " +  Player_Stats.Strength.Value;
+        Agility.text = "AGL " + Player_Stats.Agility.Value;
+        Intelligence.text = "INT " + Player_Stats.Intelligence.Value;
     }
 
     public void updateInv()
