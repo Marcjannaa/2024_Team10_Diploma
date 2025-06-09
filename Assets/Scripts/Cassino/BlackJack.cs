@@ -18,8 +18,10 @@ public class BlackJack : MonoBehaviour
     private Card _dealerSecretCard;
 
     [SerializeField] private GameObject _BJ_UI;
-    private GameObject _betPanel;
-    private GameObject _gamePanel;
+    [SerializeField] private GameObject _betPanel;
+    [SerializeField] private GameObject _gamePanel;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _losePanel;
 
     [SerializeField] private TMP_Text _playerCoinText;
     [SerializeField] private TMP_Text _currentBetText;
@@ -47,8 +49,7 @@ public class BlackJack : MonoBehaviour
         Debug.Log("Deck created with " + _deck.Count + " cards.");
         _player = player;
         _BJ_UI.SetActive(true);
-        _betPanel = _BJ_UI.transform.Find("BetPanel").gameObject;
-        _gamePanel = _BJ_UI.transform.Find("GamePanel").gameObject;
+
 
         _inGame = true;
         _inBJRound = false;
@@ -99,32 +100,28 @@ public class BlackJack : MonoBehaviour
             if (_playerScore == 21)
             {
                 GameWon(true);
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_winPanel));
                 break;
             }
 
             if (_playerScore > 21)
             {
                 GameOver();
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_losePanel));
                 break;
             }
 
             if (_dealerScore == 21)
             {
                 GameOver();
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_losePanel));
                 break;
             }
 
             if (_dealerScore > 21)
             {
                 GameWon(false);
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_winPanel));
                 break;
             }
 
@@ -133,13 +130,13 @@ public class BlackJack : MonoBehaviour
                 if (_playerScore > _dealerScore)
                 {
                     GameWon(false);
-                    yield return new WaitForSeconds(1);
-                    CloseGame();
-                    break;
+                    StartCoroutine(ShowResultAndClose(_winPanel));
                 }
-                GameOver();
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                else
+                {
+                    GameOver();
+                    StartCoroutine(ShowResultAndClose(_losePanel));
+                }
                 break;
             }
 
@@ -147,11 +144,15 @@ public class BlackJack : MonoBehaviour
         }
     }
 
+
     private void GameOver()
     {
         _gameOver = true;
         Debug.Log("game lost");
+        StartCoroutine(ShowResultAndClose(_losePanel));
     }
+
+
 
     private void GameWon(bool blackjack)
     {
@@ -162,7 +163,10 @@ public class BlackJack : MonoBehaviour
             Player_Stats.Coins.Modify(_currentBet * 2);
 
         Debug.Log("game won");
+        StartCoroutine(ShowResultAndClose(_winPanel));
     }
+
+
 
     Card PickRandomCard()
     {
@@ -308,4 +312,23 @@ public class BlackJack : MonoBehaviour
         SetDealerScoreText();
         SetBetText("0");
     }
+    
+    private IEnumerator ShowPanelTemporarily(GameObject panel)
+    {
+        yield return new WaitForSeconds(1f);
+        panel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        panel.SetActive(false);
+    }
+    
+    private IEnumerator ShowResultAndClose(GameObject panel)
+    {
+        yield return new WaitForSeconds(1f);
+        panel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        panel.SetActive(false);
+        CloseGame();
+    }
+
+
 }
