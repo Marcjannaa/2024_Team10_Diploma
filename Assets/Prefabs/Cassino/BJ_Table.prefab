@@ -2313,7 +2313,7 @@ MonoBehaviour:
   _currentBetText: {fileID: 2518472290973813959}
   _playerScoreText: {fileID: 3182333341175467093}
   _dealerScoreText: {fileID: 4599887919219982161}
-  _betPanelFocus: {fileID: 2782444372416879587}
+  _betPanelFocus: {fileID: 835707282060948284}
   _gamePanelFocus: {fileID: 7229700911548353571}
   _playerCardListContainer: {fileID: 3809310120785379745}
   _dealerCardListContainer: {fileID: 5035574556530583794}
