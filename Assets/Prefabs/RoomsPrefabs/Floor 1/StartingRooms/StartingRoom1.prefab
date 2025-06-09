@@ -3825,7 +3825,7 @@ GameObject:
   - component: {fileID: 8569018170006076003}
   m_Layer: 0
   m_Name: Crate (2)
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5505,7 +5505,7 @@ GameObject:
   - component: {fileID: 2850171000976272190}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5726,6 +5726,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2d63d45ff1ba2a3458a55578809851c5, type: 3}
       propertyPath: m_Name
       value: Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d63d45ff1ba2a3458a55578809851c5, type: 3}
+      propertyPath: m_TagString
+      value: Destroyable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6437,6 +6441,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2d63d45ff1ba2a3458a55578809851c5, type: 3}
       propertyPath: m_Name
       value: Crate (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d63d45ff1ba2a3458a55578809851c5, type: 3}
+      propertyPath: m_TagString
+      value: Destroyable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
