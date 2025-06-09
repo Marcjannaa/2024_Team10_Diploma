@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class BlackJack : MonoBehaviour
 {
@@ -15,15 +16,28 @@ public class BlackJack : MonoBehaviour
     private int _dealerScore;
     private bool _standFinished = false;
     private Card _dealerSecretCard;
+
     [SerializeField] private GameObject _BJ_UI;
-    private GameObject _betPanel;
-    private GameObject _gamePanel;
+    [SerializeField] private GameObject _betPanel;
+    [SerializeField] private GameObject _gamePanel;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _losePanel;
+
     [SerializeField] private TMP_Text _playerCoinText;
     [SerializeField] private TMP_Text _currentBetText;
     [SerializeField] private TMP_Text _playerScoreText;
     [SerializeField] private TMP_Text _dealerScoreText;
+
     [SerializeField] private GameObject _betPanelFocus;
     [SerializeField] private GameObject _gamePanelFocus;
+
+    [SerializeField] private GameObject _playerCardListContainer;
+    [SerializeField] private GameObject _dealerCardListContainer;
+
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private List<Sprite> cardSprites;
+
+    private Dictionary<string, Sprite> _spriteLookup;
 
     private bool _inBJRound;
     private bool _initialAction;
@@ -33,11 +47,9 @@ public class BlackJack : MonoBehaviour
     {
         _deck = CreateDeck();
         Debug.Log("Deck created with " + _deck.Count + " cards.");
-        PrintDeck();
         _player = player;
         _BJ_UI.SetActive(true);
-        _betPanel = _BJ_UI.transform.Find("BetPanel").gameObject;
-        _gamePanel = _BJ_UI.transform.Find("GamePanel").gameObject;
+
 
         _inGame = true;
         _inBJRound = false;
@@ -46,6 +58,16 @@ public class BlackJack : MonoBehaviour
         _betPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(_betPanelFocus);
         SetPlayerCoinsText();
+
+        _spriteLookup = new Dictionary<string, Sprite>();
+        foreach (var sprite in cardSprites)
+        {
+            string name = sprite.name.Trim().ToLower();
+            Debug.Log($"[Sprite Load] {name}");
+            if (!_spriteLookup.ContainsKey(name))
+                _spriteLookup.Add(name, sprite);
+        }
+
         StartCoroutine(BlackJackLoop());
     }
 
@@ -56,11 +78,20 @@ public class BlackJack : MonoBehaviour
             if (_initialAction && _inBJRound)
             {
                 _initialAction = false;
-                
-                _playerScore += PickRandomCard().GetValue();
-                _dealerScore += PickRandomCard().GetValue();
-                _playerScore += PickRandomCard().GetValue();
-                _dealerSecretCard = PickRandomCard();
+
+                Card playerCard1 = PickRandomCard();
+                _playerScore += playerCard1.GetValue();
+                SpawnCardUI(playerCard1, _playerCardListContainer.transform);
+
+                Card dealerCard1 = PickRandomCard();
+                _dealerScore += dealerCard1.GetValue();
+                SpawnCardUI(dealerCard1, _dealerCardListContainer.transform);
+
+                Card playerCard2 = PickRandomCard();
+                _playerScore += playerCard2.GetValue();
+                SpawnCardUI(playerCard2, _playerCardListContainer.transform);
+
+                _dealerSecretCard = PickRandomCard(); 
 
                 SetPlayerScoreText();
                 SetDealerScoreText();
@@ -69,32 +100,28 @@ public class BlackJack : MonoBehaviour
             if (_playerScore == 21)
             {
                 GameWon(true);
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_winPanel));
                 break;
             }
 
             if (_playerScore > 21)
             {
                 GameOver();
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_losePanel));
                 break;
             }
 
             if (_dealerScore == 21)
             {
                 GameOver();
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_losePanel));
                 break;
             }
 
             if (_dealerScore > 21)
             {
                 GameWon(false);
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                StartCoroutine(ShowResultAndClose(_winPanel));
                 break;
             }
 
@@ -103,13 +130,13 @@ public class BlackJack : MonoBehaviour
                 if (_playerScore > _dealerScore)
                 {
                     GameWon(false);
-                    yield return new WaitForSeconds(1);
-                    CloseGame();
-                    break;
+                    StartCoroutine(ShowResultAndClose(_winPanel));
                 }
-                GameOver();
-                yield return new WaitForSeconds(1);
-                CloseGame();
+                else
+                {
+                    GameOver();
+                    StartCoroutine(ShowResultAndClose(_losePanel));
+                }
                 break;
             }
 
@@ -117,28 +144,29 @@ public class BlackJack : MonoBehaviour
         }
     }
 
+
     private void GameOver()
     {
         _gameOver = true;
-        print("ps: " + _playerScore + " ds: " + _dealerScore);
         Debug.Log("game lost");
+        StartCoroutine(ShowResultAndClose(_losePanel));
     }
+
+
 
     private void GameWon(bool blackjack)
     {
         _gameOver = true;
-        print("ps: " + _playerScore + " ds: " + _dealerScore);
         if (blackjack)
-        {
-            int val = (int)(_currentBet * 2.5);
-            Player_Stats.Coins.Modify(val);
-        }
+            Player_Stats.Coins.Modify((int)(_currentBet * 2.5));
         else
-        {
             Player_Stats.Coins.Modify(_currentBet * 2);
-        }
+
         Debug.Log("game won");
+        StartCoroutine(ShowResultAndClose(_winPanel));
     }
+
+
 
     Card PickRandomCard()
     {
@@ -164,34 +192,26 @@ public class BlackJack : MonoBehaviour
         {
             foreach (string name in names)
             {
-                int value;
-
-                if (int.TryParse(name, out value))
-                {
-                    // 2-10
-                }
-                else if (name == "Ace")
-                {
-                    value = 11;
-                }
-                else 
-                {
-                    value = 10;
-                }
-
-                Card newCard = new Card(color, name, value);
-                deck.Add(newCard);
+                int value = name == "Ace" ? 11 : (int.TryParse(name, out int val) ? val : 10);
+                deck.Add(new Card(color, name, value));
             }
         }
 
         return deck;
     }
 
-    void PrintDeck()
+    private void SpawnCardUI(Card card, Transform container)
     {
-        foreach (Card card in _deck)
+        string spriteName = $"{card.GetName().ToLower()}_{card.GetColor().ToLower()}"; 
+        if (_spriteLookup.TryGetValue(spriteName, out Sprite sprite))
         {
-            Debug.Log($"{card.GetName()} of {card.GetColor()} (value: {card.GetValue()})");
+            GameObject cardGO = Instantiate(cardPrefab, container);
+            Image img = cardGO.GetComponent<Image>();
+            img.sprite = sprite;
+        }
+        else
+        {
+            Debug.LogWarning("Brak sprite dla: " + spriteName);
         }
     }
 
@@ -213,25 +233,10 @@ public class BlackJack : MonoBehaviour
         }
     }
 
-    public void SetPlayerScoreText()
-    {
-        _playerScoreText.text = "Player Score: " + _playerScore;
-    }
-
-    public void SetDealerScoreText()
-    {
-        _dealerScoreText.text = "Dealer Score: " + _dealerScore;
-    }
-
-    public void SetBetText(string text)
-    {
-        _currentBetText.text = text;
-    }
-
-    public void SetPlayerCoinsText()
-    {
-        _playerCoinText.text = "Coins " + Player_Stats.Coins.Value;
-    }
+    public void SetPlayerScoreText() => _playerScoreText.text = "Player Score: " + _playerScore;
+    public void SetDealerScoreText() => _dealerScoreText.text = "Dealer Score: " + _dealerScore;
+    public void SetBetText(string text) => _currentBetText.text = text;
+    public void SetPlayerCoinsText() => _playerCoinText.text = "Coins " + Player_Stats.Coins.Value;
 
     public void PlaceBet()
     {
@@ -248,26 +253,31 @@ public class BlackJack : MonoBehaviour
     public void Hit()
     {
         if (_gameOver || !_inBJRound) return;
-    
-        _playerScore += PickRandomCard().GetValue();
+
+        Card card = PickRandomCard();
+        _playerScore += card.GetValue();
+        SpawnCardUI(card, _playerCardListContainer.transform);
         SetPlayerScoreText();
     }
-
 
     public void Stand()
     {
         if (_gameOver || !_inBJRound) return;
 
         _dealerScore += _dealerSecretCard.GetValue();
+        SpawnCardUI(_dealerSecretCard, _dealerCardListContainer.transform);
         SetDealerScoreText();
+
         while (_dealerScore < 17)
         {
-            _dealerScore += PickRandomCard().GetValue();
+            Card card = PickRandomCard();
+            _dealerScore += card.GetValue();
+            SpawnCardUI(card, _dealerCardListContainer.transform);
             SetDealerScoreText();
         }
+
         _standFinished = true;
     }
-
 
     public void CloseGame()
     {
@@ -275,10 +285,9 @@ public class BlackJack : MonoBehaviour
         _inGame = false;
         _BJ_UI.SetActive(false);
         _player.GetComponent<PlayerController>().LeaveBJ();
-        print("coins: " + Player_Stats.Coins.Value);
+        Debug.Log("coins: " + Player_Stats.Coins.Value);
     }
-    
-    
+
     private void ResetGameState()
     {
         _deck.Clear();
@@ -293,10 +302,33 @@ public class BlackJack : MonoBehaviour
 
         if (_betPanel != null) _betPanel.SetActive(false);
         if (_gamePanel != null) _gamePanel.SetActive(false);
-    
+        
+        foreach (Transform child in _playerCardListContainer.transform)
+            Destroy(child.gameObject);
+        foreach (Transform child in _dealerCardListContainer.transform)
+            Destroy(child.gameObject);
+
         SetPlayerScoreText();
         SetDealerScoreText();
         SetBetText("0");
     }
     
+    private IEnumerator ShowPanelTemporarily(GameObject panel)
+    {
+        yield return new WaitForSeconds(1f);
+        panel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        panel.SetActive(false);
+    }
+    
+    private IEnumerator ShowResultAndClose(GameObject panel)
+    {
+        yield return new WaitForSeconds(1f);
+        panel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        panel.SetActive(false);
+        CloseGame();
+    }
+
+
 }
