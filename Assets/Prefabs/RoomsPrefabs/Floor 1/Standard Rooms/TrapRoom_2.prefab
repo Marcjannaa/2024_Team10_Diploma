@@ -701,6 +701,7 @@ MonoBehaviour:
   exitwall: {fileID: 5538512576654754243}
   arc: {fileID: 1694872734724465218}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &4006186778713288907
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +751,7 @@ MonoBehaviour:
   exitwall: {fileID: 455846401487950558}
   arc: {fileID: 6982764357517236235}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &5588135171548080408
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +777,7 @@ Transform:
   m_GameObject: {fileID: 5588135171548080408}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.029165, y: -0.0000038146973, z: -7.137512}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -896,6 +898,7 @@ MonoBehaviour:
   exitwall: {fileID: 9025209582665418664}
   arc: {fileID: 8732681878741521084}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &6895016907829848515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1da16c0c084e05a365415f75564d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: []
 --- !u!1 &8070808113716292684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1218,7 @@ MonoBehaviour:
   exitwall: {fileID: 8543651010399645650}
   arc: {fileID: 3388988981473746902}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &8518386705732870648
 GameObject:
   m_ObjectHideFlags: 0
