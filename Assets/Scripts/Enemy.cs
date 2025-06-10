@@ -25,6 +25,18 @@ public class Enemy : MonoBehaviour
             CombatManager.InitiateCombat(true, other.gameObject,gameObject);
         }
     }
+    
+    public void LookAtGameobject(GameObject obj)
+    {
+        
+        Vector3 direction = (obj.transform.position - transform.position).normalized;
+        //direction.y = 0f;
+
+       
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = targetRotation;
+
+    }
 
     public void SwitchMovement()
     {

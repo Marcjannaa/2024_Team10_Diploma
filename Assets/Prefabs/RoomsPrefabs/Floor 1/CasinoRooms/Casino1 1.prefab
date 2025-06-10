@@ -927,6 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1da16c0c084e05a365415f75564d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: []
 --- !u!1 &1826362582384189801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,6 +1495,7 @@ MonoBehaviour:
   exitwall: {fileID: 1880439231763308079}
   arc: {fileID: 9124208754250275598}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &2805672132786363532
 GameObject:
   m_ObjectHideFlags: 0
