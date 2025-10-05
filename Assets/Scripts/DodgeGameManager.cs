@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DodgeGame : MonoBehaviour
+public class DodgeGameManager : MonoBehaviour
 {
     public enum GameResult
     {
@@ -12,5 +13,10 @@ public class DodgeGame : MonoBehaviour
     public GameResult OnGameFinished()
     {
         return GameResult.Win;
+    }
+
+    public void ResetGame()
+    {
+        throw new NotImplementedException();
     }
 }

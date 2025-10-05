@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Prefabs.MiniGames
 {
@@ -17,16 +18,17 @@ namespace Prefabs.MiniGames
                 playerPos.y - transform.position.y < 0 ? -1 : 1
             );
             var position = new Vector2(transform.position.x, transform.position.y);
-            rb.MovePosition(position + moveDir * (speed * Time.fixedDeltaTime));
+            rb.MovePosition(position + moveDir * (speed * Time.fixedUnscaledDeltaTime));
         }
+        
         private void ResetPlayerPosition()
         {
             playerPos = new Vector2(
-                playerTransform.position.x,
-                playerTransform.position.y
+                playerTransform.position.x + Random.Range(-noise, noise),
+                playerTransform.position.y + Random.Range(-noise, noise)
             );
-            //rb.AddForce(transform.forward * 2, ForceMode2D.Impulse);
-            Invoke("ResetPlayerPosition", 2f);
+            rb.AddForce((moveDir + new Vector2(-noise, noise)) * 5 , ForceMode2D.Impulse);
+            Invoke("ResetPlayerPosition", Random.Range(0.1f, 2));
         }
     }
 }

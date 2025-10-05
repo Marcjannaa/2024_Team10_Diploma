@@ -26,7 +26,7 @@ namespace Prefabs.MiniGames
             var currentPos = new Vector2(transform.position.x,
                 transform.position.y);
             rb.MovePosition(
-                currentPos + moveDir * speed * Time.fixedDeltaTime
+                currentPos + moveDir * speed * Time.fixedUnscaledDeltaTime
             );
         }
 

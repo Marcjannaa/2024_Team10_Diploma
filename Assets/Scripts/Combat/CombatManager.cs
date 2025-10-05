@@ -97,7 +97,7 @@ public class CombatManager : MonoBehaviour
 
         var dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
-        dodgeMiniGame.GetComponent<MiniGame.DodgeMiniGame.DodgeGameManager>().ResetGame();
+        dodgeMiniGame.GetComponent<DodgeGameManager>().ResetGame();
     }
 
     private IEnumerator FlashEnemySpriteRed()
@@ -207,6 +207,7 @@ public class CombatManager : MonoBehaviour
 
         GameObject dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
+        print("sth");
     }
 
     private void SwitchBattleUIPanel()

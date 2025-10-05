@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5558886470889497637}
   - component: {fileID: 1786139452551587442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MiniGameCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3645060245125816820}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.66}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -14.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64,14 +64,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 25
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8600000, guid: a79947bd893d737448f0187601371bb2, type: 2}
   m_TargetDisplay: 0
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3360247160598144726}
   - component: {fileID: 639410761830540630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MiniGameObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5666965019754070701}
   - component: {fileID: 3484276159820956488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.05, y: 8.05, z: 8.05}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3360247160598144726}
@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5141871042780087971, guid: 748a0e8d180aaa7419ff165de509f3bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.897
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5141871042780087971, guid: 748a0e8d180aaa7419ff165de509f3bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -339,6 +339,10 @@ PrefabInstance:
     - target: {fileID: 5855997288982942423, guid: 748a0e8d180aaa7419ff165de509f3bd, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855997288982942423, guid: 748a0e8d180aaa7419ff165de509f3bd, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -428,13 +432,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 580196236960205569, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6868749174159103384, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6868749174159103384, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.43
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6868749174159103384, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -626,6 +634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 580196236960205569, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6868749174159103384, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.03
@@ -691,6 +703,10 @@ PrefabInstance:
     - target: {fileID: 580196236960205569, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 580196236960205569, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6868749174159103384, guid: 4c8421cb7092007458210d89668fce9f, type: 3}
       propertyPath: m_LocalPosition.x
