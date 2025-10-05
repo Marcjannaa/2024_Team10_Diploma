@@ -13,12 +13,14 @@ namespace ProceduralGeneration
         
         public void OpenRoomExit()
         {
+            
             anim.SetTrigger("ArcDoorOpenTrigger");
             Debug.Log("room in now open");
         }
         
         public void CloseRoomExit()
         {
+            
             anim.SetTrigger("ArcDoorCloseTrigger");
             Debug.Log("room in now closed");
         }

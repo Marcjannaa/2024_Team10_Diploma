@@ -19,19 +19,24 @@ namespace ProceduralGeneration
        
         private void OnTriggerEnter(Collider other)
         {
-            if (isRoomComplete)
+            if (other.CompareTag("Player"))
             {
-                return;
-            }
+                if (isRoomComplete)
+                {
+                    return;
+                }
 
-            if (enemyCount <= 0)
-            {
-                return;
+                if (enemyCount <= 0)
+                {
+                    return;
+                }
+                foreach (var door in exitList)
+                {
+                    door.GetComponent<OpenCloseRoomExitScript>().CloseRoomExit();
+                
+                }
             }
-            foreach (var door in exitList)
-            {
-                door.GetComponent<OpenCloseRoomExitScript>().CloseRoomExit();
-            }
+           
         }
 
         public void EnemyKilled()
