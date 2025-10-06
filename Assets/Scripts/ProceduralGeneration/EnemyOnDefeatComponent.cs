@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace ProceduralGeneration
 {
-    public class EnemyOnDefeatScript  : MonoBehaviour
+    public class EnemyOnDefeatComponent  : MonoBehaviour
     {
         public UnityEvent OnEnemyDefeated;
         private void OnDestroy()

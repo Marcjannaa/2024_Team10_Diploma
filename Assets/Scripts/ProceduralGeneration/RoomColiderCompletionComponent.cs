@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProceduralGeneration
 {
-    public class RoomCompletionScript : MonoBehaviour
+    public class RoomColiderCompletionComponent : MonoBehaviour
     {
         private bool isRoomComplete = false;
         
@@ -32,7 +32,7 @@ namespace ProceduralGeneration
                 }
                 foreach (var door in exitList)
                 {
-                    door.GetComponent<OpenCloseRoomExitScript>().CloseRoomExit();
+                    door.GetComponent<DoorHandlingComponent>().CloseRoomExit();
                 
                 }
             }
@@ -51,7 +51,7 @@ namespace ProceduralGeneration
 
                 foreach (var door in exitList)
                 {
-                    door.GetComponent<OpenCloseRoomExitScript>().OpenRoomExit();
+                    door.GetComponent<DoorHandlingComponent>().OpenRoomExit();
                 }
             }
             
