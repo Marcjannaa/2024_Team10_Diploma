@@ -26,25 +26,41 @@ public class PickupScript : MonoBehaviour
         {
             case 1:
                 Player_Stats.Coins.Modify(1);
-                Destroy(gameObject);
+                StartCoroutine(CollectAndShrink());
                 break;
             case 2:
                 Player_Stats.Bombs.Modify(1);
-                Destroy(gameObject);
+                StartCoroutine(CollectAndShrink());
                 break;
             case 3:
                 Player_Stats.Keys.Modify(1);
-                Destroy(gameObject);
+                StartCoroutine(CollectAndShrink());
                 break;
             case 4:
                 var tmp = Player_Stats.Health.Value;
                 Player_Stats.Health.Modify(10);
                 if (tmp != Player_Stats.Health.Value)
                 {
-                    Destroy(gameObject);
+
+                    StartCoroutine(CollectAndShrink());
                 }
                 break;
         }
+    }
+
+
+    public IEnumerator CollectAndShrink()
+    {
+        float duration = 0.1f;
+        Vector3 originalScale = transform.localScale;
+
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, t / duration);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision other)

@@ -74,7 +74,7 @@ namespace ProceduralGeneration
         {
             foreach (var exit in exitPoints)
             {
-                if (!exit.isConnected)
+                if (!exit.isConnected || exit.isOverlapped)
                 {
                     exit.activateWall();
                     exit.deactivateArc();
@@ -105,6 +105,7 @@ namespace ProceduralGeneration
                 Destroy(room.transform.root.gameObject);
 
                 exit.isConnected = true;
+                exit.isOverlapped = true;
                 Debug.Log("Overlap detected, room destroyed.");
             }
             else
