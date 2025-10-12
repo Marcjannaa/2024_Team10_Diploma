@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4cd8044ab2c4fdf48bacc679fa41a530, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f16d382b305185444a7dc14d459c8f00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -126,8 +126,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.41255787, y: 0.5, z: 0.39318988}
-  m_Center: {x: -0.0016946984, y: -0.000000023293545, z: -0.013554497}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6574592757423500613
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2165081689628293416}
   - component: {fileID: 5911814611989876373}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: CryingRock
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8c5642b63d57244bf757e78c7afa53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
+  _speed: 0
 --- !u!114 &713259017947486385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4cd8044ab2c4fdf48bacc679fa41a530, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f16d382b305185444a7dc14d459c8f00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

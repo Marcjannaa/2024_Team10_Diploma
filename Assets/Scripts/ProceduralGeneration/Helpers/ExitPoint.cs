@@ -9,6 +9,7 @@ namespace ProceduralGeneration
         [SerializeField]
         public GameObject arc;
         public bool isConnected = false;
+        public bool isOverlapped = false;
 
         public void activateWall()
         {
