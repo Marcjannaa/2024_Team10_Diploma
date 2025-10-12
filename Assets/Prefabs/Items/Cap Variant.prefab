@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 462463822330899229, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 476.925
+      value: 498.8905
       objectReference: {fileID: 0}
     - target: {fileID: 462463822330899229, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38,7 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 462463822330899229, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 370.91
+      value: 362.14767
+      objectReference: {fileID: 0}
+    - target: {fileID: 462463822330899229, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.2500255
       objectReference: {fileID: 0}
     - target: {fileID: 462463822330899229, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -79,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 4522212814232613298, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: 9158a6a31a1dccb4fb42079daeb01feb, type: 3}
+      objectReference: {fileID: 21300000, guid: 6bdf775f214d5b04f967f928dbcafe54, type: 3}
     - target: {fileID: 4522212814232613298, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: effect
       value: Intelligence Up!
@@ -87,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 5456164560976194349, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9158a6a31a1dccb4fb42079daeb01feb, type: 3}
+      objectReference: {fileID: 21300000, guid: 6bdf775f214d5b04f967f928dbcafe54, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

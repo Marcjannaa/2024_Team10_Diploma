@@ -15,7 +15,7 @@ public class ItemFactory : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity)) {
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
-                var pos = new Vector3(hitInfo.point.x, hitInfo.point.y + 1.0f, hitInfo.point.z);
+                var pos = new Vector3(hitInfo.point.x, hitInfo.point.y + 0.75f, hitInfo.point.z);
                 Instantiate(items[choice], pos, Quaternion.identity);
             }
         }

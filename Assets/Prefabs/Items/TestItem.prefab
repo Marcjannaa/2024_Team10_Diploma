@@ -30,8 +30,8 @@ RectTransform:
   m_GameObject: {fileID: 4584231639120443055}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 466.4052}
-  m_LocalScale: {x: 6.205605, y: 6.205605, z: 6.205605}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.9999999, y: 1.9999999, z: 1.9999999}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: adeacd18afae3314f9403e710ef917fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c09a3107f0e68194e9ecea6d8a44f9d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,6 +131,10 @@ MonoBehaviour:
   STR: 10
   AGL: 10
   INT: 10
+  Luck: 0
+  Coins: 0
+  Bombs: 0
+  Keys: 0
   image: {fileID: 21300000, guid: adeacd18afae3314f9403e710ef917fa, type: 3}
   allowLockPick: 0
 --- !u!222 &8269951067408671077
