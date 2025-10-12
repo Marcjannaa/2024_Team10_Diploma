@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class Item : MonoBehaviour
 {
     [SerializeField] private string name;
-    [SerializeField] private string effect;
+    [SerializeField] public string effect;
     [SerializeField] public int MaxHp;
     [SerializeField] public int STR;
     [SerializeField] public int AGL;
@@ -39,8 +39,16 @@ public class Item : MonoBehaviour
 
     protected virtual void pickUp()
     {
-        Inventory.addItem(this);
-        InventoryUI.Instance.updateInv();
-        Destroy(gameObject);
+        if (Inventory.Items.Count < 9)
+        {
+            Inventory.addItem(this);
+            InventoryUI.Instance.updateInv();
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Inventory Full not picking up");
+        }
+        
     }
 }

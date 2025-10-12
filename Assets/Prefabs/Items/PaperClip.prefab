@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 390.16, y: 1.42, z: 483.62}
-  m_LocalScale: {x: 6.205605, y: 6.205605, z: 6.205605}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: adeacd18afae3314f9403e710ef917fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c09a3107f0e68194e9ecea6d8a44f9d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,5 +125,9 @@ MonoBehaviour:
   STR: 0
   AGL: 0
   INT: 0
-  image: {fileID: 21300000, guid: adeacd18afae3314f9403e710ef917fa, type: 3}
+  Luck: 0
+  Coins: 0
+  Bombs: 0
+  Keys: 0
+  image: {fileID: 21300000, guid: c09a3107f0e68194e9ecea6d8a44f9d0, type: 3}
   allowLockPick: 1
