@@ -43,7 +43,36 @@ namespace ProceduralGeneration
                 .FirstOrDefault();
         }
 
+        public List<PlacedRoom> GetConnectedRooms()
+        {
+            var connectedRooms = new List<PlacedRoom>();
+            foreach (var exit in Exits)
+            {
+                if (exit.isConnected && exit != null)
+                {
+                    connectedRooms.Add(exit.ConnectedExit.GetPlacedRoom());
+                }
+            }
+            return connectedRooms;
+        }
+
+        public void setActive() {
+            SetRoomActive(true);
+        }
         
+        public void setInactive() {
+            SetRoomActive(false); 
+        }
         
+        private void SetRoomActive(bool isActive)
+        {
+          
+            foreach (var renderer in GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = isActive;
+            }
+            
+        }
+        //TODO: Add real references beetwen connected exits - rooms even. what was i thinking !>?? ??/
     }
 }

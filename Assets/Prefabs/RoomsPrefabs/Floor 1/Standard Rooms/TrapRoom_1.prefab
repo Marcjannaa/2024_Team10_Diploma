@@ -1612,6 +1612,7 @@ GameObject:
   - component: {fileID: 4090914997744575840}
   - component: {fileID: 2972971075747703602}
   - component: {fileID: 1647784121872490945}
+  - component: {fileID: 887191708725280726}
   m_Layer: 0
   m_Name: RoomCollider
   m_TagString: Untagged
@@ -1668,6 +1669,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomCamera: {fileID: 2234592331058183792}
+--- !u!114 &887191708725280726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292130854305573471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666954f808d9427ab956b384b242a64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5911053851907640858
 GameObject:
   m_ObjectHideFlags: 0

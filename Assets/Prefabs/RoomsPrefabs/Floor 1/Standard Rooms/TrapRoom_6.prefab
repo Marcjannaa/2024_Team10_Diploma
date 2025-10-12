@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1da16c0c084e05a365415f75564d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: []
 --- !u!1 &486743955425540078
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +231,7 @@ MonoBehaviour:
   exitwall: {fileID: 7825033936707545909}
   arc: {fileID: 1463025755379148019}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &1338547249389867363
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +281,7 @@ MonoBehaviour:
   exitwall: {fileID: 3289590776541773030}
   arc: {fileID: 4931775733472034978}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &1432756923507089683
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +862,7 @@ MonoBehaviour:
   exitwall: {fileID: 853657292263496836}
   arc: {fileID: 8910241411831463423}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &5771953718053177977
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +947,7 @@ MonoBehaviour:
   exitwall: {fileID: 1050857022171145861}
   arc: {fileID: 2241471558751814760}
   isConnected: 0
+  isOverlapped: 0
 --- !u!1 &7150771656747835568
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +959,7 @@ GameObject:
   - component: {fileID: 705700977434987676}
   - component: {fileID: 5419327998940896428}
   - component: {fileID: 8832385572964614211}
+  - component: {fileID: 2525117031826594900}
   m_Layer: 0
   m_Name: RoomCollider
   m_TagString: Untagged
@@ -1010,6 +1016,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomCamera: {fileID: 2190373599429981024}
+--- !u!114 &2525117031826594900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150771656747835568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666954f808d9427ab956b384b242a64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7262569350881810888
 GameObject:
   m_ObjectHideFlags: 0

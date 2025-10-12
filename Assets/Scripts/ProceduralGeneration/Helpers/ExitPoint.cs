@@ -9,6 +9,7 @@ namespace ProceduralGeneration
         [SerializeField]
         public GameObject arc;
         public bool isConnected = false;
+        public ExitPoint ConnectedExit { get; set; }
         public bool isOverlapped = false;
 
         public void activateWall()
@@ -29,5 +30,9 @@ namespace ProceduralGeneration
             arc.gameObject.SetActive(false);
         }
         
+        public PlacedRoom GetPlacedRoom()
+        {
+            return GetComponentInParent<PlacedRoom>();
+        }
     }
 }

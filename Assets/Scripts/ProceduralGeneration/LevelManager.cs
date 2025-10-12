@@ -23,6 +23,9 @@ public class LevelManager : MonoBehaviour
     private int currentFloorIndex = 0;
     private bool HasMoreFloors => currentFloorIndex < floorConfigs.Count;
 
+    private List<PlacedRoom> placedRooms;
+
+    private PlacedRoom placedRoom;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,17 +44,16 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("FloorGenerator reference not assigned!");
             return;
         }
-        
+
         strategy = strategyAsset != null ? strategyAsset.GetStrategy() : new StandardGenerationStrategy();
 
-        
+
         UsedSeed = (seed == -1) ? Random.Range(0, int.MaxValue) : seed;
         Random.InitState(UsedSeed);
         Debug.Log($"Seed used for generation: {UsedSeed}");
 
         _floorGenerator.OnFloorGenerated.AddListener(OnFloorGenerationComplete);
         GenerateNextFloor();
-        
     }
 
     public void GenerateNextFloor()
@@ -73,7 +75,28 @@ public class LevelManager : MonoBehaviour
 
         CameraManager.Instance.InitializeCameraList();
         CameraManager.Instance.AlignAllCamerasToReference();
+        
+        placedRooms = _floorGenerator.GetActiveRoomList();
         OnPlayerSpawnRequest.Invoke();
         // #TODO Maybe trigger something else and connect with game manager when and if implemented
+    }
+    
+    public void setActiveRoom(PlacedRoom room)
+    {
+        placedRoom = room;
+        var connectedRooms = placedRoom.GetConnectedRooms();
+        
+        foreach (var r in placedRooms)
+        {
+            if(r == placedRoom || connectedRooms.Contains(r))
+            {
+                r.setActive();
+            }
+            else
+            {
+                r.setInactive();
+            }
+        }
+        
     }
 }

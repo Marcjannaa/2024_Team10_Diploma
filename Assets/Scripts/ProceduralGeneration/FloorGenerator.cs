@@ -114,7 +114,11 @@ namespace ProceduralGeneration
                 colliders.Add(room.GetRoomCollider());
                 RoomPlacementHelper.AddRoomExits(room, exitPoints);
                 exit.isConnected = true;
-                RoomPlacementHelper.CloseNearestExit(exit, exitPoints);
+                //fast bannanacode
+                exit.ConnectedExit = RoomPlacementHelper.FindNearestExit(exit, exitPoints);
+                exit.ConnectedExit.ConnectedExit = exit;
+                exit.ConnectedExit.isConnected = true;
+                //RoomPlacementHelper.CloseNearestExit(exit, exitPoints);
             }
         }
 
