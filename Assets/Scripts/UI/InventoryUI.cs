@@ -2,23 +2,30 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+
 using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 
 public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI Instance { get; private set; }
 
+
+    [SerializeField] private TMP_FontAsset font;
     [SerializeField] private TextMeshProUGUI Strength;
     [SerializeField] private TextMeshProUGUI Agility;
     [SerializeField] private TextMeshProUGUI Intelligence;
     [SerializeField] private Canvas canvas;
     [SerializeField] private Player_Stats Stats;
     [SerializeField] private RectTransform InventoryPanel;
-
+    
+    
     private List<Item> items = Inventory.Items;
     private List<GameObject> buttons = new List<GameObject>();
-
+    private List<ItemTooltip> tooltips = new List<ItemTooltip>();
+    
     private void Awake()
     {
         if (Instance == null)
@@ -26,7 +33,8 @@ public class InventoryUI : MonoBehaviour
         else
             Destroy(gameObject);
     }
-
+    
+    
     void Start()
     {
         for (int i = 0; i < 9; i++)
@@ -38,15 +46,41 @@ public class InventoryUI : MonoBehaviour
             Button btn = tmp.AddComponent<Button>();
             Image img = tmp.AddComponent<Image>();
             img.color = new Color(1f, 1f, 1f, 0f); 
-
+            
             ColorBlock cb = btn.colors;
             cb.normalColor = new Color(1f, 1f, 1f, 0f); 
             cb.highlightedColor = new Color(1f, 1f, 1f, 0.1f); 
             cb.pressedColor = new Color(1f, 1f, 1f, 0.2f);    
             btn.colors = cb;
             tmp.GetComponent<GridLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
-            // tmp.AddComponent<ToolTip>();
+            GameObject tooltipObj = new GameObject("Tooltip_" + tmp);
+            tooltipObj.transform.SetParent(tmp.transform, false);
+            
+            
+            var tooltipTMP = tooltipObj.AddComponent<TextMeshProUGUI>();
+            
+            tooltipTMP.fontSize = 18;
+            tooltipTMP.color = Color.white;
+            tooltipTMP.alignment = TextAlignmentOptions.Center;
+            tooltipTMP.gameObject.SetActive(false);
+            tooltipTMP.margin = new Vector4(0f, 100f, 0f, -20f);
+            tooltipTMP.enableWordWrapping = false;
+            tooltipTMP.font = font;
+            
+            
+            var rect = tooltipObj.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(120f, 40f);
+            rect.anchorMin = new Vector2(0.5f, 1f);
+            rect.anchorMax = new Vector2(0.5f, 1f);
+            rect.pivot = new Vector2(0.5f, 1f);
+            rect.anchoredPosition = new Vector2(0, -30f);
+            
             buttons.Add(tmp);
+            
+            var hover = buttons[i].AddComponent<ItemTooltip>();
+            
+            hover.GetComponent<ItemTooltip>().tooltipText = tooltipTMP;
+            tooltips.Add(hover);
             
             tmp.transform.SetParent(InventoryPanel);
         }
@@ -73,8 +107,12 @@ public class InventoryUI : MonoBehaviour
         foreach (var item in items)
         {
             var img = buttons[tmp].GetComponent<UnityEngine.UI.Image>();
+            
+            tooltips[tmp].SetTooltip(item.effect);
+            
+            
             img.sprite = item.image;
-                img.color = Color.white; 
+            img.color = Color.white; 
             tmp++;
         }
     }

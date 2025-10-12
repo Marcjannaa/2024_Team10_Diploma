@@ -13,5 +13,8 @@ public class SpikesCollisions : MonoBehaviour
             print("ała");
             Player_Stats.Health.Modify(-30);
         }
+        
+        
     }
+    
 }
