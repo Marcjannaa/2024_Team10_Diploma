@@ -88,6 +88,10 @@ public class CombatManager : MonoBehaviour
     public void OnEnemyClicked()
     {
         StopCoroutine(CheckFocusedButton());
+        foreach (Transform e in _enemyList)
+        {
+            e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("TargetSprite").GameObject().SetActive(false);
+        }
         _miniGamePanel.SetActive(true);
     }
 
