@@ -103,13 +103,13 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator FlashEnemySpriteRed()
     {
-        Debug.Log("Highlighting enemy");
-        Color originalColor = _enemySprite.color;
-        _enemySprite.color = Color.red;
-        Debug.Log("Color set to red");
+        //Debug.Log("Highlighting enemy");
+        //Color originalColor = _enemySprite.color;
+        //_enemySprite.color = Color.red;
+       // Debug.Log("Color set to red");
         yield return new WaitForSecondsRealtime(1);
-        _enemySprite.color = originalColor;
-        Debug.Log("Color reset");
+        //_enemySprite.color = originalColor;
+        //Debug.Log("Color reset");
     }
 
     public static void OnDodgeEnded(bool win)

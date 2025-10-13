@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/AttackGameRT.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/AttackGameRT.renderTexture" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MinigameRT.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MinigameRT.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CombatManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CombatManager.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Combat/CombatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Combat/CombatManager.cs" afterDir="false" />
     </list>
@@ -25,7 +23,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="SWEA" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -118,7 +116,7 @@
       <workItem from="1760301793378" duration="137000" />
       <workItem from="1760301958986" duration="702000" />
       <workItem from="1760302687427" duration="19746000" />
-      <workItem from="1760342815063" duration="1475000" />
+      <workItem from="1760342815063" duration="2397000" />
     </task>
     <servers />
   </component>
