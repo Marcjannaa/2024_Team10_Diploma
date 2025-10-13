@@ -31,9 +31,11 @@ public class BattleUI : MonoBehaviour
         var component = newEnemy.transform.Find("EnemySprite").GetComponent<Image>();
         newEnemy.transform.Find("EnemySprite").GetComponent<Image>().sprite = enemy.Find("BattleSprite").GetComponent<Image>().sprite;
         newEnemy.transform.Find("HP").GetComponent<Slider>().value =
-            (float)(enemy.GetComponent<Enemy_Stats>().Strength.Value * 0.01);
+            (float)(enemy.GetComponent<Enemy_Stats>().MaxHealth.Value * 0.01);
         //newEnemy
     }
+    
+    
 
     public void SetEnemyImage(Transform enemy)
     {
