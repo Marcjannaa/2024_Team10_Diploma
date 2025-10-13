@@ -77,11 +77,17 @@ public class CombatManager : MonoBehaviour
             }
 
             yield return null;
+            
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                yield break;
+            }
         }
     }
 
     public void OnEnemyClicked()
     {
+        StopCoroutine(CheckFocusedButton());
         _miniGamePanel.SetActive(true);
     }
 
