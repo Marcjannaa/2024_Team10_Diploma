@@ -95,6 +95,7 @@ public class CombatManager : MonoBehaviour
     private IEnumerator AttackRoutineAfterHit()
     {
         yield return StartCoroutine(FlashEnemySpriteRed());
+        
 
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
@@ -150,6 +151,7 @@ public class CombatManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(skillButton);
         }
 
+        _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_selectedEnemy.transform);
         _inDifferentPanel = true;
     }
 
@@ -280,7 +282,10 @@ public class CombatManager : MonoBehaviour
         {
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetPlayerMPText(Player_Stats.Mana.Value.ToString());
-            //_battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+            foreach (Transform enemy in _enemyList)
+            {
+                _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_selectedEnemy.transform);
+            }
             
 
             if (Player_Stats.Health.Value <= 0)

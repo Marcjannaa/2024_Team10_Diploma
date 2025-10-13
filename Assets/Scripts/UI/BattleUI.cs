@@ -32,6 +32,8 @@ public class BattleUI : MonoBehaviour
         newEnemy.transform.Find("EnemySprite").GetComponent<Image>().sprite = enemy.Find("BattleSprite").GetComponent<Image>().sprite;
         newEnemy.transform.Find("HP").GetComponent<Slider>().value =
             (float)(enemy.GetComponent<Enemy_Stats>().MaxHealth.Value * 0.01);
+        
+        enemy.GetComponent<EnemyUI_Interaction>().setUIComponent(newEnemy);
         //newEnemy
     }
     
@@ -44,11 +46,13 @@ public class BattleUI : MonoBehaviour
         //Image enemySprite = transform.Find("BattleSprite").GetComponent<Image>();
     }
 
-    /*public void SetEnemyHealthSlider(float health)
+    public void SetEnemyHealthSlider(Transform enemy)
     {
-        _enemyHealthSlider.value = (float)(health * 0.01);
+        enemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("HP").GetComponent<Slider>().value =
+            (float)(enemy.GetComponent<Enemy_Stats>().Health.Value * 0.01);
     }
 
+    /*
     public void SetEnemySprite(Sprite sprite)
     {
         if (_enemySprite != null && sprite != null)
