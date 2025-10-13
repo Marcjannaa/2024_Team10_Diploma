@@ -5,32 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vsconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CombatManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CombatManager.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/BasicEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/BasicEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/EnemyMiniGameBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/EnemyMiniGameBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniGameMgr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/DodgeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniGameMgr.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/DodgeManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniGameSwitch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniGameSwitch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniPlayerHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniPlayerHealth.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniPlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MiniPlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/AttackGameRT.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/AttackGameRT.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MinigameRT.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MiniGames/MinigameRT.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MiniGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MiniGameScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Combat/CombatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Combat/CombatManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DodgeGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DodgeGameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RestartKey.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RestartKey.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,29 +36,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;do_not_show_solution_notification&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;rozowa/combat__system&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;SolutionBuilderGeneralOptionsPage&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "do_not_show_solution_notification": "true",
+    "git-widget-placeholder": "rozowa/combat__system",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Lenovo\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Lenovo\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Lenovo\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\48698\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\48698\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\48698\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/build\Diploma.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\48698\Documents\studia\XRG\inzynierka unity\2024_Team10_Diploma\build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Lenovo\Documents\repo\2024_Team10_Diploma -debugCodeOptimization" />
@@ -130,6 +118,7 @@
       <workItem from="1760301793378" duration="137000" />
       <workItem from="1760301958986" duration="702000" />
       <workItem from="1760302687427" duration="19746000" />
+      <workItem from="1760342815063" duration="1475000" />
     </task>
     <servers />
   </component>
