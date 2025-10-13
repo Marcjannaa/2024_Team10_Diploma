@@ -113,21 +113,50 @@ public class CombatManager : MonoBehaviour
 
     public static void OnAttackEnded(Player.HitResult hitResult)
     {
+        float dmg = 0;
         switch (hitResult)
         {
             case Player.HitResult.PerfectHit:
-                _selectedEnemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 4);
+                dmg = Player_Stats.Strength.Value * 4;
                 break;
             case Player.HitResult.MediumHit:
-                _selectedEnemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 3);
+                dmg = Player_Stats.Strength.Value * 3;
                 break;
             case Player.HitResult.NoHit:
-                _selectedEnemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 2);
+                dmg = Player_Stats.Strength.Value * 2;
                 break;
+        }
+
+        var enemyStats = _selectedEnemy.GetComponent<Enemy_Stats>();
+        enemyStats.Health.Modify(-dmg);
+        
+
+        if (enemyStats.Health.Value <= 0)
+        {
+            Transform enemyTransform = _selectedEnemy.transform;
+
+
+            _battleUI.GetComponent<BattleUI>().RemoveEnemyFromList(enemyTransform);
+
+
+            enemyTransform.SetParent(null);
+            Destroy(_selectedEnemy);
+
+
+            if (_enemyList.childCount > 0)
+            {
+                _selectedEnemy = _enemyList.GetChild(0).gameObject;
+            }
+            else
+            {
+                Instance.EnemyDefeated();
+                return;
+            }
         }
 
         Instance.StartCoroutine(Instance.AttackRoutineAfterHit());
     }
+
 
     private IEnumerator AttackRoutineAfterHit()
     {
@@ -334,7 +363,7 @@ public class CombatManager : MonoBehaviour
                 yield break;
             }
 
-            if (_selectedEnemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
+            if (_enemyList.childCount <= 0)
             {
                 EnemyDefeated();
                 yield break;

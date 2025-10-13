@@ -79,4 +79,17 @@ public class BattleUI : MonoBehaviour
     {
         _skillsCosts[skillPos].text = "MP COST: " + text;
     }
+    
+    public void RemoveEnemyFromList(Transform enemy)
+    {
+        if (enemy == null) return;
+        var enemyUI = enemy.GetComponent<EnemyUI_Interaction>()?.getUIComponent();
+        if (enemyUI == null) return;
+        
+        if (enemyUI.transform.parent == _enemyUIList)
+        {
+            Destroy(enemyUI);
+        }
+    }
+
 }
