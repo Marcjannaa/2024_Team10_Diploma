@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MiniGame;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -19,14 +20,16 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private List<CombatSkill> _combatSkills;
     public static CombatManager Instance { get; private set; }
 
+    private static ArrayList enemiesInCombat = new ArrayList();
     private static GameObject _battleUI;
     private GameObject attackButton;
     private static GameObject _player;
     private static GameObject _enemy;
+    private static GameObject _selectedEnemy;
+    private static Transform _enemyList;
     private bool _enemyFirstStrike = false;
     private bool _battleOngoing;
     private float _guardMultiplier = 1;
-    private Image _enemySprite;
     private static GameObject _miniGamePanel;
     private Turn _turn;
     private bool _playerAttacked = false;
@@ -76,13 +79,13 @@ public class CombatManager : MonoBehaviour
         switch (hitResult)
         {
             case Player.HitResult.PerfectHit:
-                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 4);
+                _selectedEnemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 4);
                 break;
             case Player.HitResult.MediumHit:
-                _enemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 3);
+                _selectedEnemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 3);
                 break;
             case Player.HitResult.NoHit:
-                _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 2);
+                _selectedEnemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 2);
                 break;
         }
 
@@ -121,7 +124,7 @@ public class CombatManager : MonoBehaviour
 
         if (!win)
         {
-            Player_Stats.Health.Modify(-(int)_enemy.GetComponent<Enemy_Stats>().Strength.Value * Instance._guardMultiplier);
+            Player_Stats.Health.Modify(-(int)_selectedEnemy.GetComponent<Enemy_Stats>().Strength.Value * Instance._guardMultiplier);
         }
 
         Instance._playerAttacked = false;
@@ -194,9 +197,23 @@ public class CombatManager : MonoBehaviour
         //Instance.StartCoroutine(Transition.Instance.PlayTransition(() =>
         //{
             _battleUI.SetActive(true);
-            Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
-            Instance._enemySprite = battleSpriteTransform.GetComponent<Image>();
+
+
+//todo losowanie presetu
+            _enemyList = _enemy.GetComponent<Enemy>().getPresets().transform.GetChild(0);
+            
+            
+            
+            //Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
+            
+
             Instance.SwitchBattleUIPanel();
+
+            foreach (Transform enemy in _enemyList)
+            {
+                _battleUI.GetComponent<BattleUI>().AddEnemyToList(enemy);
+                _selectedEnemy = enemy.GameObject();
+            }
             Instance.StartCoroutine(Instance.BattleLoop());
         //}));
     }
@@ -258,12 +275,12 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator BattleLoop()
     {
-        _battleUI.GetComponent<BattleUI>().SetEnemySprite(_enemySprite.sprite);
+
         while (_battleOngoing)
         {
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetPlayerMPText(Player_Stats.Mana.Value.ToString());
-            _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
+            //_battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_enemy.GetComponent<Enemy_Stats>().Health.Value);
             
 
             if (Player_Stats.Health.Value <= 0)
@@ -272,7 +289,7 @@ public class CombatManager : MonoBehaviour
                 yield break;
             }
 
-            if (_enemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
+            if (_selectedEnemy.GetComponent<Enemy_Stats>().Health.Value <= 0)
             {
                 EnemyDefeated();
                 yield break;

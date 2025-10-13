@@ -9,8 +9,10 @@ public class BattleUI : MonoBehaviour
     [SerializeField] private List<TMP_Text> _skillsCosts;
     [SerializeField] private TMP_Text _playerHealthText;
     [SerializeField] private TMP_Text _playerManaText;
-    [SerializeField] private Slider _enemyHealthSlider;
-    [SerializeField] private Image _enemySprite;
+    //[SerializeField] private Slider _enemyHealthSlider;
+    //[SerializeField] private Image _enemySprite;
+    [SerializeField] private GameObject _enemyCombatComponentPrefab;
+    [SerializeField] private Transform _enemyUIList;
     [SerializeField] private GameObject _playerActionFirst;
     [SerializeField] private GameObject _skillActionFirst;
     
@@ -22,7 +24,20 @@ public class BattleUI : MonoBehaviour
         _playerHealthText.text = "HP: " + text;
     }
 
-    public void SetEnemyHealthSlider(float health)
+    public void AddEnemyToList(Transform enemy)
+    {
+        GameObject newEnemy = Instantiate(_enemyCombatComponentPrefab, _enemyUIList);
+        //newEnemy
+    }
+
+    public void SetEnemyImage(Transform enemy)
+    {
+        //GameObject 
+        //_enemyUIList.AddComponent<>()
+        //Image enemySprite = transform.Find("BattleSprite").GetComponent<Image>();
+    }
+
+    /*public void SetEnemyHealthSlider(float health)
     {
         _enemyHealthSlider.value = (float)(health * 0.01);
     }
@@ -37,7 +52,9 @@ public class BattleUI : MonoBehaviour
         {
             Debug.LogError("Failed to set enemy sprite: _enemySprite or sprite is null!");
         }
-    }
+    }*/
+    
+    
     
     public GameObject GetPlayerActionFirst() => _playerActionFirst;
     public GameObject GetSkillActionFirst() => _skillActionFirst;
