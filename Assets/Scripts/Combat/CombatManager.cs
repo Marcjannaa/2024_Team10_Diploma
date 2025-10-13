@@ -266,15 +266,21 @@ public class CombatManager : MonoBehaviour
         Instance._turn = enemyAdvantage ? Turn.Enemy : Turn.Player;
         Instance._enemyFirstStrike = enemyAdvantage;
 
-        //Instance.StartCoroutine(Transition.Instance.PlayTransition(() =>
-        //{
+        Instance.StartCoroutine(Transition.Instance.PlayTransition(() =>
+        {
             _battleUI.SetActive(true);
 
+            Random.InitState(System.DateTime.Now.Millisecond);
 
-//todo losowanie presetu
-            _enemyList = _enemy.GetComponent<Enemy>().getPresets().transform.GetChild(1);
             
-            
+            Transform presetsParent = _enemy.GetComponent<Enemy>().getPresets().transform;
+            int presetCount = presetsParent.childCount;
+
+            if (presetCount > 0)
+            {
+                int randomIndex = Random.Range(0, presetCount);
+                _enemyList = presetsParent.GetChild(randomIndex);
+            }
             
             //Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
             
@@ -290,7 +296,7 @@ public class CombatManager : MonoBehaviour
                 enemyButton.gameObject.GetComponent<EnemyFocusButton>().setMyEnemy(enemy.gameObject);
             }
             Instance.StartCoroutine(Instance.BattleLoop());
-        //}));
+        }));
     }
 
     private void EnemyAction()
