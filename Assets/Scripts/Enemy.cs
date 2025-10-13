@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float _speed = 4.0f;
+    [SerializeField] GameObject _battlePresets;
     private bool _canMove = true;
     private void OnTriggerStay(Collider other)
     {
@@ -41,5 +42,10 @@ public class Enemy : MonoBehaviour
     public void SwitchMovement()
     {
         _canMove = !_canMove;
+    }
+
+    public GameObject getPresets()
+    {
+        return _battlePresets;
     }
 }
