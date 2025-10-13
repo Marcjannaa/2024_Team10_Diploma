@@ -461,10 +461,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CombatManager
       objectReference: {fileID: 0}
-    - target: {fileID: 724264574472544989, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1959516971861882001, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -513,14 +509,6 @@ PrefabInstance:
       propertyPath: attackGameObject
       value: 
       objectReference: {fileID: 1160778956}
-    - target: {fileID: 4194374945915342977, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
-      propertyPath: m_ChildForceExpandWidth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4194374945915342977, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
-      propertyPath: m_ChildForceExpandHeight
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7536434099797231721, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
       propertyPath: dodgeMiniGame
       value: 
