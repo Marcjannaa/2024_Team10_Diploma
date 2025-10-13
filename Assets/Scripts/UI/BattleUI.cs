@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,10 @@ public class BattleUI : MonoBehaviour
     public void AddEnemyToList(Transform enemy)
     {
         GameObject newEnemy = Instantiate(_enemyCombatComponentPrefab, _enemyUIList);
+        var component = newEnemy.transform.Find("EnemySprite").GetComponent<Image>();
+        newEnemy.transform.Find("EnemySprite").GetComponent<Image>().sprite = enemy.Find("BattleSprite").GetComponent<Image>().sprite;
+        newEnemy.transform.Find("HP").GetComponent<Slider>().value =
+            (float)(enemy.GetComponent<Enemy_Stats>().Strength.Value * 0.01);
         //newEnemy
     }
 
