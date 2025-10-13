@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Prefabs.MiniGames
@@ -11,8 +12,9 @@ namespace Prefabs.MiniGames
         [SerializeField] protected float noise = 1.5f;
         protected Vector2 moveDir;
         protected Vector2 playerPos;
+        
 
-        private void Start()
+        private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
             playerPos = new Vector2(
@@ -20,12 +22,6 @@ namespace Prefabs.MiniGames
                 playerTransform.position.y
             );
         }
-
-        private void FixedUpdate()
-        {
-            Move();
-        }
-
         
         protected virtual void Move()
         {

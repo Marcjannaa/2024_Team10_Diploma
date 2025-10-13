@@ -6,11 +6,34 @@ namespace Prefabs.MiniGames
 {
     public class BasicEnemy : EnemyMiniGameBehaviour
     {
-        private void Awake()
+        private float resetTimer = 0f;
+        private float resetInterval = 0f;
+        
+        private void Start()
         {
-            Invoke("ResetPlayerPosition", 2f);
+            
+            gameObject.transform.localPosition = new Vector2(
+                5 + Random.Range(1, 5),
+                0
+                );
+            resetInterval = Random.Range(0.1f, 2f);
+            resetTimer = 0f;
+            ResetPlayerPosition();
+            print("what");
         }
 
+        private void Update()
+        {
+            Move();
+
+            resetTimer += Time.unscaledDeltaTime;
+            if (resetTimer >= resetInterval)
+            {
+                ResetPlayerPosition();
+                resetTimer = 0f;
+                resetInterval = Random.Range(0.1f, 2f); 
+            }
+        }
         protected override void Move()
         {
             moveDir = new Vector2(
@@ -18,7 +41,7 @@ namespace Prefabs.MiniGames
                 playerPos.y - transform.position.y < 0 ? -1 : 1
             );
             var position = new Vector2(transform.position.x, transform.position.y);
-            rb.MovePosition(position + moveDir * (speed * Time.fixedUnscaledDeltaTime));
+            rb.MovePosition(position + moveDir * (speed * Time.unscaledDeltaTime));
         }
         
         private void ResetPlayerPosition()
@@ -27,8 +50,8 @@ namespace Prefabs.MiniGames
                 playerTransform.position.x + Random.Range(-noise, noise),
                 playerTransform.position.y + Random.Range(-noise, noise)
             );
-            rb.AddForce((moveDir + new Vector2(-noise, noise)) * 5 , ForceMode2D.Impulse);
-            Invoke("ResetPlayerPosition", Random.Range(0.1f, 2));
+
+            rb.AddForce((moveDir + new Vector2(-noise, noise)) * 5, ForceMode2D.Impulse);
         }
     }
 }

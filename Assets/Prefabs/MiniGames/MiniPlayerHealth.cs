@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MiniPlayerHealth : MonoBehaviour
 {
-    [SerializeField] private MiniGameMgr miniGameMgr;
+    [SerializeField] private DodgeManager dodgeManager;
     private float health = 100f;
     
     public void DecreaseHealth(float amount)
@@ -12,7 +13,7 @@ public class MiniPlayerHealth : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
-            MiniGameMgr.Lose();
+            DodgeManager.Lose();
         }
     }
 }

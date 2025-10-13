@@ -7,7 +7,7 @@ public class MiniGameSwitch : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeMiniGame;
 
-    private void Awake()
+    private void OnEnable()
     {
         dodgeMiniGame.SetActive(true);
     }
@@ -16,5 +16,4 @@ public class MiniGameSwitch : MonoBehaviour
     {
         dodgeMiniGame.SetActive(false);
     }
-
 }

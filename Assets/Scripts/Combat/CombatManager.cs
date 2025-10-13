@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MiniGame;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,7 +33,7 @@ public class CombatManager : MonoBehaviour
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
 
-    void Update()
+    private void Update()
     {
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
         {
@@ -70,17 +71,17 @@ public class CombatManager : MonoBehaviour
         SwitchBattleUIPanel();
     }
 
-    public static void OnAttackEnded(TimingMiniGame.HitResult hitResult)
+    public static void OnAttackEnded(Player.HitResult hitResult)
     {
         switch (hitResult)
         {
-            case TimingMiniGame.HitResult.PerfectHit:
+            case Player.HitResult.PerfectHit:
                 _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 4);
                 break;
-            case TimingMiniGame.HitResult.MediumHit:
+            case Player.HitResult.MediumHit:
                 _enemy.GetComponent<Enemy_Stats>().Health.Modify(Player_Stats.Strength.Value * 3);
                 break;
-            case TimingMiniGame.HitResult.NoHit:
+            case Player.HitResult.NoHit:
                 _enemy.GetComponent<Enemy_Stats>().Health.Modify(-Player_Stats.Strength.Value * 2);
                 break;
         }
@@ -97,7 +98,7 @@ public class CombatManager : MonoBehaviour
 
         var dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
-        dodgeMiniGame.GetComponent<DodgeGameManager>().ResetGame();
+        //dodgeMiniGame.GetComponent<DodgeManager>().ResetGame();
     }
 
     private IEnumerator FlashEnemySpriteRed()
@@ -207,7 +208,6 @@ public class CombatManager : MonoBehaviour
 
         GameObject dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
-        print("sth");
     }
 
     private void SwitchBattleUIPanel()

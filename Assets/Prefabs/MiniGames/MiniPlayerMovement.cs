@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -5,7 +6,7 @@ namespace Prefabs.MiniGames
 {
     public class MiniPlayerMovement : MonoBehaviour
     {
-        [SerializeField] private int speed = 5;
+        [SerializeField] private int speed = 50;
         private Vector2 moveDir;
         private Rigidbody2D rb;
 
@@ -13,24 +14,26 @@ namespace Prefabs.MiniGames
         {
             rb = GetComponent<Rigidbody2D>();
             Assert.IsNotNull(rb, "Rigidbody is null!");
+            gameObject.transform.position = Vector3.zero;
+
             moveDir = new Vector2(0, 0);
+         
+            Physics2D.autoSimulation = false;
         }
 
         private void Update()
         {
-            moveDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            if (moveDir != Vector2.zero)
+            {
+                rb.MovePosition(rb.position + moveDir.normalized * speed * Time.unscaledDeltaTime);
+            }
+            
+            Physics2D.Simulate(Time.unscaledDeltaTime);
         }
 
-        private void FixedUpdate()
-        {
-            var currentPos = new Vector2(transform.position.x,
-                transform.position.y);
-            rb.MovePosition(
-                currentPos + moveDir * speed * Time.fixedUnscaledDeltaTime
-            );
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             var health = this.gameObject.GetComponent<MiniPlayerHealth>();
             Assert.IsNotNull(health, "Player's health not found!");
