@@ -200,7 +200,7 @@ public class CombatManager : MonoBehaviour
 
 
 //todo losowanie presetu
-            _enemyList = _enemy.GetComponent<Enemy>().getPresets().transform.GetChild(1);
+            _enemyList = _enemy.GetComponent<Enemy>().getPresets().transform.GetChild(0);
             
             
             
