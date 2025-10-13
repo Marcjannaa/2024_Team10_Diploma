@@ -29,6 +29,10 @@ PrefabInstance:
       value: Cursed Blade
       objectReference: {fileID: 0}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
+      propertyPath: slot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: MaxHp
       value: 0
       objectReference: {fileID: 0}
@@ -39,6 +43,10 @@ PrefabInstance:
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: effect
       value: Strength Up Luck Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
+      propertyPath: equippable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3122221047699877222, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: m_Pivot.x

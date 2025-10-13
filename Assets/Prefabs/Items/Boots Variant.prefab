@@ -25,12 +25,20 @@ PrefabInstance:
       value: Epic Boots of Swiftness
       objectReference: {fileID: 0}
     - target: {fileID: 6353342776532359995, guid: 8c073646f7c28c54a90870432d72807d, type: 3}
+      propertyPath: slot
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353342776532359995, guid: 8c073646f7c28c54a90870432d72807d, type: 3}
       propertyPath: image
       value: 
       objectReference: {fileID: 21300000, guid: 508a1838c297e1f45ad04c9d6bc06f51, type: 3}
     - target: {fileID: 6353342776532359995, guid: 8c073646f7c28c54a90870432d72807d, type: 3}
       propertyPath: effect
       value: Agility Up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353342776532359995, guid: 8c073646f7c28c54a90870432d72807d, type: 3}
+      propertyPath: equippable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6954326817868874132, guid: 8c073646f7c28c54a90870432d72807d, type: 3}
       propertyPath: m_LocalScale.x

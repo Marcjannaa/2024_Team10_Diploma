@@ -42,15 +42,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: MaxHp
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: ae3034c795237ae4b8d1a782bac9a97a, type: 3}
+      objectReference: {fileID: 21300000, guid: dd9ab3e1330af4a4597e501d151b6c92, type: 3}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: effect
-      value: Not Implemented
+      value: Defense Up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
+      propertyPath: equippable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3122221047699877222, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: m_Pivot.x
@@ -163,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 7387991532678753622, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ae3034c795237ae4b8d1a782bac9a97a, type: 3}
+      objectReference: {fileID: 21300000, guid: dd9ab3e1330af4a4597e501d151b6c92, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
