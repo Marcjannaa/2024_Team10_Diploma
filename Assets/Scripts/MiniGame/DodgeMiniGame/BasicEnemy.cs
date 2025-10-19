@@ -2,12 +2,13 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 namespace Prefabs.MiniGames
 {
     public class BasicEnemy : EnemyMiniGameBehaviour
     {
-        private float resetTimer = 0f;
-        private float resetInterval = 0f;
+        private float _resetTimer = 0f;
+        private float _resetInterval = 0f;
         
         private void Start()
         {
@@ -16,22 +17,21 @@ namespace Prefabs.MiniGames
                 5 + Random.Range(1, 5),
                 0
                 );
-            resetInterval = Random.Range(0.1f, 2f);
-            resetTimer = 0f;
+            _resetInterval = Random.Range(0.1f, 2f);
+            _resetTimer = 0f;
             ResetPlayerPosition();
-            print("what");
         }
 
         private void Update()
         {
             Move();
 
-            resetTimer += Time.unscaledDeltaTime;
-            if (resetTimer >= resetInterval)
+            _resetTimer += Time.unscaledDeltaTime;
+            if (_resetTimer >= _resetInterval)
             {
                 ResetPlayerPosition();
-                resetTimer = 0f;
-                resetInterval = Random.Range(0.1f, 2f); 
+                _resetTimer = 0f;
+                _resetInterval = Random.Range(0.1f, 2f); 
             }
         }
         protected override void Move()
@@ -50,7 +50,6 @@ namespace Prefabs.MiniGames
                 playerTransform.position.x + Random.Range(-noise, noise),
                 playerTransform.position.y + Random.Range(-noise, noise)
             );
-
             rb.AddForce((moveDir + new Vector2(-noise, noise)) * 5, ForceMode2D.Impulse);
         }
     }
