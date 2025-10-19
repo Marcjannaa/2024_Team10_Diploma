@@ -7,6 +7,7 @@ namespace Prefabs.MiniGames
     public class MiniPlayerMovement : MonoBehaviour
     {
         [SerializeField] private int speed = 50;
+        [SerializeField] private Vector3 startPosition = new Vector3(0, 0, 0);
         
         private Vector2 _moveDir;
         private Rigidbody2D _rb;
@@ -16,10 +17,9 @@ namespace Prefabs.MiniGames
         {
             _rb = GetComponent<Rigidbody2D>();
             Assert.IsNotNull(_rb, "Rigidbody is null!");
-            gameObject.transform.position = Vector3.zero;
-
+            
+            gameObject.transform.position = startPosition;
             _moveDir = new Vector2(0, 0);
-         
             Physics2D.autoSimulation = false;
         }
 
@@ -29,7 +29,7 @@ namespace Prefabs.MiniGames
 
             if (_moveDir != Vector2.zero)
             {
-                _rb.MovePosition(_rb.position + _moveDir.normalized * speed * Time.unscaledDeltaTime);
+                _rb.MovePosition(_rb.position + _moveDir.normalized * (speed * Time.unscaledDeltaTime));
             }
             
             Physics2D.Simulate(Time.unscaledDeltaTime);

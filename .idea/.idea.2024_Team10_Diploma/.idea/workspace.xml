@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/BasicEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/BasicEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/DodgeManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/DodgeManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/EnemyMiniGameBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/EnemyMiniGameBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/MiniPlayerHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/MiniPlayerHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/AttackMiniGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/AttackMiniGame/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/MiniPlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/MiniPlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +120,7 @@
       <workItem from="1760302687427" duration="19746000" />
       <workItem from="1760342815063" duration="11035000" />
       <workItem from="1760356775249" duration="4186000" />
-      <workItem from="1760899585703" duration="2266000" />
+      <workItem from="1760899585703" duration="2825000" />
     </task>
     <servers />
   </component>

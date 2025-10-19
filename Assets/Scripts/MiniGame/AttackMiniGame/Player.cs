@@ -12,8 +12,11 @@ namespace MiniGame
         [SerializeField] private float speed = 0.5f;
         [SerializeField] private Collider2D perfectHitbox, mediumHitbox;
         [SerializeField] private AttackGameManager attackGameManager;
+        [SerializeField] private Vector3 startPosition = new Vector3(-1, 0, 0);
+        
         private Rigidbody2D _rb;
         private Collider2D _collider;
+        
         public enum HitResult {PerfectHit, MediumHit, NoHit}
         
         [Obsolete("Obsolete")]
@@ -21,7 +24,7 @@ namespace MiniGame
         {
             _rb = GetComponent<Rigidbody2D>();
             _collider = GetComponent<Collider2D>();
-            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.position = startPosition;
             
             Physics2D.autoSimulation = false;
 
