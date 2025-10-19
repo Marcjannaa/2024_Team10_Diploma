@@ -21,6 +21,7 @@ namespace ProceduralGeneration
                 if (placedRoom != null)
                 {
                      _levelManager.setActiveRoom(placedRoom);
+                     Debug.Log("Room activated trigger triggered succesfuly: " );
                 }
                 else
                 {
