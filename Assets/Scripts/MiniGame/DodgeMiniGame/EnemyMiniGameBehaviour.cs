@@ -8,8 +8,9 @@ namespace Prefabs.MiniGames
         [SerializeField] protected Transform playerTransform;
         [SerializeField] protected int speed = 1;
         [SerializeField] protected int damage = 10;
-        protected Rigidbody2D Rb;
         [SerializeField] protected float noise = 1.5f;
+
+        protected Rigidbody2D Rb;
         protected Vector2 MoveDir;
         protected Vector2 PlayerPos;
         

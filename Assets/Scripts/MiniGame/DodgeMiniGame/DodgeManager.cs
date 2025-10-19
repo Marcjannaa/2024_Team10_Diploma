@@ -12,7 +12,6 @@ public class DodgeManager : MonoBehaviour
 
     private void Update()
     {
-        print(_timer);
         _timer += Time.unscaledDeltaTime;
         if (_timer > gameTime)
         {

@@ -12,7 +12,6 @@ namespace Prefabs.MiniGames
         
         private void Start()
         {
-            
             gameObject.transform.localPosition = new Vector2(
                 5 + Random.Range(1, 5),
                 0

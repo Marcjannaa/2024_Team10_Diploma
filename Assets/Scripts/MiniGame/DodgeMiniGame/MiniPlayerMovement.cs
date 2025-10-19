@@ -7,6 +7,7 @@ namespace Prefabs.MiniGames
     public class MiniPlayerMovement : MonoBehaviour
     {
         [SerializeField] private int speed = 50;
+        
         private Vector2 _moveDir;
         private Rigidbody2D _rb;
 
