@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/AttackMiniGame/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/AttackMiniGame/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/MiniPlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MiniGame/DodgeMiniGame/MiniPlayerMovement.cs" afterDir="false" />
-    </list>
+    <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +115,7 @@
       <workItem from="1760302687427" duration="19746000" />
       <workItem from="1760342815063" duration="11035000" />
       <workItem from="1760356775249" duration="4186000" />
-      <workItem from="1760899585703" duration="2825000" />
+      <workItem from="1760899585703" duration="3254000" />
     </task>
     <servers />
   </component>
