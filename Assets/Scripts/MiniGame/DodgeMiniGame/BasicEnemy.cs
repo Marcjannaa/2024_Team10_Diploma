@@ -36,21 +36,21 @@ namespace Prefabs.MiniGames
         }
         protected override void Move()
         {
-            moveDir = new Vector2(
-                playerPos.x - transform.position.x < 0 ? -1 : 1,
-                playerPos.y - transform.position.y < 0 ? -1 : 1
+            MoveDir = new Vector2(
+                PlayerPos.x - transform.position.x < 0 ? -1 : 1,
+                PlayerPos.y - transform.position.y < 0 ? -1 : 1
             );
             var position = new Vector2(transform.position.x, transform.position.y);
-            rb.MovePosition(position + moveDir * (speed * Time.unscaledDeltaTime));
+            Rb.MovePosition(position + MoveDir * (speed * Time.unscaledDeltaTime));
         }
         
         private void ResetPlayerPosition()
         {
-            playerPos = new Vector2(
+            PlayerPos = new Vector2(
                 playerTransform.position.x + Random.Range(-noise, noise),
                 playerTransform.position.y + Random.Range(-noise, noise)
             );
-            rb.AddForce((moveDir + new Vector2(-noise, noise)) * 5, ForceMode2D.Impulse);
+            Rb.AddForce((MoveDir + new Vector2(-noise, noise)) * 5, ForceMode2D.Impulse);
         }
     }
 }

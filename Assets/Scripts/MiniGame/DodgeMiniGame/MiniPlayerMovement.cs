@@ -7,27 +7,28 @@ namespace Prefabs.MiniGames
     public class MiniPlayerMovement : MonoBehaviour
     {
         [SerializeField] private int speed = 50;
-        private Vector2 moveDir;
-        private Rigidbody2D rb;
+        private Vector2 _moveDir;
+        private Rigidbody2D _rb;
 
+        [Obsolete("Obsolete")]
         private void Awake()
         {
-            rb = GetComponent<Rigidbody2D>();
-            Assert.IsNotNull(rb, "Rigidbody is null!");
+            _rb = GetComponent<Rigidbody2D>();
+            Assert.IsNotNull(_rb, "Rigidbody is null!");
             gameObject.transform.position = Vector3.zero;
 
-            moveDir = new Vector2(0, 0);
+            _moveDir = new Vector2(0, 0);
          
             Physics2D.autoSimulation = false;
         }
 
         private void Update()
         {
-            moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            _moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            if (moveDir != Vector2.zero)
+            if (_moveDir != Vector2.zero)
             {
-                rb.MovePosition(rb.position + moveDir.normalized * speed * Time.unscaledDeltaTime);
+                _rb.MovePosition(_rb.position + _moveDir.normalized * speed * Time.unscaledDeltaTime);
             }
             
             Physics2D.Simulate(Time.unscaledDeltaTime);

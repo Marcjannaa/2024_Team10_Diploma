@@ -8,16 +8,16 @@ namespace Prefabs.MiniGames
         [SerializeField] protected Transform playerTransform;
         [SerializeField] protected int speed = 1;
         [SerializeField] protected int damage = 10;
-        protected Rigidbody2D rb;
+        protected Rigidbody2D Rb;
         [SerializeField] protected float noise = 1.5f;
-        protected Vector2 moveDir;
-        protected Vector2 playerPos;
+        protected Vector2 MoveDir;
+        protected Vector2 PlayerPos;
         
 
         private void OnEnable()
         {
-            rb = GetComponent<Rigidbody2D>();
-            playerPos = new Vector2(
+            Rb = GetComponent<Rigidbody2D>();
+            PlayerPos = new Vector2(
                 playerTransform.position.x,
                 playerTransform.position.y
             );

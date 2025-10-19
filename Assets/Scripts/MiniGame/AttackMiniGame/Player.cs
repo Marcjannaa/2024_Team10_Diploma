@@ -16,6 +16,7 @@ namespace MiniGame
         private Collider2D _collider;
         public enum HitResult {PerfectHit, MediumHit, NoHit}
         
+        [Obsolete("Obsolete")]
         private void OnEnable()
         {
             _rb = GetComponent<Rigidbody2D>();

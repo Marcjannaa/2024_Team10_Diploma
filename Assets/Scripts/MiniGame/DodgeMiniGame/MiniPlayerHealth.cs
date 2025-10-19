@@ -6,12 +6,12 @@ using UnityEngine.Serialization;
 public class MiniPlayerHealth : MonoBehaviour
 {
     [SerializeField] private DodgeManager dodgeManager;
-    private float health = 100f;
+    private float _health = 100f;
     
     public void DecreaseHealth(float amount)
     {
-        health -= amount;
-        if (health <= 0)
+        _health -= amount;
+        if (_health <= 0)
         {
             DodgeManager.Lose();
         }
