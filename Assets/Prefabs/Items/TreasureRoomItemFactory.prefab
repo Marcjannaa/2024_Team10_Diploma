@@ -129,3 +129,4 @@ MonoBehaviour:
   - {fileID: 6848673200360793411, guid: 6aaaf21d0f26e0146b399dd2f4a90be3, type: 3}
   - {fileID: 6370408251690006517, guid: 98b316199ade5b44698b35ca06492606, type: 3}
   - {fileID: 892753278020138189, guid: f1e9dc066c14c3647bdcddcff3d788c8, type: 3}
+  defaultItem: {fileID: 6848673200360793411, guid: 6aaaf21d0f26e0146b399dd2f4a90be3, type: 3}

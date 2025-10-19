@@ -77,6 +77,10 @@ PrefabInstance:
       value: Thinking Cap
       objectReference: {fileID: 0}
     - target: {fileID: 4522212814232613298, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
+      propertyPath: slot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522212814232613298, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: MaxHp
       value: 0
       objectReference: {fileID: 0}
@@ -87,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 4522212814232613298, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: effect
       value: Intelligence Up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522212814232613298, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
+      propertyPath: equippable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456164560976194349, guid: 3810754dd1a68f341b8222f2973f742c, type: 3}
       propertyPath: m_Sprite
