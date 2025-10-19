@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2165081689628293416}
   - component: {fileID: 5911814611989876373}
   m_Layer: 0
-  m_Name: Boss
+  m_Name: DANTE
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+  _battlePresets: {fileID: 0}
 --- !u!114 &713259017947486385
 MonoBehaviour:
   m_ObjectHideFlags: 0
