@@ -366,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 591f1e6f36532e34f9c75ccb96980de7, type: 3}
     - target: {fileID: 4462020435206975905, guid: 80f53660c1065bf44b956117aeb8da52, type: 3}
       propertyPath: Health.StatValue
-      value: 500
+      value: 499
       objectReference: {fileID: 0}
     - target: {fileID: 4462020435206975905, guid: 80f53660c1065bf44b956117aeb8da52, type: 3}
       propertyPath: Strength.StatValue
