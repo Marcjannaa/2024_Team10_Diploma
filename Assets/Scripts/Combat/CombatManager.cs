@@ -22,6 +22,8 @@ public class CombatManager : MonoBehaviour
     private static GameObject _battleUI;
     private GameObject attackButton;
     private static GameObject enemyButton;
+    private bool _selectingEnemyForSkill = false;
+
     private static GameObject _player;
     private static GameObject _enemy;
     private static GameObject _selectedEnemy;
@@ -97,13 +99,70 @@ public class CombatManager : MonoBehaviour
     {
         if (_combatSkills[0].GetMPCost() <= Player_Stats.Mana.Value)
         {
-            _combatSkills[0].PerformSkill(this);
-            _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
-            _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
-
-            StartCoroutine(PlayerSkillRoutine());
+            SelectEnemyForSkill(_combatSkills[0]);
         }
     }
+
+    
+    public void SelectEnemyForSkill(CombatSkill skill)
+    {
+        _selectingEnemyForSkill = true;
+
+        _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(false);
+        _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(enemyButton.gameObject);
+        _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
+            .Find("TargetSprite").gameObject.SetActive(true);
+
+        StartCoroutine(CheckFocusedButtonForSkill(skill));
+    }
+
+    
+    private IEnumerator CheckFocusedButtonForSkill(CombatSkill skill)
+    {
+        while (true)
+        {
+            var focused = EventSystem.current.currentSelectedGameObject;
+            _selectedEnemy = focused.gameObject.GetComponent<EnemyFocusButton>().getMyEnemy();
+
+            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
+                .Find("TargetSprite").gameObject.SetActive(true);
+
+            foreach (Transform e in _enemyList)
+            {
+                if (e != _selectedEnemy.transform)
+                {
+                    e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
+                        .Find("TargetSprite").gameObject.SetActive(false);
+                }
+            }
+
+            yield return null;
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                skill.PerformSkill(this);
+
+                foreach (Transform e in _enemyList)
+                {
+                    e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
+                        .Find("TargetSprite").gameObject.SetActive(false);
+                }
+
+                _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
+                _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
+                _inDifferentPanel = false;
+
+                _selectingEnemyForSkill = false;
+                yield break;
+            }
+
+        }
+    }
+
+
 
     private IEnumerator PlayerSkillRoutine()
     {

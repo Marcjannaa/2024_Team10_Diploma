@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="" />
+    <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/AttackGameRT.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/AttackGameRT.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/MinigameRT.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/MinigameRT.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/CombatManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/CombatManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyCombatComponent.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyCombatComponent.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Inari.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Inari.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Combat/BigDMG.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Combat/BigDMG.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Combat/CombatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Combat/CombatManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/MinimapRenderTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/MinimapRenderTexture.renderTexture" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +47,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "do_not_show_solution_notification": "true",
-    "git-widget-placeholder": "janek__stuff",
+    "git-widget-placeholder": "inari__stuff",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -46,6 +56,13 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\48698\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\48698\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\48698\\AppData\\Local\\Symbols\\src"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -78,9 +95,6 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
-      <option name="runtimes">
-        <list />
-      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -91,9 +105,6 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="projectPathOnTarget" />
-      <option name="runtimes">
-        <list />
-      </option>
       <option name="selectedOptions">
         <list />
       </option>
@@ -117,6 +128,7 @@
       <workItem from="1760356775249" duration="4186000" />
       <workItem from="1760899585703" duration="3520000" />
       <workItem from="1760905324457" duration="1574000" />
+      <workItem from="1760965770487" duration="2450000" />
     </task>
     <servers />
   </component>

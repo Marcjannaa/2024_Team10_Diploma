@@ -6,6 +6,7 @@ public class BigDMG : CombatSkill
     public override void PerformSkill(CombatManager combatManager)
     {
         base.PerformSkill(combatManager);
+        
         combatManager.GetSelectedEnemy().GetComponent<Enemy_Stats>().Health
             .Modify(-Player_Stats.Intelligence.Value * 8);
         
