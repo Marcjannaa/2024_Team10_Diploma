@@ -18,9 +18,16 @@ public class Item : MonoBehaviour
     [SerializeField] public int Keys;
     [SerializeField] public Sprite image;
     [SerializeField] public bool allowLockPick;
-    
-    
-   
+    [SerializeField] public bool equippable;
+    [SerializeField] public Slot slot;
+
+    private void Start()
+    {
+        if (!equippable)
+        {
+            slot = Slot.None;
+        }
+    }
 
     // Update is called once per frame
     void Update()

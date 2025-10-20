@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProceduralGeneration
 {
@@ -29,7 +30,10 @@ namespace ProceduralGeneration
         public void InitializeCameraList()
         {
             allCameras.Clear();
-            allCameras.AddRange(FindObjectsOfType<Camera>(true)); 
+            allCameras.AddRange(
+                FindObjectsOfType<Camera>(true)
+                    .Where(cam => !cam.CompareTag("MiniGameCamera"))
+                ); 
             Debug.Log("Cameras Intitialized");
         }
 
@@ -44,6 +48,10 @@ namespace ProceduralGeneration
             foreach (Camera cam in allCameras)
             {
                 cam.gameObject.SetActive(false);
+            }
+            foreach (Camera cam in allCameras)
+            {
+                cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Ground", "Water", "UI", "Transitions");
             }
 
             targetCamera.gameObject.SetActive(true);

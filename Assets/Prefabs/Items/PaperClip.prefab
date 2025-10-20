@@ -131,3 +131,5 @@ MonoBehaviour:
   Keys: 0
   image: {fileID: 21300000, guid: c09a3107f0e68194e9ecea6d8a44f9d0, type: 3}
   allowLockPick: 1
+  equippable: 0
+  slot: 5

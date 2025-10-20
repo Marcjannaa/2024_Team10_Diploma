@@ -33,6 +33,10 @@ PrefabInstance:
       value: Lucky Charm
       objectReference: {fileID: 0}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
+      propertyPath: slot
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: Bombs
       value: 0
       objectReference: {fileID: 0}
@@ -47,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 21300000, guid: 3948c21ebca19c648ae15c7f7c547dae, type: 3}
+      objectReference: {fileID: 21300000, guid: 5b5b2634a36c3cc40bb7933d3ba1dd74, type: 3}
     - target: {fileID: 1440443232745650121, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: effect
       value: Luck Up!
@@ -163,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 7387991532678753622, guid: 45d94249ce01a4f45bbee54daf9e44e5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3948c21ebca19c648ae15c7f7c547dae, type: 3}
+      objectReference: {fileID: 21300000, guid: 5b5b2634a36c3cc40bb7933d3ba1dd74, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

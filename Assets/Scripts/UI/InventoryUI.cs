@@ -20,11 +20,18 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private Player_Stats Stats;
     [SerializeField] private RectTransform InventoryPanel;
+    [SerializeField] private GameObject HelmetSlot;
+    [SerializeField] private GameObject ArmorSlot;
+    [SerializeField] private GameObject PrimarySlot;
+    [SerializeField] private GameObject SecondarySlot;
+
     
-    
-    private List<Item> items = Inventory.Items;
-    private List<GameObject> buttons = new List<GameObject>();
+    private List<DraggableItem> draggableItems = new List<DraggableItem>();
+    public List<Item> items = Inventory.Items;
+    public List<GameObject> buttons = new List<GameObject>();
     private List<ItemTooltip> tooltips = new List<ItemTooltip>();
+
+    private int lastItemsSize;
     
     private void Awake()
     {
@@ -41,11 +48,11 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject tmp = new GameObject();
             tmp.name = i.ToString();
-            
+            var draggable = tmp.AddComponent<DraggableItem>();
             tmp.AddComponent<GridLayoutGroup>();
             Button btn = tmp.AddComponent<Button>();
             Image img = tmp.AddComponent<Image>();
-            img.color = new Color(1f, 1f, 1f, 0f); 
+            img.color = new Color(1f, 1f, 1f, 0f);
             
             ColorBlock cb = btn.colors;
             cb.normalColor = new Color(1f, 1f, 1f, 0f); 
@@ -76,7 +83,7 @@ public class InventoryUI : MonoBehaviour
             rect.anchoredPosition = new Vector2(0, -30f);
             
             buttons.Add(tmp);
-            
+            draggableItems.Add(draggable);
             var hover = buttons[i].AddComponent<ItemTooltip>();
             
             hover.GetComponent<ItemTooltip>().tooltipText = tooltipTMP;
@@ -96,6 +103,7 @@ public class InventoryUI : MonoBehaviour
     }
     void Update()
     {
+        
         Strength.text = "STR " +  Player_Stats.Strength.Value;
         Agility.text = "AGL " + Player_Stats.Agility.Value;
         Intelligence.text = "INT " + Player_Stats.Intelligence.Value;
@@ -110,10 +118,22 @@ public class InventoryUI : MonoBehaviour
             
             tooltips[tmp].SetTooltip(item.effect);
             
-            
+            draggableItems[tmp].item = item;
             img.sprite = item.image;
             img.color = Color.white; 
             tmp++;
         }
+    }
+
+    public void remove(Item item)
+    {
+        var index = items.IndexOf(item);
+        Debug.Log(index);
+        items.Remove(item);
+        var img = buttons[index].GetComponent<UnityEngine.UI.Image>();
+        img.sprite = null;
+        img.color = Color.clear;
+        draggableItems[index].item = null;
+        tooltips[index].SetTooltip(null);
     }
 }
