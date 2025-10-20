@@ -99,6 +99,7 @@ public class Inventory : MonoBehaviour
                     equippedSecondary = item;
                 break;
         }
+        WeaponSprite.Instance.changeSprite(item.image);
         Player_Stats.MaxHealth.Modify(item.MaxHp);
         Player_Stats.Strength.Modify(item.STR);
         Player_Stats.Agility.Modify(item.AGL);
