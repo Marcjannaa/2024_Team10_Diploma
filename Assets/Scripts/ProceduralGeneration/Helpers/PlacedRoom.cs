@@ -50,6 +50,11 @@ namespace ProceduralGeneration
             {
                 if (exit.isConnected && exit != null)
                 {
+                    if (exit.ConnectedExit == null)
+                    {
+                        //Debug.LogError("Connected exit ref is null for exit: " + exit.transform.root.gameObject.name);
+                        continue;
+                    }
                     connectedRooms.Add(exit.ConnectedExit.GetPlacedRoom());
                 }
             }

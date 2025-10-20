@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ProceduralGeneration
 {
@@ -11,6 +12,14 @@ namespace ProceduralGeneration
         public bool isConnected = false;
         public ExitPoint ConnectedExit { get; set; }
         public bool isOverlapped = false;
+        private PlacedRoom _placedRoom;
+
+        public void Awake()
+        {
+            _placedRoom = GetComponentInParent<PlacedRoom>();
+            if (_placedRoom == null)
+                Debug.LogWarning($"[ExitPoint] {name} has no PlacedRoom parent!");
+        }
 
         public void activateWall()
         {
@@ -32,14 +41,7 @@ namespace ProceduralGeneration
         
         public PlacedRoom GetPlacedRoom()
         {
-            var pr = GetComponentInParent<PlacedRoom>();
-
-            if (pr is null)
-            {
-                Debug.Log(pr is null);
-                return null;
-            }
-            return GetComponentInParent<PlacedRoom>();
+            return _placedRoom;
         }
     }
 }

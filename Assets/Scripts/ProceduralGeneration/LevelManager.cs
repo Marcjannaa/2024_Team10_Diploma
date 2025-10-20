@@ -26,6 +26,8 @@ public class LevelManager : MonoBehaviour
     private List<PlacedRoom> placedRooms;
 
     private PlacedRoom placedRoom;
+    
+    private bool gameStarted = false;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -78,11 +80,18 @@ public class LevelManager : MonoBehaviour
         
         placedRooms = _floorGenerator.GetActiveRoomList();
         OnPlayerSpawnRequest.Invoke();
+        gameStarted = true;
         // #TODO Maybe trigger something else and connect with game manager when and if implemented
     }
     
     public void setActiveRoom(PlacedRoom room)
     {
+        if (!gameStarted)
+        {
+            Debug.LogWarning("Game has not started yet. Cannot set active room.");
+            return;
+        }
+        
         placedRoom = room;
         var connectedRooms = placedRoom.GetConnectedRooms();
         
