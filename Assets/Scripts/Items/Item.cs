@@ -43,14 +43,29 @@ public class Item : MonoBehaviour
             pickUp();
         }
     }
+    
+    void StripDownToSelf()
+    {
+        var components = GetComponents<Component>();
 
+        foreach (var comp in components)
+        {
+            if (comp is Transform || comp == this)
+                continue;
+
+            Destroy(comp);
+        }
+    }
+    
     protected virtual void pickUp()
     {
-        if (Inventory.Items.Count < 9)
+        if (Inventory.getItems().Count < 9)
         {
+            
             Inventory.addItem(this);
             InventoryUI.Instance.updateInv();
-            Destroy(gameObject);
+            
+            GetComponent<Transform>().position = new Vector3(0, -100, 0);
         }
         else
         {

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -27,8 +29,8 @@ public class InventoryUI : MonoBehaviour
 
     
     private List<DraggableItem> draggableItems = new List<DraggableItem>();
-    public List<Item> items = Inventory.Items;
-    public List<GameObject> buttons = new List<GameObject>();
+    private List<Item> items = new List<Item>();
+    private List<GameObject> buttons = new List<GameObject>();
     private List<ItemTooltip> tooltips = new List<ItemTooltip>();
 
     private int lastItemsSize;
@@ -40,7 +42,6 @@ public class InventoryUI : MonoBehaviour
         else
             Destroy(gameObject);
     }
-    
     
     void Start()
     {
@@ -82,6 +83,8 @@ public class InventoryUI : MonoBehaviour
             rect.pivot = new Vector2(0.5f, 1f);
             rect.anchoredPosition = new Vector2(0, -30f);
             
+            
+            
             buttons.Add(tmp);
             draggableItems.Add(draggable);
             var hover = buttons[i].AddComponent<ItemTooltip>();
@@ -92,18 +95,38 @@ public class InventoryUI : MonoBehaviour
             tmp.transform.SetParent(InventoryPanel);
         }
         canvas.gameObject.SetActive(false);
-
-        
+        copyList();
+        addListeners();
     }
 
     public void ToggleUI()
     {
-        Debug.Log(1);
+        copyList();
         canvas.gameObject.SetActive(!canvas.gameObject.activeSelf);
+    }
+
+    private void addListeners()
+    {
+        
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            int index = i;
+
+            Button btn = buttons[i].GetComponent<Button>();
+            btn.onClick.AddListener(delegate
+            {
+                Debug.Log(index);
+
+                if (items.Count > index && items[index] != null)
+                {
+                    Debug.Log("Dropping");
+                    dropItem(items[index]);
+                }
+            });
+        }
     }
     void Update()
     {
-        
         Strength.text = "STR " +  Player_Stats.Strength.Value;
         Agility.text = "AGL " + Player_Stats.Agility.Value;
         Intelligence.text = "INT " + Player_Stats.Intelligence.Value;
@@ -111,9 +134,12 @@ public class InventoryUI : MonoBehaviour
 
     public void updateInv()
     {
+        copyList();
         int tmp = 0;
         foreach (var item in items)
         {
+            Debug.Log(item);
+            
             var img = buttons[tmp].GetComponent<UnityEngine.UI.Image>();
             
             tooltips[tmp].SetTooltip(item.effect);
@@ -125,15 +151,38 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    private void copyList()
+    {
+        items.Clear();
+        foreach (Item i in Inventory.getItems())
+        {
+            items.Add(i);
+        }
+    }
+
+    private void dropItem(Item item)
+    {
+        remove(item);
+        Inventory.removeItem(item);
+        updateInv();
+        
+        Inventory inventory = FindObjectOfType<Inventory>();
+        Debug.Log("Dropped");
+        Vector3 dropPos = inventory.transform.position + new Vector3(5,0, 0);
+        item.GetComponent<Transform>().position = dropPos;
+    }
+    
     public void remove(Item item)
     {
         var index = items.IndexOf(item);
         Debug.Log(index);
         items.Remove(item);
+        copyList();
         var img = buttons[index].GetComponent<UnityEngine.UI.Image>();
         img.sprite = null;
         img.color = Color.clear;
         draggableItems[index].item = null;
         tooltips[index].SetTooltip(null);
     }
+    
 }

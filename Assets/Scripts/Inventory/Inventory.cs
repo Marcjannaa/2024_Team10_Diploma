@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     public static Item equippedFeet;
     public static Item equippedPrimary;
     public static Item equippedSecondary;
-    public static List<Item> Items = new List<Item>();
+    private static List<Item> Items = new List<Item>();
     // Start is called before the first frame update
     private void Awake()
     {
@@ -62,9 +62,18 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("Over 9 items");
         }
-        Debug.Log(Items);
+        foreach(Item i in Items)
+        {
+            Debug.Log(i);
+        }
+        
     }
 
+    public static void removeItem(Item item)
+    {
+        Items.Remove(item);
+    }
+    
     public static void equipItem(Item item)
     {
         switch (item.slot)
@@ -98,7 +107,7 @@ public class Inventory : MonoBehaviour
         Items.Remove(item);
     }
 
-    public static void removeItem(Item item)
+    public static void unEquipItem(Item item)
     {
         switch (item.slot)
         {
@@ -126,7 +135,7 @@ public class Inventory : MonoBehaviour
         Items.Add(item);
     }
     
-    private List<Item> getItems()
+    public static List<Item> getItems()
     {
         return Items;
     }
