@@ -11,6 +11,8 @@ namespace ProceduralGeneration
         public static CameraManager Instance { get; private set; }
 
         private Camera referenceCamera;
+
+        [SerializeField] public Camera cameraToIgnore;
         
         private Vector3 _referenceForward;
 
@@ -32,8 +34,9 @@ namespace ProceduralGeneration
             allCameras.Clear();
             allCameras.AddRange(
                 FindObjectsOfType<Camera>(true)
-                    .Where(cam => !cam.CompareTag("MiniGameCamera"))
-                ); 
+                    .Where(cam => (!cam.CompareTag("MiniGameCamera") || !cam.CompareTag("MinimapCamera")))
+                );
+            allCameras.Remove(cameraToIgnore);
             Debug.Log("Cameras Intitialized");
         }
 
@@ -49,10 +52,7 @@ namespace ProceduralGeneration
             {
                 cam.gameObject.SetActive(false);
             }
-            foreach (Camera cam in allCameras)
-            {
-                cam.cullingMask = LayerMask.GetMask("Default", "TransparentFX", "Ignore Raycast", "Ground", "Water", "UI", "Transitions");
-            }
+          
 
             targetCamera.gameObject.SetActive(true);
         }

@@ -13,6 +13,8 @@ namespace ProceduralGeneration
            
             if (other.CompareTag("Player"))
             {
+                
+                
                 if (roomCamera != null)
                 {
                     CameraManager.Instance.SwitchToCamera(roomCamera);

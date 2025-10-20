@@ -27,6 +27,9 @@ public class LevelManager : MonoBehaviour
 
     private PlacedRoom placedRoom;
     
+    [SerializeField]
+    public Camera MinimapCamera;
+    
     private bool gameStarted = false;
     private void Awake()
     {
@@ -106,6 +109,7 @@ public class LevelManager : MonoBehaviour
                 r.setInactive();
             }
         }
+        MinimapCamera.GetComponent<MinimapFollowScript>().MinimapUpdatePosition(room);
         
     }
 }
