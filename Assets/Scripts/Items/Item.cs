@@ -21,12 +21,15 @@ public class Item : MonoBehaviour
     [SerializeField] public bool equippable;
     [SerializeField] public Slot slot;
 
+    private bool canPickup = true;
+    
     private void Start()
     {
         if (!equippable)
         {
             slot = Slot.None;
         }
+        StartCoroutine(pickupCD());
     }
 
     // Update is called once per frame
@@ -35,6 +38,13 @@ public class Item : MonoBehaviour
         
     }
 
+    public IEnumerator pickupCD()
+    {
+        canPickup = false;
+        yield return new WaitForSeconds(2);
+        canPickup = true;
+    }
+    
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log(other.collider.tag);
@@ -43,19 +53,34 @@ public class Item : MonoBehaviour
             pickUp();
         }
     }
+    
+    void StripDownToSelf()
+    {
+        var components = GetComponents<Component>();
 
+        foreach (var comp in components)
+        {
+            if (comp is Transform || comp == this)
+                continue;
+
+            Destroy(comp);
+        }
+    }
+    
     protected virtual void pickUp()
     {
-        if (Inventory.Items.Count < 9)
+        if (Inventory.getItems().Count < 9 && canPickup)
         {
+            
             Inventory.addItem(this);
             InventoryUI.Instance.updateInv();
-            Destroy(gameObject);
+            
+            GetComponent<Transform>().position = new Vector3(0, -100, 0);
         }
-        else
-        {
-            Debug.Log("Inventory Full not picking up");
-        }
+        // else
+        // {
+        //     Debug.Log("Inventory Full not picking up");
+        // }
         
     }
 }

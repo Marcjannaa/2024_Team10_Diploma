@@ -1,6 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -27,12 +30,12 @@ public class InventoryUI : MonoBehaviour
 
     
     private List<DraggableItem> draggableItems = new List<DraggableItem>();
-    public List<Item> items = Inventory.Items;
-    public List<GameObject> buttons = new List<GameObject>();
+    private List<Item> items = new List<Item>();
+    private List<GameObject> buttons = new List<GameObject>();
     private List<ItemTooltip> tooltips = new List<ItemTooltip>();
 
     private int lastItemsSize;
-    
+    private bool canDrop = true;
     private void Awake()
     {
         if (Instance == null)
@@ -40,7 +43,6 @@ public class InventoryUI : MonoBehaviour
         else
             Destroy(gameObject);
     }
-    
     
     void Start()
     {
@@ -82,6 +84,8 @@ public class InventoryUI : MonoBehaviour
             rect.pivot = new Vector2(0.5f, 1f);
             rect.anchoredPosition = new Vector2(0, -30f);
             
+            
+            
             buttons.Add(tmp);
             draggableItems.Add(draggable);
             var hover = buttons[i].AddComponent<ItemTooltip>();
@@ -92,18 +96,38 @@ public class InventoryUI : MonoBehaviour
             tmp.transform.SetParent(InventoryPanel);
         }
         canvas.gameObject.SetActive(false);
-
-        
+        copyList();
+        addListeners();
     }
 
     public void ToggleUI()
     {
-        Debug.Log(1);
+        copyList();
         canvas.gameObject.SetActive(!canvas.gameObject.activeSelf);
+    }
+
+    private void addListeners()
+    {
+        
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            int index = i;
+
+            Button btn = buttons[i].GetComponent<Button>();
+            btn.onClick.AddListener(delegate
+            {
+                Debug.Log(index);
+
+                if (items.Count > index && items[index] != null)
+                {
+                    Debug.Log("Dropping");
+                    dropItem(items[index]);
+                }
+            });
+        }
     }
     void Update()
     {
-        
         Strength.text = "STR " +  Player_Stats.Strength.Value;
         Agility.text = "AGL " + Player_Stats.Agility.Value;
         Intelligence.text = "INT " + Player_Stats.Intelligence.Value;
@@ -111,9 +135,12 @@ public class InventoryUI : MonoBehaviour
 
     public void updateInv()
     {
+        copyList();
         int tmp = 0;
         foreach (var item in items)
         {
+            Debug.Log(item);
+            
             var img = buttons[tmp].GetComponent<UnityEngine.UI.Image>();
             
             tooltips[tmp].SetTooltip(item.effect);
@@ -123,17 +150,61 @@ public class InventoryUI : MonoBehaviour
             img.color = Color.white; 
             tmp++;
         }
+        
+        for (int i = 8; i > items.Count-1; i--)
+        {
+            
+            var img = buttons[i].GetComponent<UnityEngine.UI.Image>();
+            
+            tooltips[i].SetTooltip("");
+            
+            draggableItems[i].item = null;
+            img.sprite = null;
+            img.color = Color.clear; 
+        }
     }
 
+    private void copyList()
+    {
+        items.Clear();
+        foreach (Item i in Inventory.getItems())
+        {
+            items.Add(i);
+        }
+    }
+
+    private void dropItem(Item item)
+    {
+        remove(item);
+        Inventory.removeItem(item);
+        
+        
+        Inventory inventory = FindObjectOfType<Inventory>();
+        Debug.Log("Dropped");
+        Vector3 dropPos = inventory.transform.position + new Vector3(0 ,0, 0.1f);
+        item.GetComponent<Transform>().position = dropPos;
+        updateInv();
+        item.StartCoroutine(item.pickupCD());
+    }
+
+    private IEnumerator dropCooldown()
+    {
+        canDrop = false;
+        yield return new WaitForSeconds(1f);
+        canDrop = true;
+    }
+    
     public void remove(Item item)
     {
         var index = items.IndexOf(item);
         Debug.Log(index);
         items.Remove(item);
+        copyList();
         var img = buttons[index].GetComponent<UnityEngine.UI.Image>();
         img.sprite = null;
         img.color = Color.clear;
         draggableItems[index].item = null;
         tooltips[index].SetTooltip(null);
     }
+    
 }
