@@ -41,9 +41,7 @@ namespace ProceduralGeneration
         
         public PlacedRoom GetPlacedRoom()
         {
-<<<<<<< Updated upstream
-            return _placedRoom;
-=======
+
             var pr = GetComponentInParent<PlacedRoom>();
 
             if (pr is null)
@@ -52,7 +50,7 @@ namespace ProceduralGeneration
                 return null;
             }
             return GetComponentInParent<PlacedRoom>();
->>>>>>> Stashed changes
+
         }
     }
 }

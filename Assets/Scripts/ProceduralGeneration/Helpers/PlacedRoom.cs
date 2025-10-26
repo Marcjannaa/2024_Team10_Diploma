@@ -51,11 +51,7 @@ namespace ProceduralGeneration
             {
                 if (exit.isConnected && exit != null)
                 {
-<<<<<<< Updated upstream
-                    if (exit.ConnectedExit == null)
-                    {
-                        //Debug.LogError("Connected exit ref is null for exit: " + exit.transform.root.gameObject.name);
-=======
+
                     if (exit.ConnectedExit is null)
                     {
                         Debug.LogError("Connected exit is null despite isConnected being true. " +
@@ -65,7 +61,7 @@ namespace ProceduralGeneration
                     if ( exit.ConnectedExit.GetPlacedRoom() is null)
                     {
                         Debug.LogError("Connected exit's placed room is null.");
->>>>>>> Stashed changes
+
                         continue;
                     }
                     connectedRooms.Add(exit.ConnectedExit.GetPlacedRoom());
