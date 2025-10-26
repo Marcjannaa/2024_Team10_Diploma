@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -34,7 +35,7 @@ public class InventoryUI : MonoBehaviour
     private List<ItemTooltip> tooltips = new List<ItemTooltip>();
 
     private int lastItemsSize;
-    
+    private bool canDrop = true;
     private void Awake()
     {
         if (Instance == null)
@@ -149,6 +150,18 @@ public class InventoryUI : MonoBehaviour
             img.color = Color.white; 
             tmp++;
         }
+        
+        for (int i = 8; i > items.Count-1; i--)
+        {
+            
+            var img = buttons[i].GetComponent<UnityEngine.UI.Image>();
+            
+            tooltips[i].SetTooltip("");
+            
+            draggableItems[i].item = null;
+            img.sprite = null;
+            img.color = Color.clear; 
+        }
     }
 
     private void copyList()
@@ -164,12 +177,21 @@ public class InventoryUI : MonoBehaviour
     {
         remove(item);
         Inventory.removeItem(item);
-        updateInv();
+        
         
         Inventory inventory = FindObjectOfType<Inventory>();
         Debug.Log("Dropped");
-        Vector3 dropPos = inventory.transform.position + new Vector3(5,0, 0);
+        Vector3 dropPos = inventory.transform.position + new Vector3(0 ,0, 0.1f);
         item.GetComponent<Transform>().position = dropPos;
+        updateInv();
+        item.StartCoroutine(item.pickupCD());
+    }
+
+    private IEnumerator dropCooldown()
+    {
+        canDrop = false;
+        yield return new WaitForSeconds(1f);
+        canDrop = true;
     }
     
     public void remove(Item item)
