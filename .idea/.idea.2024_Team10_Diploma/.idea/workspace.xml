@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="" />
+    <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Helpers/ExitPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Helpers/ExitPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Helpers/PlacedRoom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Helpers/PlacedRoom.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +54,7 @@
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/build\Diploma.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../Builds/demobuild\Diploma.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\48698\Documents\studia\XRG\inzynierka unity\2024_Team10_Diploma\build" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -58,7 +62,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Unity\Editors\2022.3.46f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Lenovo\Documents\repo\2024_Team10_Diploma -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Lenovo\Documents\repo\2024_Team10_Diploma" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -66,7 +70,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="D:\Unity\Editors\2022.3.46f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Lenovo\Documents\repo\2024_Team10_Diploma -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Lenovo\Documents\repo\2024_Team10_Diploma" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -117,6 +121,7 @@
       <workItem from="1760356775249" duration="4186000" />
       <workItem from="1760899585703" duration="3520000" />
       <workItem from="1760905324457" duration="1574000" />
+      <workItem from="1760919377923" duration="1433000" />
     </task>
     <servers />
   </component>
