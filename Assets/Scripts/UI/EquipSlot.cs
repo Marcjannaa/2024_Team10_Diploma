@@ -132,6 +132,7 @@ public class EquipSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
 //        Debug.Log("Equipping " + item.name);
         equipped = item;
         Debug.Log("Equipped " + item);
+        
         image.sprite = item.image;
         image.color = Color.white;
 //        Debug.Log($"Equipped {item.name} in {slotType}");
@@ -142,6 +143,7 @@ public class EquipSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
         if (Inventory.getItems().Count < 9)
         {
             equipped = null;
+            WeaponSprite.Instance.changeSprite(null);
             Inventory.unEquipItem(item);
             InventoryUI.Instance.updateInv();
             updateSlot();
