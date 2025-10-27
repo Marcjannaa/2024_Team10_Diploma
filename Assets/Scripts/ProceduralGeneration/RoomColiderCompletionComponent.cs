@@ -36,6 +36,7 @@ namespace ProceduralGeneration
                 {
                     door.GetComponent<DoorHandlingComponent>().CloseRoomExit();
                 }
+                Debug.Log("Room locked, defeat all enemies to proceed.");
             }
         }
         // Called by UnityEvent in EnemyOnDefeatComponent
@@ -47,12 +48,14 @@ namespace ProceduralGeneration
             }
             else
             {
+                enemyCount = 0;
                 isRoomComplete = true;
 
                 foreach (var door in exitList)
                 {
                     door.GetComponent<DoorHandlingComponent>().OpenRoomExit();
                 }
+                Debug.Log("Room complete! Exits are now open.");
             }
         }
     }

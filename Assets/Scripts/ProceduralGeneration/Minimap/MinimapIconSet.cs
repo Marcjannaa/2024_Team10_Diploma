@@ -10,6 +10,7 @@ public class MinimapIconSet : ScriptableObject
     public Sprite treasureRoom;
     public Sprite shopRoom;
     public Sprite casinoRoom;
+    public Sprite trapRoom;
 
     public Sprite GetSprite(RoomTypeMinimap type)
     {
@@ -19,7 +20,8 @@ public class MinimapIconSet : ScriptableObject
             RoomTypeMinimap.Boss => bossRoom,
             RoomTypeMinimap.Treasure => treasureRoom,
             RoomTypeMinimap.Shop => shopRoom,
-            RoomTypeMinimap.casino => casinoRoom,
+            RoomTypeMinimap.Casino => casinoRoom,
+            RoomTypeMinimap.Trap => trapRoom,
             _ => defaultRoom
         };
     }
@@ -32,5 +34,6 @@ public enum RoomTypeMinimap
     Boss,
     Treasure,
     Shop,
-    casino
+    Casino,
+    Trap
 }
