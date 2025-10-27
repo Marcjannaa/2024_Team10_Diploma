@@ -41,7 +41,16 @@ namespace ProceduralGeneration
         
         public PlacedRoom GetPlacedRoom()
         {
-            return _placedRoom;
+
+            var pr = GetComponentInParent<PlacedRoom>();
+
+            if (pr is null)
+            {
+                Debug.Log("pr is null");
+                return null;
+            }
+            return GetComponentInParent<PlacedRoom>();
+
         }
     }
 }

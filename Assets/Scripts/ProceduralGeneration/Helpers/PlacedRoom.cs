@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace ProceduralGeneration
@@ -48,15 +49,29 @@ namespace ProceduralGeneration
             var connectedRooms = new List<PlacedRoom>();
             foreach (var exit in Exits)
             {
-                if (exit.isConnected && exit != null)
-                {
-                    if (exit.ConnectedExit == null)
-                    {
-                        //Debug.LogError("Connected exit ref is null for exit: " + exit.transform.root.gameObject.name);
-                        continue;
-                    }
-                    connectedRooms.Add(exit.ConnectedExit.GetPlacedRoom());
+                if(exit is null){
+                    Debug.LogError("Exit is null " );
+                    continue;
                 }
+
+                if (!exit.isConnected)
+                {
+                    
+                    continue;
+                }
+                
+                if (exit.ConnectedExit is null)
+                {
+                    Debug.LogError("Connected exit is null despite isConnected being true. ");
+                    continue;
+                }
+                if ( exit.ConnectedExit.GetPlacedRoom() is null)
+                { 
+                    Debug.LogError("Connected exit's placed room is null.");
+                    continue;
+                }
+                connectedRooms.Add(exit.ConnectedExit.GetPlacedRoom());
+                
             }
             return connectedRooms;
         }
@@ -78,6 +93,6 @@ namespace ProceduralGeneration
             }
             
         }
-        //TODO: Add real references beetwen connected exits - rooms even. what was i thinking !>?? ??/
+        
     }
 }
