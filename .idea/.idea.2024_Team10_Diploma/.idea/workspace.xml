@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f38f0b9-1597-4114-80e1-43167555a4a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/RoomSpriteScript.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/RoomSpriteScript.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2024_Team10_Diploma/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Janek.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Helpers/PlacedRoom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Helpers/PlacedRoom.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/BossRooms/BossRoom1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/BossRooms/BossRoom1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/CasinoRooms/Casino1 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/CasinoRooms/Casino1 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/ShopRooms/Shop1 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/ShopRooms/Shop1 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/StandardRoom_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/StandardRoom_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/StandardSkinnyRoom 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/StandardSkinnyRoom 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TRAPROOMBASE.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TRAPROOMBASE.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_5.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_5.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_6.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_6.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_7.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/Standard Rooms/TrapRoom_7.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/StartingRooms/StartingRoom1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/StartingRooms/StartingRoom1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/TreasureRooms/Treasure1 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RoomsPrefabs/Floor 1/TreasureRooms/Treasure1 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/RoomSpriteScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/RoomSpriteScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/StandardIconset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ProceduralGeneration/Minimap/StandardIconset.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +137,7 @@
       <workItem from="1760899585703" duration="3520000" />
       <workItem from="1760905324457" duration="1574000" />
       <workItem from="1760919377923" duration="1433000" />
-      <workItem from="1761518268615" duration="3382000" />
+      <workItem from="1761518268615" duration="4167000" />
     </task>
     <servers />
   </component>

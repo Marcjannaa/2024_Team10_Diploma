@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ProceduralGeneration.Minimap
 {
-    [RequireComponent(typeof(Image))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class RoomSpriteScript : MonoBehaviour
     {
         [Header("References")]

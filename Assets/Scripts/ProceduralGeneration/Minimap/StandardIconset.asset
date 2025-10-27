@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d48bd1be7dbcb34983a70d141b4f7e0, type: 3}
   m_Name: StandardIconset
   m_EditorClassIdentifier: 
-  defaultRoom: {fileID: 21300000, guid: 85a8e7b67c89e2e4eb55155dddda4f6d, type: 3}
-  startRoom: {fileID: 0}
-  bossRoom: {fileID: 0}
-  treasureRoom: {fileID: 0}
-  shopRoom: {fileID: 0}
-  casinoRoom: {fileID: 0}
+  defaultRoom: {fileID: 21300000, guid: 745a5d7d4c2769e42ac9a8163d628feb, type: 3}
+  startRoom: {fileID: 21300000, guid: 67919e70f6a7c9942a0a453285abe245, type: 3}
+  bossRoom: {fileID: 21300000, guid: c9207316854777640984dedb9bc3b1ea, type: 3}
+  treasureRoom: {fileID: 21300000, guid: bcd114b09d12ea54790129f6b559ea42, type: 3}
+  shopRoom: {fileID: 21300000, guid: 5c8f5309a0e16eb4c862742f9052b252, type: 3}
+  casinoRoom: {fileID: 21300000, guid: 513fd905db1da214b9fa6f25c3187181, type: 3}
