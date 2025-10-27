@@ -17,6 +17,8 @@ namespace ProceduralGeneration
         private Vector3 _referenceForward;
 
         private List<Camera> allCameras = new List<Camera>();
+        [SerializeField] private Camera[] ignoreCameras;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -37,6 +39,10 @@ namespace ProceduralGeneration
                     .Where(cam => (!cam.CompareTag("MiniGameCamera") || !cam.CompareTag("MinimapCamera")))
                 );
             allCameras.Remove(cameraToIgnore);
+            foreach (var cam in ignoreCameras)
+            {
+                allCameras.Remove(cam);
+            }
             Debug.Log("Cameras Intitialized");
         }
 
