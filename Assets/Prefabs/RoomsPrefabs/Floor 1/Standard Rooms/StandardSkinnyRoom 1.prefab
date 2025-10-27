@@ -2345,8 +2345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7520556213751171784}
+  - {fileID: 5252294216459509123}
   exitList:
   - {fileID: 1592791857229885502}
   - {fileID: 4871730550813257911}
@@ -3926,10 +3926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CryingRock
       objectReference: {fileID: 0}
-    - target: {fileID: 7777230580453729988, guid: f30f9d166f4de294298850597c1290d4, type: 3}
-      propertyPath: _battlePresets
+    - target: {fileID: 7216523179849776309, guid: f30f9d166f4de294298850597c1290d4, type: 3}
+      propertyPath: OnEnemyDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6253889816689297536}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3938,6 +3938,11 @@ PrefabInstance:
 --- !u!224 &2531015253365368224 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
+  m_PrefabInstance: {fileID: 1431652669025235142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5252294216459509123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6574592757423500613, guid: f30f9d166f4de294298850597c1290d4, type: 3}
   m_PrefabInstance: {fileID: 1431652669025235142}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2284749677939794260
@@ -4181,13 +4186,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6574592757423500613, guid: ae93eb9b6b44eec48a51ef4ff9b23fc7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 740903410623762187}
   m_SourcePrefab: {fileID: 100100000, guid: ae93eb9b6b44eec48a51ef4ff9b23fc7, type: 3}
 --- !u!224 &261911583144719083 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3513291987900765542, guid: ae93eb9b6b44eec48a51ef4ff9b23fc7, type: 3}
   m_PrefabInstance: {fileID: 3703022398886094733}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7520556213751171784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6574592757423500613, guid: ae93eb9b6b44eec48a51ef4ff9b23fc7, type: 3}
+  m_PrefabInstance: {fileID: 3703022398886094733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &740903410623762187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520556213751171784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7204c4793d460a852362fa7b7ac106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnemyDefeated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6253889816689297536}
+        m_TargetAssemblyTypeName: ProceduralGeneration.RoomColiderCompletionComponent,
+          Assembly-CSharp
+        m_MethodName: EnemyKilled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4185219537342946595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4214,7 +4255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6017943723617134099, guid: 0e3b4a3f558087a4dad13585b0b4cc92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6017943723617134099, guid: 0e3b4a3f558087a4dad13585b0b4cc92, type: 3}
       propertyPath: m_LocalPosition.z

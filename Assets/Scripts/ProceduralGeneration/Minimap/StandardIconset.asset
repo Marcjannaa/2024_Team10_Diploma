@@ -18,3 +18,4 @@ MonoBehaviour:
   treasureRoom: {fileID: 21300000, guid: bcd114b09d12ea54790129f6b559ea42, type: 3}
   shopRoom: {fileID: 21300000, guid: 5c8f5309a0e16eb4c862742f9052b252, type: 3}
   casinoRoom: {fileID: 21300000, guid: 513fd905db1da214b9fa6f25c3187181, type: 3}
+  trapRoom: {fileID: 21300000, guid: 2dec118b9940c72449e1ded3f8907aa0, type: 3}
