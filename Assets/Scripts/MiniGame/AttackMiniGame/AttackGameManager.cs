@@ -17,6 +17,7 @@ public class AttackGameManager : MonoBehaviour
     
     public void EndGame(Player.HitResult hitResult)
     {
+        attackGameObject.SetActive(false);
         CombatManager.OnAttackEnded(hitResult);
     }
 }
