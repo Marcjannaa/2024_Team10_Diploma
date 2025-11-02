@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0
-  _battlePresets: {fileID: 0}
+  _battlePresets: {fileID: 320240042124749471}
 --- !u!114 &7216523179849776309
 MonoBehaviour:
   m_ObjectHideFlags: 0
