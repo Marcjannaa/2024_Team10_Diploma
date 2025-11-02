@@ -288,6 +288,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa3ed57763d11c04fb20309aa1f7af95, type: 3}
+--- !u!20 &559145302 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2318461180462774259, guid: fd97d261fbf85834b9dea3ddaf898c28, type: 3}
+  m_PrefabInstance: {fileID: 926736246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &694750320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,6 +1114,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb3aa9adec184d14da985a3cc0a7229a, type: 3}
+--- !u!20 &1819847110 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1786139452551587442, guid: 2bf15ca871ecb584490b216c481b3963, type: 3}
+  m_PrefabInstance: {fileID: 2089835018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1822488297 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5188179366629512230, guid: 259d2d97dd837d143816e1aa3f011657, type: 3}
@@ -1331,6 +1341,18 @@ PrefabInstance:
       propertyPath: cameraToIgnore
       value: 
       objectReference: {fileID: 1822488297}
+    - target: {fileID: 3334965391139342508, guid: e9c8c696f39848c4cb9494a4a5b3fbba, type: 3}
+      propertyPath: ignoreCameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334965391139342508, guid: e9c8c696f39848c4cb9494a4a5b3fbba, type: 3}
+      propertyPath: ignoreCameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1819847110}
+    - target: {fileID: 3334965391139342508, guid: e9c8c696f39848c4cb9494a4a5b3fbba, type: 3}
+      propertyPath: ignoreCameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 559145302}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

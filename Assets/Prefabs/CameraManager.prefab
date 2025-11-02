@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e3134362b446e0862955852f236efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraToIgnore: {fileID: 0}
+  ignoreCameras:
+  - {fileID: 0}
+  - {fileID: 0}
