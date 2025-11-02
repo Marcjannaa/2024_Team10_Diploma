@@ -388,6 +388,7 @@ Transform:
   - {fileID: 7957156729180534834}
   - {fileID: 1816145898858733743}
   - {fileID: 4951249883365413801}
+  - {fileID: 8227199664878678407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2272130583935275564
@@ -1799,7 +1800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 2068285112412200680}
+  - {fileID: 0}
   exitList:
   - {fileID: 3231970798586374446}
   - {fileID: 3071234426621615288}
@@ -2529,7 +2530,6 @@ Transform:
   - {fileID: 7529466738898063505}
   - {fileID: 3278316398707211612}
   - {fileID: 429236609062725650}
-  - {fileID: 8595150041144272587}
   m_Father: {fileID: 8722550849733844433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5559697307653111899
@@ -2976,7 +2976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 3199777983298819433}
+  - {fileID: 0}
 --- !u!1 &8324224045699764563
 GameObject:
   m_ObjectHideFlags: 0
@@ -4448,13 +4448,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 812828570598883054, guid: f44e12905b9eca14291fcd7d1905ef7d, type: 3}
   m_PrefabInstance: {fileID: 4340462113665765150}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5154830599937831853
+--- !u!1001 &4822610778161112289
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7957156729180534834}
+    m_TransformParent: {fileID: 8722550849733844433}
     m_Modifications:
     - target: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
       propertyPath: m_Pivot.x
@@ -4498,7 +4498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7412338
+      value: 7.3863616
       objectReference: {fileID: 0}
     - target: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4518,11 +4518,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0948925
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.02
+      value: 1.49
       objectReference: {fileID: 0}
     - target: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4540,35 +4540,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: CryingRock
       objectReference: {fileID: 0}
-    - target: {fileID: 7216523179849776309, guid: f30f9d166f4de294298850597c1290d4, type: 3}
-      propertyPath: OnEnemyDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1475693665532809387}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f30f9d166f4de294298850597c1290d4, type: 3}
---- !u!1 &2068285112412200680 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6574592757423500613, guid: f30f9d166f4de294298850597c1290d4, type: 3}
-  m_PrefabInstance: {fileID: 5154830599937831853}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3199777983298819433 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7777230580453729988, guid: f30f9d166f4de294298850597c1290d4, type: 3}
-  m_PrefabInstance: {fileID: 5154830599937831853}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068285112412200680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e8c5642b63d57244bf757e78c7afa53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &8595150041144272587 stripped
+--- !u!224 &8227199664878678407 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3513291987900765542, guid: f30f9d166f4de294298850597c1290d4, type: 3}
-  m_PrefabInstance: {fileID: 5154830599937831853}
+  m_PrefabInstance: {fileID: 4822610778161112289}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5163255279230687906
 PrefabInstance:
