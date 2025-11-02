@@ -37,6 +37,8 @@ public class CombatManager : MonoBehaviour
     private bool _enemyHasActed = false;
     private bool _inDifferentPanel = false;
 
+    private Coroutine _enemySelectionRoutine;
+
     private void Update()
     {
         if (Keyboard.current.backspaceKey.wasPressedThisFrame && _inDifferentPanel)
@@ -52,32 +54,49 @@ public class CombatManager : MonoBehaviour
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(false);
-        
+
         EventSystem.current.SetSelectedGameObject(enemyButton.gameObject);
-        _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("TargetSprite").GameObject().SetActive(true);
-        
-        StartCoroutine(CheckFocusedButton());
+        if (_selectedEnemy != null && !_selectedEnemy.Equals(null))
+        {
+            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                .transform.Find("TargetSprite").gameObject.SetActive(true);
+        }
+
+        _enemySelectionRoutine = StartCoroutine(CheckFocusedButton());
     }
 
     private IEnumerator CheckFocusedButton()
     {
         while (true)
         {
+            if (_selectedEnemy == null || _selectedEnemy.Equals(null))
+                yield break;
+
             var focused = EventSystem.current.currentSelectedGameObject;
+            if (focused == null)
+            {
+                yield return null;
+                continue;
+            }
 
             _selectedEnemy = focused.gameObject.GetComponent<EnemyFocusButton>().getMyEnemy();
-            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("TargetSprite").GameObject().SetActive(true);
+            if (_selectedEnemy == null || _selectedEnemy.Equals(null))
+                yield break;
+
+            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                .transform.Find("TargetSprite").gameObject.SetActive(true);
 
             foreach (Transform e in _enemyList)
             {
                 if (e != _selectedEnemy.transform)
                 {
-                    e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("TargetSprite").GameObject().SetActive(false);
+                    e.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                        .transform.Find("TargetSprite").gameObject.SetActive(false);
                 }
             }
 
             yield return null;
-            
+
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 yield break;
@@ -87,11 +106,18 @@ public class CombatManager : MonoBehaviour
 
     public void OnEnemyClicked()
     {
-        StopCoroutine(CheckFocusedButton());
+        if (_enemySelectionRoutine != null)
+        {
+            StopCoroutine(_enemySelectionRoutine);
+            _enemySelectionRoutine = null;
+        }
+
         foreach (Transform e in _enemyList)
         {
-            e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("TargetSprite").GameObject().SetActive(false);
+            e.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                .transform.Find("TargetSprite").gameObject.SetActive(false);
         }
+
         _miniGamePanel.SetActive(true);
     }
 
@@ -103,7 +129,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    
     public void SelectEnemyForSkill(CombatSkill skill)
     {
         _selectingEnemyForSkill = true;
@@ -113,29 +138,42 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(enemyButton.gameObject);
-        _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
-            .Find("TargetSprite").gameObject.SetActive(true);
+        if (_selectedEnemy != null && !_selectedEnemy.Equals(null))
+        {
+            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                .transform.Find("TargetSprite").gameObject.SetActive(true);
+        }
 
-        StartCoroutine(CheckFocusedButtonForSkill(skill));
+        _enemySelectionRoutine = StartCoroutine(CheckFocusedButtonForSkill(skill));
     }
 
-    
     private IEnumerator CheckFocusedButtonForSkill(CombatSkill skill)
     {
         while (true)
         {
-            var focused = EventSystem.current.currentSelectedGameObject;
-            _selectedEnemy = focused.gameObject.GetComponent<EnemyFocusButton>().getMyEnemy();
+            if (_selectedEnemy == null || _selectedEnemy.Equals(null))
+                yield break;
 
-            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
-                .Find("TargetSprite").gameObject.SetActive(true);
+            var focused = EventSystem.current.currentSelectedGameObject;
+            if (focused == null)
+            {
+                yield return null;
+                continue;
+            }
+
+            _selectedEnemy = focused.gameObject.GetComponent<EnemyFocusButton>().getMyEnemy();
+            if (_selectedEnemy == null || _selectedEnemy.Equals(null))
+                yield break;
+
+            _selectedEnemy.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                .transform.Find("TargetSprite").gameObject.SetActive(true);
 
             foreach (Transform e in _enemyList)
             {
                 if (e != _selectedEnemy.transform)
                 {
-                    e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
-                        .Find("TargetSprite").gameObject.SetActive(false);
+                    e.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                        .transform.Find("TargetSprite").gameObject.SetActive(false);
                 }
             }
 
@@ -147,22 +185,18 @@ public class CombatManager : MonoBehaviour
 
                 foreach (Transform e in _enemyList)
                 {
-                    e.GetComponent<EnemyUI_Interaction>().getUIComponent().transform
-                        .Find("TargetSprite").gameObject.SetActive(false);
+                    e.GetComponent<EnemyUI_Interaction>().getUIComponent()
+                        .transform.Find("TargetSprite").gameObject.SetActive(false);
                 }
 
                 _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(false);
                 _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
                 _inDifferentPanel = false;
-
                 _selectingEnemyForSkill = false;
                 yield break;
             }
-
         }
     }
-
-
 
     private IEnumerator PlayerSkillRoutine()
     {
@@ -174,39 +208,39 @@ public class CombatManager : MonoBehaviour
 
     public static void OnAttackEnded(Player.HitResult hitResult)
     {
-        float dmg = 0;
-        switch (hitResult)
+        float dmg = hitResult switch
         {
-            case Player.HitResult.PerfectHit:
-                dmg = Player_Stats.Strength.Value * 4;
-                break;
-            case Player.HitResult.MediumHit:
-                dmg = Player_Stats.Strength.Value * 3;
-                break;
-            case Player.HitResult.NoHit:
-                dmg = Player_Stats.Strength.Value * 2;
-                break;
-        }
+            Player.HitResult.PerfectHit => Player_Stats.Strength.Value * 4,
+            Player.HitResult.MediumHit => Player_Stats.Strength.Value * 3,
+            _ => Player_Stats.Strength.Value * 2
+        };
 
         var enemyStats = _selectedEnemy.GetComponent<Enemy_Stats>();
         enemyStats.Health.Modify(-dmg);
-        
 
         if (enemyStats.Health.Value <= 0)
         {
             Transform enemyTransform = _selectedEnemy.transform;
 
+            if (Instance._enemySelectionRoutine != null)
+            {
+                Instance.StopCoroutine(Instance._enemySelectionRoutine);
+                Instance._enemySelectionRoutine = null;
+            }
 
             _battleUI.GetComponent<BattleUI>().RemoveEnemyFromList(enemyTransform);
 
-
             enemyTransform.SetParent(null);
             Destroy(_selectedEnemy);
-
+            _selectedEnemy = null;
 
             if (_enemyList.childCount > 0)
             {
                 _selectedEnemy = _enemyList.GetChild(0).gameObject;
+                enemyButton = _selectedEnemy.GetComponent<EnemyUI_Interaction>()
+                    .getUIComponent()
+                    .transform.Find("EnemyFocusButton").gameObject;
+                enemyButton.GetComponent<EnemyFocusButton>().setMyEnemy(_selectedEnemy);
             }
             else
             {
@@ -218,29 +252,20 @@ public class CombatManager : MonoBehaviour
         Instance.StartCoroutine(Instance.AttackRoutineAfterHit());
     }
 
-
     private IEnumerator AttackRoutineAfterHit()
     {
         yield return StartCoroutine(FlashEnemySpriteRed());
-        
 
         _battleUI.transform.Find("PlayerActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("EnemyActionPanel").gameObject.SetActive(true);
 
         var dodgeMiniGame = _battleUI.transform.Find("EnemyActionPanel").Find("DodgeMiniGame").gameObject;
         dodgeMiniGame.SetActive(true);
-        //dodgeMiniGame.GetComponent<DodgeManager>().ResetGame();
     }
 
     private IEnumerator FlashEnemySpriteRed()
     {
-        //Debug.Log("Highlighting enemy");
-        //Color originalColor = _enemySprite.color;
-        //_enemySprite.color = Color.red;
-       // Debug.Log("Color set to red");
         yield return new WaitForSecondsRealtime(1);
-        //_enemySprite.color = originalColor;
-        //Debug.Log("Color reset");
     }
 
     public static void OnDodgeEnded(bool win)
@@ -250,7 +275,7 @@ public class CombatManager : MonoBehaviour
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(true);
         _battleUI.transform.Find("PlayerActionPanel").Find("StatsPanel").gameObject.SetActive(true);
 
-        if (!win)
+        if (!win && _selectedEnemy != null && !_selectedEnemy.Equals(null))
         {
             Player_Stats.Health.Modify(-(int)_selectedEnemy.GetComponent<Enemy_Stats>().Strength.Value * Instance._guardMultiplier);
         }
@@ -258,7 +283,6 @@ public class CombatManager : MonoBehaviour
         Instance._playerAttacked = false;
         Instance._turn = Turn.Player;
         Instance._guardMultiplier = 1;
-
         Instance.SwitchBattleUIPanel();
     }
 
@@ -266,6 +290,7 @@ public class CombatManager : MonoBehaviour
     {
         _battleUI.transform.Find("PlayerActionPanel").Find("ActionPanel").gameObject.SetActive(false);
         _battleUI.transform.Find("PlayerActionPanel").Find("SkillPanel").gameObject.SetActive(true);
+
         for (int i = 0; i < _combatSkills.Count; i++)
         {
             _battleUI.GetComponent<BattleUI>().SetSkillCostText(i, _combatSkills[i].GetMPCost().ToString());
@@ -278,7 +303,9 @@ public class CombatManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(skillButton);
         }
 
-        _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_selectedEnemy.transform);
+        if (_selectedEnemy != null && !_selectedEnemy.Equals(null))
+            _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_selectedEnemy.transform);
+
         _inDifferentPanel = true;
     }
 
@@ -326,10 +353,8 @@ public class CombatManager : MonoBehaviour
         Instance.StartCoroutine(Transition.Instance.PlayTransition(() =>
         {
             _battleUI.SetActive(true);
-
             Random.InitState(System.DateTime.Now.Millisecond);
 
-            
             Transform presetsParent = _enemy.GetComponent<Enemy>().getPresets().transform;
             int presetCount = presetsParent.childCount;
 
@@ -338,9 +363,6 @@ public class CombatManager : MonoBehaviour
                 int randomIndex = Random.Range(0, presetCount);
                 _enemyList = presetsParent.GetChild(randomIndex);
             }
-            
-            //Transform battleSpriteTransform = EnemyGO.transform.Find("BattleSprite");
-            
 
             Instance.SwitchBattleUIPanel();
 
@@ -348,9 +370,11 @@ public class CombatManager : MonoBehaviour
             {
                 Debug.Log(enemy.name);
                 _battleUI.GetComponent<BattleUI>().AddEnemyToList(enemy);
-                _selectedEnemy = enemy.GameObject();
-                enemyButton = enemy.GetComponent<EnemyUI_Interaction>().getUIComponent().transform.Find("EnemyFocusButton").gameObject;
-                enemyButton.gameObject.GetComponent<EnemyFocusButton>().setMyEnemy(enemy.gameObject);
+                _selectedEnemy = enemy.gameObject;
+                enemyButton = enemy.GetComponent<EnemyUI_Interaction>()
+                    .getUIComponent()
+                    .transform.Find("EnemyFocusButton").gameObject;
+                enemyButton.GetComponent<EnemyFocusButton>().setMyEnemy(enemy.gameObject);
             }
             Instance.StartCoroutine(Instance.BattleLoop());
         }));
@@ -377,7 +401,6 @@ public class CombatManager : MonoBehaviour
                 _miniGamePanel.SetActive(false);
 
                 attackButton = _battleUI.GetComponent<BattleUI>().GetPlayerActionFirst();
-
                 if (EventSystem.current.currentSelectedGameObject != attackButton)
                 {
                     EventSystem.current.SetSelectedGameObject(attackButton);
@@ -413,16 +436,15 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator BattleLoop()
     {
-
         while (_battleOngoing)
         {
             _battleUI.GetComponent<BattleUI>().SetPlayerHealthText(Player_Stats.Health.Value.ToString());
             _battleUI.GetComponent<BattleUI>().SetPlayerMPText(Player_Stats.Mana.Value.ToString());
-            foreach (Transform enemy in _enemyList)
+
+            if (_selectedEnemy != null && !_selectedEnemy.Equals(null))
             {
                 _battleUI.GetComponent<BattleUI>().SetEnemyHealthSlider(_selectedEnemy.transform);
             }
-            
 
             if (Player_Stats.Health.Value <= 0)
             {
@@ -449,8 +471,5 @@ public class CombatManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public GameObject GetSelectedEnemy()
-    {
-        return _selectedEnemy;
-    }
+    public GameObject GetSelectedEnemy() => _selectedEnemy;
 }
