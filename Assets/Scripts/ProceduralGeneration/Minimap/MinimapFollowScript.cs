@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ProceduralGeneration;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MinimapFollowScript : MonoBehaviour
@@ -9,6 +10,7 @@ public class MinimapFollowScript : MonoBehaviour
 
     public void MinimapUpdatePosition(PlacedRoom pr)
     {
-        transform.position = new Vector3(pr.transform.position.x, height, pr.transform.position.z);
+        var newpos = pr.transform.parent.GetComponentInChildren<RoomCenter>().transform.position;
+        transform.position = new Vector3(newpos.x, height, newpos.z);
     }
 }
