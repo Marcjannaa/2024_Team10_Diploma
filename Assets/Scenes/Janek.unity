@@ -583,49 +583,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 356365777908877932, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_IsKinematic
+    - target: {fileID: 1576048537196762437, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 356365777908877932, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 356365777908877932, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 531959500601404211, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 531959500601404211, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 531959500601404211, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 531959500601404211, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.953717
-      objectReference: {fileID: 0}
-    - target: {fileID: 531959500601404211, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.30070576
-      objectReference: {fileID: 0}
-    - target: {fileID: 531959500601404211, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2327995856416819966, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2327995856416819966, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4722623413402335451, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -667,22 +631,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7514932793992568512, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 6888181915817953594, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8367650231476230941, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 0
+    - target: {fileID: 6888181915817953594, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8617117715524096389, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: CoinVal
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8617117715524096389, guid: af2e993c8c70a68419042a440b6bf2ae, type: 3}
-      propertyPath: inventoryUI
-      value: 
-      objectReference: {fileID: 2056449721}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1140,17 +1096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9851172a2c17c459b6d6e1d14c9695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2056449721 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5025177654391281517, guid: 727d4eede11d5c64eb7e6cf14793f97b, type: 3}
-  m_PrefabInstance: {fileID: 1045870755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b6572d0b2321f4fbddc08f87e2dbf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2089835018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1226,7 +1171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5188179366629512230, guid: 259d2d97dd837d143816e1aa3f011657, type: 3}
       propertyPath: orthographic size
-      value: 100
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 5188179366629512230, guid: 259d2d97dd837d143816e1aa3f011657, type: 3}
       propertyPath: m_BackGroundColor.a
