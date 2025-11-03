@@ -199,10 +199,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 5004310735997836531, guid: fa3ed57763d11c04fb20309aa1f7af95, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 765.4
-      objectReference: {fileID: 0}
     - target: {fileID: 6615374261247978293, guid: fa3ed57763d11c04fb20309aa1f7af95, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -912,6 +908,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7975880417969203995, guid: 727d4eede11d5c64eb7e6cf14793f97b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -85.78894
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1226,7 +1226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5188179366629512230, guid: 259d2d97dd837d143816e1aa3f011657, type: 3}
       propertyPath: orthographic size
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5188179366629512230, guid: 259d2d97dd837d143816e1aa3f011657, type: 3}
       propertyPath: m_BackGroundColor.a
